@@ -1,0 +1,79 @@
+﻿using System;
+using System.IO;
+using System.Text;
+
+namespace LibMicroDesk;
+
+/// <summary>
+/// Representing the logging functionality of the MicroDesk library.
+/// </summary>
+public static class Log
+{
+    /// <summary>
+    /// Represents the path to the log file used by the MicroDesk library.
+    /// </summary>
+    public static string Path => "MicroDesk.log";
+
+    internal const char Separator = ';';
+
+    private static void WriteEntry(string message, string type, string tag = "Global")
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+        sb.Append(Separator);
+        sb.Append(type);
+        sb.Append(Separator);
+        sb.Append(tag);
+        sb.Append(Separator);
+        sb.Append(message);
+        sb.Append(Environment.NewLine);
+        string data = sb.ToString();
+
+        File.AppendAllText(Path, data, Encoding.Unicode);
+        return;
+    }
+
+    /// <summary>
+    /// Writes an error message to the log file.
+    /// </summary>
+    /// <param name="message">Error message.</param>
+    /// <param name="tag">Identification tag.</param>
+    public static void Error(string message, string tag = "Global")
+    {
+        WriteEntry(message, "Error", tag);
+        return;
+    }
+
+    /// <summary>
+    /// Writes a warning message to the log file.
+    /// </summary>
+    /// <param name="message">Warning message.</param>
+    /// <param name="tag">Identification tag.</param>
+    public static void Warning(string message, string tag = "Global")
+    {
+        WriteEntry(message, "Warning", tag);
+        return;
+    }
+
+    /// <summary>
+    /// Writes an informational message to the log file.
+    /// </summary>
+    /// <param name="message">Informational message.</param>
+    /// <param name="tag">Identification tag.</param>
+    public static void Info(string message, string tag = "Global")
+    {
+        WriteEntry(message, "Info", tag);
+        return;
+    }
+
+    /// <summary>
+    /// Writes an error message to the log file from an exception.
+    /// </summary>
+    /// <param name="ex">An exception information.</param>
+    /// <param name="tag">Identification tag.</param>
+    public static void Error(Exception ex, string tag = "Global")
+    {
+        WriteEntry(ex.ToString(), "Error", tag);
+        return;
+    }
+}
