@@ -32,6 +32,8 @@ namespace MoodTracker
         {
             if (window == null) return false;
 
+            // center the window
+
             window.Left = (SystemParameters.PrimaryScreenWidth - window.Width) / 2;
             window.Top = (SystemParameters.PrimaryScreenHeight - window.Height) / 2;
             return true;

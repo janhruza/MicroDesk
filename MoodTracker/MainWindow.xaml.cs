@@ -30,7 +30,6 @@ public partial class MainWindow : Window
             return false;
         }
 
-        App.CenterWindow(this);
         this.Title = page.Title;
         return true;
     }

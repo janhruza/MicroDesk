@@ -37,6 +37,11 @@ public partial class PgMood : Page
                 }
             };
         }
+
+        this.Loaded += (s, e) =>
+        {
+            App.CenterWindow(App.Current.MainWindow);
+        };
     }
 
     private ToggleButton[] _moddButtons => new ToggleButton[3]
