@@ -10,7 +10,8 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
 
-    <StackPanel Margin="10">
+    <StackPanel Margin="10"
+                Width="400">
         <Label Content="About Micro Desktop Solution"
                FontSize="28"/>
 
@@ -37,10 +38,11 @@
         </TextBlock>
 
         <TextBlock TextWrapping="Wrap">
-            <Run Text="Description"/>
-            <Run Text="A simple desktop solution for managing tasks, notes, and more."
-                 FontWeight="Bold"
-                 Foreground="{x:Static SystemColors.AccentColorBrush}"/>
+            <LineBreak />
+            <Run Text="Description"
+                 FontSize="16"/>
+            <LineBreak />
+            <Run Text="A simple desktop solution for managing tasks, notes, and more."/>
         </TextBlock>
 
     </StackPanel>
