@@ -1,4 +1,6 @@
-﻿namespace MoodTracker.Core;
+﻿using System;
+
+namespace MoodTracker.Core;
 
 /// <summary>
 /// Representing the mood record data structure.
