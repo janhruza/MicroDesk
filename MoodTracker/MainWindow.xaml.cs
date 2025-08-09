@@ -1,12 +1,12 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
+using LibMicroDesk.Windows;
 
 namespace MoodTracker;
 
 /// <summary>
 /// Represents the main window of the Mood Tracker application.
 /// </summary>
-public partial class MainWindow : Window
+public partial class MainWindow : IconlessWindow
 {
     /// <summary>
     /// Constructs a new instance of the <see cref="MainWindow"/> class.

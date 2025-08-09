@@ -1,3 +1,4 @@
+using LibMicroDesk.Windows;
 
 namespace LibMicroDesk
 {
@@ -6,5 +7,12 @@ namespace LibMicroDesk
     /// </summary>
     public static class MDCore
     {
+        /// <summary>
+        /// Shows the About dialog for the MicroDesk applications.
+        /// </summary>
+        public static void AboutBox()
+        {
+            _ = new WndAbout().ShowDialog();
+        }
     }
 }
