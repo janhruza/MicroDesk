@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Windows;
 
 namespace LibMicroDesk;
 
@@ -76,4 +77,26 @@ public static class Log
         WriteEntry(ex.ToString(), "Error", tag);
         return;
     }
+
+    #region Predefined log messages
+
+    /// <summary>
+    /// Writes a message indicating that the application has started.
+    /// </summary>
+    public static void ApplicationStarted()
+    {
+        Info("Application started.", AppDomain.CurrentDomain.FriendlyName);
+        return;
+    }
+
+    /// <summary>
+    /// Writes a message indicating that the application has stopped.
+    /// </summary>
+    public static void ApplicationStopped()
+    {
+        Info("Application stopped.", AppDomain.CurrentDomain.FriendlyName);
+        return;
+    }
+
+    #endregion
 }

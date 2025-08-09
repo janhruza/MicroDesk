@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Forms;
+using LibMicroDesk;
 using MoodTracker.Core;
 using MoodTracker.Pages;
 using Application = System.Windows.Application;
@@ -98,6 +99,8 @@ namespace MoodTracker
             MainWindow = new MoodTracker.MainWindow();
             MainWindow.SetActivePage(MoodPage);
             MainWindow.Show();
+
+            Log.ApplicationStarted();
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)
@@ -108,6 +111,7 @@ namespace MoodTracker
                 _trayIcon.Dispose();
             }
 
+            Log.ApplicationStopped();
             return;
         }
 
