@@ -1,0 +1,24 @@
+﻿Random Break Reminder
+	Pops up a cute animal photo every 45 minutes telling you to stretch.
+	Could keep track of breaks taken.
+
+One-Click Clipboard Translator
+	Reads whatever is currently in your clipboard and shows a quick translation (using an API like Google Translate).
+
+Quick Mood Logger
+	Lets you click a mood emoji once every few hours and stores the history in a CSV so you can track your patterns.
+
+Custom Alarm Clock
+	Pick a sound (funny or relaxing) and time — plays it with a themed background.
+	Could be used for cooking timers, work sprints, etc.
+
+Random Meal Picker
+	Stores your favorite dishes and picks one for you when you can’t decide what to eat.
+
+Screenshot Annotator
+	Simple “press hotkey → capture screenshot → doodle with basic pen tool → save/share.”
+	Less bloated than Snipping Tool, more fun.
+
+Compliment Dispenser
+	Every time you press a button, it shows a wholesome, quirky compliment.
+	Could also send a daily one to your email.
