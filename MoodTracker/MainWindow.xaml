@@ -11,6 +11,7 @@
         SizeToContent="WidthAndHeight">
 
     <Frame Name="frmContent"
-           NavigationUIVisibility="Hidden"/>
+           NavigationUIVisibility="Hidden"
+           Margin="10"/>
 
 </Window>

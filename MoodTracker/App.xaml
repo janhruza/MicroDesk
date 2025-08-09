@@ -4,4 +4,5 @@
              xmlns:local="clr-namespace:MoodTracker"
              Startup="Application_Startup"
              Exit="Application_Exit"
-             ThemeMode="System"/>
+             ThemeMode="System"
+             ShutdownMode="OnExplicitShutdown"/>
