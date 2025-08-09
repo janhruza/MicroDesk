@@ -8,7 +8,8 @@
         Title="Mood Tracker"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize"
-        SizeToContent="WidthAndHeight">
+        SizeToContent="WidthAndHeight"
+        Closed="Window_Closed">
 
     <Frame Name="frmContent"
            NavigationUIVisibility="Hidden"

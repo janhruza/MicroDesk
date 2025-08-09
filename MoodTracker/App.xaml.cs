@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using System.Windows.Forms;
 using MoodTracker.Core;
 using MoodTracker.Pages;
-
-using System.Windows.Forms;
-
 using Application = System.Windows.Application;
 
 namespace MoodTracker
@@ -19,12 +16,24 @@ namespace MoodTracker
         /// <summary>
         /// Shell notify icon object.
         /// </summary>
-        private NotifyIcon? _trayIcon;
+        private static NotifyIcon? _trayIcon;
 
         /// <summary>
         /// Gets or sets the main application window.
         /// </summary>
         public new MainWindow MainWindow { get; set; }
+
+        /// <summary>
+        /// Shows a tray message with the specified text.
+        /// </summary>
+        /// <param name="message">A message to be shown.</param>
+        /// <returns>Operation result.</returns>
+        public static bool ShowTrayMessage(string message)
+        {
+            if (_trayIcon == null) return false;
+            _trayIcon.ShowBalloonTip(3000, "Mood Tracker", message, ToolTipIcon.Info);
+            return true;
+        }
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
@@ -38,7 +47,7 @@ namespace MoodTracker
 
             // create tray menu items
             _trayIcon.ContextMenuStrip = new ContextMenuStrip();
-            _trayIcon.ContextMenuStrip.Items.Add("New mood record", null, (s, args) =>
+            _trayIcon.ContextMenuStrip.Items.Add("New Record", null, (s, args) =>
             {
                 // show the main window
                 if (MainWindow == null || !MainWindow.IsVisible)
@@ -54,7 +63,7 @@ namespace MoodTracker
                 }
             });
 
-            _trayIcon.ContextMenuStrip.Items.Add("Show mood history", null, (s, args) =>
+            _trayIcon.ContextMenuStrip.Items.Add("Mood History", null, (s, args) =>
             {
                 // show the mood history page
                 if (MainWindow == null || !MainWindow.IsVisible)

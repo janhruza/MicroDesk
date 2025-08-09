@@ -33,4 +33,12 @@ public partial class MainWindow : Window
         this.Title = page.Title;
         return true;
     }
+
+    private void Window_Closed(object sender, System.EventArgs e)
+    {
+        if (sender is MainWindow mainWindow)
+        {
+            App.ShowTrayMessage("Mood Tracker is running in the tray.");
+        }
+    }
 }
