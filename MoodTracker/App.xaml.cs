@@ -82,6 +82,12 @@ namespace MoodTracker
 
             _trayIcon.ContextMenuStrip.Items.Add(new ToolStripSeparator());
 
+            _trayIcon.ContextMenuStrip.Items.Add("Settings", null, (s, args) =>
+            {
+                // show the settings window
+                LibMicroDesk.MDCore.SettingsBox();
+            });
+
             _trayIcon.ContextMenuStrip.Items.Add("About MicroDesk", null, (s, args) =>
             {
                 LibMicroDesk.MDCore.AboutBox();
@@ -94,6 +100,9 @@ namespace MoodTracker
                 // exit the application
                 Application.Current.Shutdown();
             });
+
+            MDCore.EnsureSettings();
+            MDCore.ApplyTheme(MDCore.Settings.Theme);
 
             // create the main window
             MainWindow = new MoodTracker.MainWindow();
