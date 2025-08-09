@@ -7,6 +7,7 @@ namespace LibMicroDesk.Windows;
 
 /// <summary>
 /// Representing a dialog window with a specific style for MicroDesk applications.
+/// The iconless behavior is achieved by removing the default dialog frame.
 /// </summary>
 public class IconlessWindow : Window
 {

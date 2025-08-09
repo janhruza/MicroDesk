@@ -1,7 +1,4 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using System.Windows;
-using System.Windows.Interop;
+﻿using System.Media;
 
 namespace LibMicroDesk.Windows;
 
@@ -17,5 +14,10 @@ public partial class WndAbout : IconlessWindow
     public WndAbout()
     {
         InitializeComponent();
+
+        this.Loaded += (s, e) =>
+        {
+            SystemSounds.Beep.Play();
+        };
     }
 }

@@ -81,6 +81,13 @@ namespace MoodTracker
 
             _trayIcon.ContextMenuStrip.Items.Add(new ToolStripSeparator());
 
+            _trayIcon.ContextMenuStrip.Items.Add("About MicroDesk", null, (s, args) =>
+            {
+                LibMicroDesk.MDCore.AboutBox();
+            });
+
+            _trayIcon.ContextMenuStrip.Items.Add(new ToolStripSeparator());
+
             _trayIcon.ContextMenuStrip.Items.Add("Exit", null, (s, args) =>
             {
                 // exit the application

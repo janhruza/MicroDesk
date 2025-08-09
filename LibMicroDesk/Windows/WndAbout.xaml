@@ -20,7 +20,29 @@
                  FontWeight="Bold"
                  Foreground="{x:Static SystemColors.AccentColorBrush}"/>
         </TextBlock>
-        
+
+        <TextBlock>
+            <Run Text="Version"/>
+            <Run Text="1.0.0"
+                 FontWeight="Bold"
+                 Foreground="{x:Static SystemColors.AccentColorBrush}"/>
+        </TextBlock>
+
+        <TextBlock>
+            <Run Text="License"/>
+            <Run Text="MIT"
+                 FontWeight="Bold"
+                 Foreground="{x:Static SystemColors.AccentColorBrush}"/>
+
+        </TextBlock>
+
+        <TextBlock TextWrapping="Wrap">
+            <Run Text="Description"/>
+            <Run Text="A simple desktop solution for managing tasks, notes, and more."
+                 FontWeight="Bold"
+                 Foreground="{x:Static SystemColors.AccentColorBrush}"/>
+        </TextBlock>
+
     </StackPanel>
     
 </local:IconlessWindow>
