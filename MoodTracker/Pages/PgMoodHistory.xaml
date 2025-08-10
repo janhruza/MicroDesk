@@ -25,9 +25,13 @@
 
             <Border>
                 <StackPanel>
-                    <TextBlock FontSize="48"
-                               Text="😃"
-                               HorizontalAlignment="Center"/>
+                    <Label HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                        <Label.Content>
+                            <TextBlock FontSize="48"
+                                       Text="😃"/>
+                        </Label.Content>
+                    </Label>
 
                     <Label HorizontalAlignment="Center">
                         <Label.Content>
@@ -44,9 +48,13 @@
 
             <Border>
                 <StackPanel>
-                    <TextBlock FontSize="48"
-                               Text="😐"
-                               HorizontalAlignment="Center"/>
+                    <Label HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                        <Label.Content>
+                            <TextBlock FontSize="48"
+                                       Text="😐"/>
+                        </Label.Content>
+                    </Label>
 
                     <Label HorizontalAlignment="Center">
                         <Label.Content>
@@ -63,9 +71,13 @@
 
             <Border>
                 <StackPanel>
-                    <TextBlock FontSize="48"
-                               Text="😞"
-                               HorizontalAlignment="Center"/>
+                    <Label HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                        <Label.Content>
+                            <TextBlock FontSize="48"
+                                       Text="😞"/>
+                        </Label.Content>
+                    </Label>
 
                     <Label HorizontalAlignment="Center">
                         <Label.Content>
@@ -88,9 +100,15 @@
             <Label Content="Average mood"/>
             <Border HorizontalAlignment="Center">
                 <StackPanel>
-                    <TextBlock FontSize="50"
-                               Name="tbAverage"
-                               Text="😃"/>
+                    <Label HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                        
+                        <Label.Content>
+                            <TextBlock FontSize="50"
+                                       Name="tbAverage"
+                                       Text="😃"/>
+                        </Label.Content>
+                    </Label>
 
                     <Label HorizontalAlignment="Center"
                            Content="Good"
