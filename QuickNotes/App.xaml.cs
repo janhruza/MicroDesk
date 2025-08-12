@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Windows;
+using LibMicroDesk;
 using QuickNotes.Core;
 using QuickNotes.Pages;
-using System;
 
 namespace QuickNotes;
 
@@ -14,7 +16,7 @@ public partial class App : Application
     static App()
     {
         Notes = [];
-        GenerateTestData();
+        LoadNotesData();
     }
 
     #region Page definitions
@@ -24,9 +26,16 @@ public partial class App : Application
     /// </summary>
     public static PgOverview OverviewPage => new PgOverview();
 
+    /// <summary>
+    /// Representing the New note page.
+    /// </summary>
+    public static PgNewNote NewNotePage => new PgNewNote();
+
     #endregion
 
     #region Static code
+
+    #region Notes saving and loading
 
     private static void GenerateTestData()
     {
@@ -36,6 +45,85 @@ public partial class App : Application
             new Note("Feed cat.", DateTime.Now, DateTime.Now.AddDays(-3)),
         ]);
     }
+
+    private static string NotesFile => "Notes.bin";
+
+    private static void LoadNotesData()
+    {
+        try
+        {
+            if (File.Exists(NotesFile) == false)
+            {
+                Log.Info("Notes file not found, using sample data instead.", nameof(LoadNotesData));
+                GenerateTestData();
+                return;
+            }
+
+            Notes.Clear();
+            using (FileStream fs = File.OpenRead(NotesFile))
+            {
+                using (BinaryReader br = new BinaryReader(fs))
+                {
+                    // get notes count
+                    int count = br.ReadInt32();
+
+                    for (int i = 0; i < count; i++)
+                    {
+                        // get note data
+                        DateTime dtCreation = DateTime.FromBinary(br.ReadInt64());
+                        DateTime dtExpiration = DateTime.FromBinary(br.ReadInt64());
+                        string text = br.ReadString();
+
+                        Note note = new Note(text, dtCreation, dtExpiration);
+                        Notes.Add(note);
+                    }
+                }
+            }
+
+            Log.Info("Notes were loaded.", nameof(LoadNotesData));
+            return;
+        }
+
+        catch (Exception ex)
+        {
+            Log.Error(ex, nameof(LoadNotesData));
+            return;
+        }
+    }
+
+    private static void SaveNotesData()
+    {
+        try
+        {
+            using (FileStream fs = File.Create(NotesFile))
+            {
+                using (BinaryWriter bw = new BinaryWriter(fs))
+                {
+                    // write notes count
+                    bw.Write(Notes.Count);
+
+                    // write all notes to the file
+                    foreach (var note in Notes)
+                    {
+                        bw.Write(note.Creation.ToBinary());
+                        bw.Write(note.Expiration.ToBinary());
+                        bw.Write(note.Text);
+                    }
+                }
+            }
+
+            Log.Info("Notes saved successfully.", nameof(SaveNotesData));
+            return;
+        }
+
+        catch (Exception ex)
+        {
+            Log.Error(ex, nameof(SaveNotesData));
+            return;
+        }
+    }
+
+    #endregion
 
     /// <summary>
     /// Representing a list of all loaded notes.
@@ -53,6 +141,7 @@ public partial class App : Application
 
     private void Application_Exit(object sender, ExitEventArgs e)
     {
+        SaveNotesData();
         return;
     }
 }
