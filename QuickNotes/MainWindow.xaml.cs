@@ -15,4 +15,9 @@ public partial class MainWindow : IconlessWindow
     {
         InitializeComponent();
     }
+
+    private void IconlessWindow_Loaded(object sender, RoutedEventArgs e)
+    {
+        this.frmContent.Navigate(App.OverviewPage);
+    }
 }

@@ -11,10 +11,11 @@
                              Width="350"
                              Height="350"
                              ResizeMode="CanMinimize"
-                             WindowStartupLocation="CenterScreen">
-    
-    <Grid>
+                             WindowStartupLocation="CenterScreen"
+                             Loaded="IconlessWindow_Loaded">
 
-    </Grid>
-    
+    <Frame Margin="10"
+           Name="frmContent"
+           NavigationUIVisibility="Hidden"/>
+
 </libmdwindows:IconlessWindow>
