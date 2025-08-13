@@ -32,7 +32,9 @@
             <DatePicker Name="dtExpiration"
                         SelectedDate="{x:Static system:DateTime.Now}"
                         SelectedDateFormat="Long"
-                        Visibility="Collapsed"/>
+                        Visibility="Collapsed"
+                        IsTodayHighlighted="True"
+                        DisplayDate="{Binding SelectedDate}"/>
 
         </StackPanel>
 

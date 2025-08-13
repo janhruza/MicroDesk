@@ -18,4 +18,15 @@ public record struct Note(string Text, DateTime Creation, DateTime Expiration)
     /// </summary>
     /// <returns></returns>
     public readonly bool IsIndefinite() => this.Expiration == this.Creation;
+
+    /// <summary>
+    /// Determines whether the note has expired.
+    /// </summary>
+    public readonly bool HasExpired()
+    {
+        // indifinite note
+        if (this.Expiration == this.Creation) return false;
+
+        return this.Expiration < this.Creation;
+    }
 }

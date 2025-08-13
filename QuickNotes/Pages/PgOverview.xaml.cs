@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using QuickNotes.Core;
 
 namespace QuickNotes.Pages;
@@ -55,6 +56,8 @@ public partial class PgOverview : Page
         return btn;
     }
 
+    private bool _showAllNotes => cbShowAllNotes.IsChecked == true;
+
     private void RefreshUI()
     {
         // load all notes and display them
@@ -69,6 +72,15 @@ public partial class PgOverview : Page
 
         foreach (Note note in App.Notes)
         {
+            if (_showAllNotes == false)
+            {
+                // exclude expired notes
+                if (note.HasExpired())
+                {
+                    continue;
+                }
+            }
+
             // create item's content
             Button btnDelete = CreateDeleteButton(note);
 
@@ -88,7 +100,27 @@ public partial class PgOverview : Page
                     {
                         new Label
                         {
-                            Content = note.Text,
+                            //Content = note.Text,
+                            Content = new TextBlock
+                            {
+                                Inlines =
+                                {
+                                    new Run
+                                    {
+                                        FontSize = 14,
+                                        Text = note.Text
+                                    },
+
+                                    new LineBreak(),
+
+                                    new Run
+                                    {
+                                        FontSize = 12,
+                                        Text = (note.Expiration == note.Creation ? "Indefinite" : note.Expiration.ToString())
+                                    }
+                                }
+                            },
+
                             VerticalAlignment = VerticalAlignment.Center
                         },
 
@@ -118,6 +150,20 @@ public partial class PgOverview : Page
     private void btnNewNote_Click(object sender, RoutedEventArgs e)
     {
         MainWindow.Navigate(App.NewNotePage);
+        return;
+    }
+
+    private void cbShowAllNotes_Checked(object sender, RoutedEventArgs e)
+    {
+        // refresh as the visibility could change
+        this.RefreshUI();
+        return;
+    }
+
+    private void cbShowAllNotes_Unchecked(object sender, RoutedEventArgs e)
+    {
+        // refresh as the visibility could change
+        this.RefreshUI();
         return;
     }
 }

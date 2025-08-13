@@ -20,23 +20,43 @@
         <ListBox Grid.Row="1"
                  Name="lbxNotes"/>
 
-        <StackPanel Grid.Row="2"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Right"
-                    Margin="0,10,0,0">
+        <Grid Grid.Row="2"
+              Margin="0,10,0,0">
 
-            <Button Content=""
-                    FontFamily="Segoe Fluent Icons"
-                    Name="btnRefresh"
-                    Click="btnRefresh_Click"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal"
+                        Grid.Column="0">
+
+                <CheckBox Content="Show all notes"
+                          Name="cbShowAllNotes"
+                          Checked="cbShowAllNotes_Checked"
+                          Unchecked="cbShowAllNotes_Unchecked"
+                          ToolTip="Show/hide notes that expired or aren't valid for another reason."/>
+
+            </StackPanel>
             
-            <Button Content=""
-                    FontFamily="Segoe Fluent Icons"
-                    Margin="5,0,0,0"
-                    Name="btnNewNote"
-                    Click="btnNewNote_Click"/>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Grid.Column="1">
 
-        </StackPanel>
+                <Button Content=""
+                        FontFamily="Segoe Fluent Icons"
+                        Name="btnRefresh"
+                        Click="btnRefresh_Click"/>
+
+                <Button Content=""
+                        FontFamily="Segoe Fluent Icons"
+                        Margin="5,0,0,0"
+                        Name="btnNewNote"
+                        Click="btnNewNote_Click"/>
+
+            </StackPanel>
+        </Grid>
+        
     </Grid>
     
 </Page>
