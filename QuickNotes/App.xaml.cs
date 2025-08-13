@@ -130,6 +130,19 @@ public partial class App : Application
     /// </summary>
     public static List<Note> Notes { get; }
 
+    /// <summary>
+    /// Shows a message dialog box to the user.
+    /// </summary>
+    /// <param name="message">The message text.</param>
+    /// <param name="title">The caption (title) of the message.</param>
+    /// <param name="button">Available option buttons.</param>
+    /// <param name="image">Message box icon.</param>
+    public static void ShowMessage(string message, string title = "Message", MessageBoxButton button = MessageBoxButton.OK, MessageBoxImage image = MessageBoxImage.Information)
+    {
+        _ = MessageBox.Show(message, title, button, image);
+        return;
+    }
+
     #endregion
 
     private void Application_Startup(object sender, StartupEventArgs e)

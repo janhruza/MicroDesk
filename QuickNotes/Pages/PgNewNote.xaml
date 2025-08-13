@@ -4,11 +4,54 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:QuickNotes.Pages"
+      xmlns:system="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="New Note">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <Label Content="Note text"/>
+            <TextBox Name="txtText"
+                     Height="50"
+                     TextWrapping="Wrap"
+                     SelectionBrush="{x:Static SystemColors.AccentColorBrush}"/>
+
+            <CheckBox Content="Can expire"
+                      Name="cbCanExpire"
+                      Margin="0,5,0,5"
+                      Checked="cbCanExpire_Checked"
+                      Unchecked="cbCanExpire_Unchecked"
+                      IsChecked="False"/>
+
+            <DatePicker Name="dtExpiration"
+                        SelectedDate="{x:Static system:DateTime.Now}"
+                        SelectedDateFormat="Long"
+                        Visibility="Collapsed"/>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="1"
+                    Margin="0,10,0,0"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+
+            <Button Content="Cancel"
+                    Margin="0,0,5,0"
+                    Name="btnCancel"
+                    Click="btnCancel_Click"/>
+            
+            <Button Content="Create"
+                    Name="btnCreate"
+                    Click="btnCreate_Click"/>
+
+        </StackPanel>
         
     </Grid>
+
 </Page>

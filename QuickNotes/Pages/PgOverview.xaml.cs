@@ -117,6 +117,7 @@ public partial class PgOverview : Page
 
     private void btnNewNote_Click(object sender, RoutedEventArgs e)
     {
+        MainWindow.Navigate(App.NewNotePage);
         return;
     }
 }
