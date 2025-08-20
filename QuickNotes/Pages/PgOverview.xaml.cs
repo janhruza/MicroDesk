@@ -107,7 +107,7 @@ public partial class PgOverview : Page
                                 {
                                     new Run
                                     {
-                                        FontSize = 14,
+                                        FontSize = 16,
                                         Text = note.Text
                                     },
 
@@ -116,7 +116,7 @@ public partial class PgOverview : Page
                                     new Run
                                     {
                                         FontSize = 12,
-                                        Text = (note.Expiration == note.Creation ? "Indefinite" : note.Expiration.ToString())
+                                        Text = (note.Expiration == note.Creation ? "Indefinite" : note.Expiration.ToString("d"))
                                     }
                                 }
                             },
