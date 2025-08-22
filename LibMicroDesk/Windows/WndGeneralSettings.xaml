@@ -39,7 +39,12 @@
                     Margin="0,0,5,0"
                     Name="btnCancel"
                     Click="btnCancel_Click"/>
-            
+
+            <Button Content="Apply"
+                    Margin="0,0,5,0"
+                    Name="btnApply"
+                    Click="btnApply_Click"/>
+
             <Button Content="OK"
                     Name="btnOk"
                     Click="btnOk_Click"/>

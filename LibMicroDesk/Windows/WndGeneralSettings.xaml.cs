@@ -112,4 +112,31 @@ public partial class WndGeneralSettings : IconlessWindow
             System.Windows.MessageBox.Show("Failed to save settings.", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
         }
     }
+
+    private void btnApply_Click(object sender, System.Windows.RoutedEventArgs e)
+    {
+        // same as ok but do not close the window
+        // Save the settings
+        if (cbxTheme.SelectedItem is ComboBoxItem selectedTheme)
+        {
+            SystemTheme theme = (SystemTheme)selectedTheme.Tag;
+            MDCore.Settings.Theme = theme;
+            MDCore.ApplyTheme(theme);
+        }
+
+        if (cbxCulture.SelectedItem is ComboBoxItem selectedCulture)
+        {
+            string culture = selectedCulture.Tag.ToString() ?? "en-US"; // Default to en-US if null
+            MDCore.Settings.Culture = culture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);
+        }
+
+        // Save the settings to file
+        if (AppSettings.Save(MDCore.Settings) != true)
+        {
+            // Show an error message if saving fails
+            System.Windows.MessageBox.Show("Failed to save settings.", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+        }
+    }
 }
