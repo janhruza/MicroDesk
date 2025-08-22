@@ -62,5 +62,10 @@ public class IconlessWindow : Window
         {
             _ = new WndAbout().ShowDialog();
         }
+
+        else if (e.Key == System.Windows.Input.Key.F2)
+        {
+            _ = new WndGeneralSettings().ShowDialog();
+        }
     }
 }
