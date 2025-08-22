@@ -51,5 +51,16 @@ public class IconlessWindow : Window
     public IconlessWindow()
     {
         WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+        // custom behavior
+        this.KeyDown += this.IconlessWindow_KeyDown;
+    }
+
+    private void IconlessWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    {
+        if (e.Key == System.Windows.Input.Key.F1)
+        {
+            _ = new WndAbout().ShowDialog();
+        }
     }
 }
