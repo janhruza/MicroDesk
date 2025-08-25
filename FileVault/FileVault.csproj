@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="Windows\" />
-    <Folder Include="Pages\" />
   </ItemGroup>
 
 </Project>

@@ -6,12 +6,57 @@
                     xmlns:local="clr-namespace:FileVault"
                     xmlns:lib="clr-namespace:LibMicroDesk.Windows;assembly=LibMicroDesk"
                     mc:Ignorable="d"
+                    WindowStartupLocation="CenterScreen"
                     Title="File Vault"
-                    Height="450"
-                    Width="800">
-    
-    <Grid Name="gMain">
+                    Height="720"
+                    Width="1280"
+                    MinWidth="350"
+                    MinHeight="350">
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!--Main window menu-->
+        <Menu Grid.Row="0">
+            <MenuItem Header="File">
+                <MenuItem Name="miClose"
+                          Header="Close"
+                          InputGestureText="Alt+F4"
+                          Click="miClose_Click"/>
+            </MenuItem>
+            <MenuItem Header="View">
+                <MenuItem Header="Status Panel"
+                          IsCheckable="True"
+                          Name="miToggleStatusPanel"
+                          Checked="miToggleStatusPanel_Checked"
+                          Unchecked="miToggleStatusPanel_Unchecked"/>
+
+                <Separator />
+
+                <MenuItem Header="Options"
+                          Name="miSettings"
+                          Click="miSettings_Click"/>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Name="miAbout"
+                          InputGestureText="F1"
+                          Header="About MicroDesk"
+                          Click="miAbout_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <Frame Grid.Row="1"
+               Name="frm"
+               NavigationUIVisibility="Hidden"/>
+
+        <StatusBar Grid.Row="2"
+                   Name="stb">
+            <TextBlock Text="No drives selected."/>
+        </StatusBar>
     </Grid>
     
 </lib:IconlessWindow>

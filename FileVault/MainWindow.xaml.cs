@@ -1,6 +1,5 @@
-﻿using System;
-using System.Windows.Controls;
-using FileVault.Controls;
+﻿using FileVault.Pages;
+using LibMicroDesk;
 using LibMicroDesk.Windows;
 
 namespace FileVault;
@@ -16,18 +15,37 @@ public partial class MainWindow : IconlessWindow
     public MainWindow()
     {
         InitializeComponent();
-        StackPanel stp = new StackPanel();
+        this.Loaded += this.MainWindow_Loaded;
+    }
 
-        foreach (string drive in Environment.GetLogicalDrives())
-        {
-            var ctl = new DriveButton(drive);
-            Button btn = new Button
-            {
-                Content = ctl
-            };
-            stp.Children.Add(btn);
-        }
+    private void MainWindow_Loaded(object sender, System.Windows.RoutedEventArgs e)
+    {
+        miToggleStatusPanel.IsChecked = true;
+        frm.Navigate(new PgDrives());
+    }
 
-        gMain.Children.Add(stp);
+    private void miToggleStatusPanel_Checked(object sender, System.Windows.RoutedEventArgs e)
+    {
+        stb.Visibility = System.Windows.Visibility.Visible;
+    }
+
+    private void miToggleStatusPanel_Unchecked(object sender, System.Windows.RoutedEventArgs e)
+    {
+        stb.Visibility ^= System.Windows.Visibility.Collapsed;
+    }
+
+    private void miSettings_Click(object sender, System.Windows.RoutedEventArgs e)
+    {
+        MDCore.SettingsBox();
+    }
+
+    private void miClose_Click(object sender, System.Windows.RoutedEventArgs e)
+    {
+        this.Close();
+    }
+
+    private void miAbout_Click(object sender, System.Windows.RoutedEventArgs e)
+    {
+        MDCore.AboutBox();
     }
 }
