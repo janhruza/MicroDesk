@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using LibMicroDesk;
 
 namespace FileVault
 {
@@ -9,6 +10,9 @@ namespace FileVault
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            // load settings
+            MDCore.EnsureSettings();
+
             // app startup
             MainWindow mw = new MainWindow();
             MainWindow = mw;
