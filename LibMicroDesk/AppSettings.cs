@@ -54,9 +54,9 @@ public class AppSettings
     /// </summary>
     /// <param name="settings">Output <see cref="AppSettings"/> object.</param>
     /// <returns>Operation result.</returns>
-    public static bool Load(out AppSettings? settings)
+    public static bool Load(out AppSettings settings)
     {
-        settings = null;
+        settings = new AppSettings();
         try
         {
             if (System.IO.File.Exists(_path) == false)
@@ -65,7 +65,7 @@ public class AppSettings
             }
 
             var json = System.IO.File.ReadAllText(_path);
-            settings = System.Text.Json.JsonSerializer.Deserialize<AppSettings>(json);
+            settings = System.Text.Json.JsonSerializer.Deserialize<AppSettings>(json) ?? new AppSettings();
             return true;
         }
         catch
