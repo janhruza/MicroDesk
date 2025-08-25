@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows.Controls;
+using FileVault.Controls;
 using LibMicroDesk.Windows;
 
 namespace FileVault;
@@ -14,5 +16,18 @@ public partial class MainWindow : IconlessWindow
     public MainWindow()
     {
         InitializeComponent();
+        StackPanel stp = new StackPanel();
+
+        foreach (string drive in Environment.GetLogicalDrives())
+        {
+            var ctl = new DriveButton(drive);
+            Button btn = new Button
+            {
+                Content = ctl
+            };
+            stp.Children.Add(btn);
+        }
+
+        gMain.Children.Add(stp);
     }
 }

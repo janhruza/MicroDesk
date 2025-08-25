@@ -31,6 +31,15 @@ public partial class DriveButton : UserControl
         return bytes / 1_073_741_824;
     }
 
+    private string GetLabel(string driveLabel)
+    {
+        if (string.IsNullOrEmpty(driveLabel.Trim()) == false) return driveLabel;
+        else
+        {
+            return "Local Disk";
+        }
+    }
+
     private void RefreshDriveInfo()
     {
         // draw UI
@@ -47,14 +56,13 @@ public partial class DriveButton : UserControl
             if (di.IsReady == false)
             {
                 // drive not ready
-                lblLabel.Content = di.VolumeLabel.Trim() ?? "No Label";
                 pbFree.Visibility = System.Windows.Visibility.Collapsed;
                 lblFreeSpace.Visibility = System.Windows.Visibility.Collapsed;
                 return;
             }
 
             // general
-            lblLabel.Content = di.VolumeLabel.Trim() ?? "No Label";
+            lblLabel.Content = GetLabel(di.VolumeLabel);
             pbFree.Visibility = System.Windows.Visibility.Visible;
             lblFreeSpace.Visibility = System.Windows.Visibility.Visible;
 
