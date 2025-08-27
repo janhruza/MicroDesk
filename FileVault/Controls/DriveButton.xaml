@@ -7,8 +7,15 @@
              mc:Ignorable="d">
 
     <StackPanel>
-        <Label Content="Drive Label"
-               Name="lblLabel"/>
+        <Label>
+            <TextBlock>
+                <Run Name="rLabel"
+                     Text="Volume Label"/>
+                
+                <Run Text="("/><Run Text="Letter"
+                     Name="rLetter"/><Run Text=")"/>
+            </TextBlock>
+        </Label>
         
         <ProgressBar Minimum="0"
                      Maximum="100"

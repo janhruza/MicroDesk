@@ -56,13 +56,16 @@ public partial class DriveButton : UserControl
             if (di.IsReady == false)
             {
                 // drive not ready
+                rLetter.Text = _drive.Replace("\\", string.Empty);
+                rLabel.Text = "Drive";
                 pbFree.Visibility = System.Windows.Visibility.Collapsed;
                 lblFreeSpace.Visibility = System.Windows.Visibility.Collapsed;
                 return;
             }
 
             // general
-            lblLabel.Content = GetLabel(di.VolumeLabel);
+            rLetter.Text = _drive.Replace("\\", string.Empty);
+            rLabel.Text = GetLabel(di.VolumeLabel);
             pbFree.Visibility = System.Windows.Visibility.Visible;
             lblFreeSpace.Visibility = System.Windows.Visibility.Visible;
 
