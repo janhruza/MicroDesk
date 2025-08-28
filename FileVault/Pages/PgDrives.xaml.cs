@@ -46,6 +46,14 @@ public partial class PgDrives : Page
                     Margin = new System.Windows.Thickness(10, 0, 10, 0)
                 };
 
+                btn.Click += (s, e) =>
+                {
+                    App.Navigate(new Page
+                    {
+                        Content = new FileBrowserControl(drive)
+                    });
+                };
+
                 ugAvailable.Children.Add(btn);
             }
 

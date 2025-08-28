@@ -130,5 +130,26 @@ namespace LibMicroDesk
             Settings = settings;
             return true;
         }
+
+        /// <summary>
+        /// Creates a new process using the system shell.
+        /// </summary>
+        /// <param name="path">Path to the target file.</param>
+        /// <param name="proc">Output process instance.</param>
+        /// <returns>Operation result.</returns>
+        public static bool CreateShellProcess(string path, out Process proc)
+        {
+            proc = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    WorkingDirectory = Directory.GetParent(path)?.FullName ?? AppDomain.CurrentDomain.BaseDirectory,
+                    FileName = path,
+                    UseShellExecute = true
+                }
+            };
+
+            return proc.Start();
+        }
     }
 }

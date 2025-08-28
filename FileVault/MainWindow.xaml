@@ -55,7 +55,8 @@
 
         <StatusBar Grid.Row="2"
                    Name="stb">
-            <TextBlock Text="No drives selected."/>
+            <TextBlock Text="No drives selected."
+                       Name="tbMessage"/>
         </StatusBar>
     </Grid>
     
