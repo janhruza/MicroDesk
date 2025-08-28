@@ -18,10 +18,11 @@
                FontFamily="Segoe Fluent Icons"
                Content=""
                VerticalAlignment="Center"
-               HorizontalAlignment="Left"/>
+               HorizontalAlignment="Left"
+               FontSize="18"/>
 
         <Label Grid.Column="1"
-               Margin="5,0,0,0"
+               Margin="10,0,0,0"
                Name="lblName"
                VerticalAlignment="Center"
                HorizontalAlignment="Stretch"
@@ -31,7 +32,7 @@
                 Name="btnActions"
                 FontFamily="Segoe Fluent Icons"
                 Content=""
-                Margin="5,0,0,0"
+                Margin="10,0,0,0"
                 HorizontalAlignment="Right"
                 Visibility="Visible"/>
     </Grid>
