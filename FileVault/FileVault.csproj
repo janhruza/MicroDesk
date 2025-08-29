@@ -16,8 +16,4 @@
     <ProjectReference Include="..\LibMicroDesk\LibMicroDesk.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Windows\" />
-  </ItemGroup>
-
 </Project>

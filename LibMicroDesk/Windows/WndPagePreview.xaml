@@ -8,6 +8,8 @@
                       WindowStartupLocation="CenterScreen"
                       SizeToContent="WidthAndHeight"
                       ResizeMode="CanMinimize"
+                      MinWidth="300"
+                      MinHeight="300"
                       Loaded="IconlessWindow_Loaded">
 
     <Frame Name="frm"
