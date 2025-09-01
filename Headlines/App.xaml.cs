@@ -39,12 +39,18 @@ public partial class App : Application
         Headlines.MainWindow mw = new Headlines.MainWindow();
         MainWindow = mw;
         MainWindow.Show();
+
+        // log entry
+        Log.ApplicationStarted();
     }
 
     private async void Application_Exit(object sender, ExitEventArgs e)
     {
         // post exit cleanup
         await SaveSources();
+
+        // log entry
+        Log.ApplicationStopped();
         return;
     }
 

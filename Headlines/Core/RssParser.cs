@@ -49,12 +49,12 @@ public static class RssParser
     {
         while (reader.Read())
         {
-            if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "channel")
+            if (reader.NodeType == XmlNodeType.EndElement && reader.Name.ToLower() == "channel")
                 break;
 
             if (reader.IsStartElement())
             {
-                switch (reader.Name)
+                switch (reader.Name.ToLower())
                 {
                     case "title":
                         feed.Title = reader.ReadElementContentAsString();

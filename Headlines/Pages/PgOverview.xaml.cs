@@ -7,7 +7,6 @@ using System.Windows.Documents;
 using System.Windows.Media.Imaging;
 using Headlines.Core;
 using Headlines.Windows;
-using LibMicroDesk;
 using LibMicroDesk.Windows;
 
 namespace Headlines.Pages;
@@ -32,6 +31,11 @@ public partial class PgOverview : Page
 
     private bool CreateFeedItemButton(RssFeed feed)
     {
+        // TODO better display of items
+        if (string.IsNullOrWhiteSpace(feed.Title))
+        {
+            return false;
+        }
         TreeViewItem tvi = new TreeViewItem
         {
             HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch,
