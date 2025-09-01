@@ -14,4 +14,8 @@
     <ProjectReference Include="..\LibMicroDesk\LibMicroDesk.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controls\" />
+  </ItemGroup>
+
 </Project>

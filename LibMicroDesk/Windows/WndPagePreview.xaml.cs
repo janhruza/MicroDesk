@@ -1,6 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
-using System;
 
 namespace LibMicroDesk.Windows;
 
@@ -19,6 +19,8 @@ public partial class WndPagePreview : IconlessWindow
 
         _page = page;
         InitializeComponent();
+
+        this.Loaded += IconlessWindow_Loaded;
     }
 
     private Page _page;

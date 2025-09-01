@@ -28,6 +28,8 @@ public class WndPageView : IconlessWindow
 
         this.Loaded += (s, e) =>
         {
+            if (frame == null) return;
+
             // display page
             if (frame.Navigate(pgContent) == true)
             {

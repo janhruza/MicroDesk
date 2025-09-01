@@ -9,8 +9,7 @@
                       SizeToContent="WidthAndHeight"
                       ResizeMode="CanMinimize"
                       MinWidth="300"
-                      MinHeight="300"
-                      Loaded="IconlessWindow_Loaded">
+                      MinHeight="300">
 
     <Frame Name="frm"
            NavigationUIVisibility="Hidden"/>

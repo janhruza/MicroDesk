@@ -5,14 +5,16 @@
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:local="clr-namespace:Headlines"
                      xmlns:core="clr-namespace:LibMicroDesk.Windows;assembly=LibMicroDesk"
+                     mc:Ignorable="d"
+                     d:DesignWidth="800"
+                     d:DesignHeight="600"
                      Title="Headlines"
                      WindowStartupLocation="CenterScreen"
                      ResizeMode="CanResize"
                      MinWidth="350"
                      MinHeight="350">
-    
-    <Grid>
 
-    </Grid>
-    
+    <Frame Name="frm"
+           NavigationUIVisibility="Hidden"/>
+
 </core:IconlessWindow>
