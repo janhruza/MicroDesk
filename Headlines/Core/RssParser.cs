@@ -1,28 +1,48 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml;
 using Headlines.Core;
+using LibMicroDesk;
 
+/// <summary>
+/// Representing a simple RSS parser.
+/// </summary>
 public static class RssParser
 {
+    /// <summary>
+    /// Parses the RSS feed from the given URL.
+    /// </summary>
+    /// <param name="rssUrl">Source address.</param>
+    /// <returns>Parsed RSS feed item.</returns>
     public static RssFeed Parse(string rssUrl)
     {
-        var feed = new RssFeed
+        try
         {
-            Items = new List<RssFeedItem>()
-        };
-
-        using (var reader = XmlReader.Create(rssUrl))
-        {
-            while (reader.Read())
+            Uri uri = new Uri(rssUrl, UriKind.RelativeOrAbsolute);
+            var feed = new RssFeed
             {
-                if (reader.IsStartElement() && reader.Name == "channel")
+                Items = new List<RssFeedItem>()
+            };
+
+            using (var reader = XmlReader.Create(uri.AbsoluteUri))
+            {
+                while (reader.Read())
                 {
-                    ParseChannel(reader, ref feed);
+                    if (reader.IsStartElement() && reader.Name == "channel")
+                    {
+                        ParseChannel(reader, ref feed);
+                    }
                 }
             }
+
+            return feed;
         }
 
-        return feed;
+        catch (Exception ex)
+        {
+            Log.Error(ex, nameof(Parse));
+            return new RssFeed();
+        }
     }
 
     private static void ParseChannel(XmlReader reader, ref RssFeed feed)

@@ -4,7 +4,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Media.Imaging;
 using Headlines.Core;
+using Headlines.Windows;
 using LibMicroDesk;
 using LibMicroDesk.Windows;
 
@@ -33,8 +35,7 @@ public partial class PgOverview : Page
         TreeViewItem tvi = new TreeViewItem
         {
             HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch,
-            Header = feed.Title,
-            Padding = new System.Windows.Thickness(10),
+            Padding = new System.Windows.Thickness(0,10,10,10),
             ToolTip = new TextBlock
             {
                 Inlines =
@@ -48,6 +49,31 @@ public partial class PgOverview : Page
                     new LineBreak(),
 
                     new Run(feed.Description)
+                }
+            },
+
+            Header = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                Children =
+                {
+                    new Image
+                    {
+                        Width = 32,
+                        Height = 32,
+                        Margin = new Thickness(0, 0, 5, 0),
+                        //Source = !string.IsNullOrWhiteSpace(feed.Image) ? new BitmapImage(new Uri(feed.Image)) : new BitmapImage(new Uri("pack://application:,,,/Resources/Icons/rss.png")),
+                        Source = !string.IsNullOrWhiteSpace(feed.Image) ? new BitmapImage(new Uri(feed.Image)) : null
+                    },
+
+                    new TextBlock
+                    {
+                        Margin = new Thickness(10, 0, 0, 0),
+                        Text = feed.Title,
+                        TextTrimming = TextTrimming.CharacterEllipsis,
+                        TextWrapping = TextWrapping.NoWrap,
+                        VerticalAlignment = VerticalAlignment.Center
+                    }
                 }
             }
         };
@@ -92,7 +118,7 @@ public partial class PgOverview : Page
                                     new LineBreak(),
                                     new LineBreak(),
 
-                                    new Run(item.Description)
+                                    new Run(item.Description ?? "No description.")
                                 }
                             }
                         };
@@ -113,6 +139,7 @@ public partial class PgOverview : Page
     private async Task RefreshFeeds()
     {
         // get all feeds
+        this.Cursor = System.Windows.Input.Cursors.AppStarting;
         List<RssFeed> feeds = [];
         await App.FetchAllFeeds(feeds);
 
@@ -122,14 +149,37 @@ public partial class PgOverview : Page
 
         foreach (RssFeed feed in feeds)
         {
+            // check if feed is valid
+            if (string.IsNullOrWhiteSpace(feed.Title))
+            {
+                continue;
+            }
+
             CreateFeedItemButton(feed);
         }
 
+        this.Cursor = System.Windows.Input.Cursors.Arrow;
+        return;
+    }
+
+    private void AddNewFeed()
+    {
+        WndAddFeed wnd = new WndAddFeed
+        {
+            Owner = Application.Current.MainWindow
+        };
+
+        _ = wnd.ShowDialog();
         return;
     }
 
     private async void btnRefresh_Click(object sender, System.Windows.RoutedEventArgs e)
     {
         await RefreshFeeds();
+    }
+
+    private void btnNewFeed_Click(object sender, RoutedEventArgs e)
+    {
+        AddNewFeed();
     }
 }

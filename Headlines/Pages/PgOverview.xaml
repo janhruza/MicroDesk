@@ -12,7 +12,8 @@
     <Page.ContextMenu>
         <ContextMenu>
             <MenuItem Header="Add new Feed"
-                      Name="miAddFeed"/>
+                      Name="miAddFeed"
+                      Click="btnNewFeed_Click"/>
 
             <MenuItem Header="Refresh"
                       Name="miRefresh"
@@ -63,7 +64,8 @@
 
             <Button Content=""
                     FontFamily="Segoe Fluent Icons"
-                    Name="btnNewFeed"/>
+                    Name="btnNewFeed"
+                    Click="btnNewFeed_Click"/>
 
         </StackPanel>
 
