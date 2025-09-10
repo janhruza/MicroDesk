@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
@@ -136,20 +137,38 @@ namespace LibMicroDesk
         /// </summary>
         /// <param name="path">Path to the target file.</param>
         /// <param name="proc">Output process instance.</param>
+        /// <param name="isPrivileged">Determines whether the process will request elevated privileges.</param>
         /// <returns>Operation result.</returns>
-        public static bool CreateShellProcess(string path, out Process proc)
+        public static bool CreateShellProcess(string path, out Process proc, bool isPrivileged = false)
         {
-            proc = new Process
+            try
             {
-                StartInfo = new ProcessStartInfo
+                proc = new Process
                 {
-                    WorkingDirectory = Directory.GetParent(path)?.FullName ?? AppDomain.CurrentDomain.BaseDirectory,
-                    FileName = path,
-                    UseShellExecute = true
-                }
-            };
+                    StartInfo = new ProcessStartInfo
+                    {
+                        WorkingDirectory = Directory.GetParent(path)?.FullName ?? AppDomain.CurrentDomain.BaseDirectory,
+                        FileName = path,
+                        UseShellExecute = true,
+                        Verb = (isPrivileged ? "runas" : "open")
+                    }
+                };
 
-            return proc.Start();
+                return proc.Start();
+            }
+
+            catch (Exception ex)
+            {
+                if (ex is Win32Exception)
+                {
+                    // invalid file type such as DLL
+                    _ = MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+                proc = new Process();
+                Log.Error(ex, nameof(CreateShellProcess));
+                return false;
+            }
         }
     }
 }
