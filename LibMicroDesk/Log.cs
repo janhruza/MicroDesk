@@ -15,7 +15,14 @@ public static class Log
     /// </summary>
     public static string Path => "MicroDesk.log";
 
+    /// <summary>
+    /// Determines whether the dialog window will popup if certain logging happens.
+    /// </summary>
+    public static bool ShowDialog { get; set; } = true;
+
     internal const char Separator = ';';
+
+    static object _lock = new object();
 
     private static void WriteEntry(string message, string type, string tag = "Global")
     {
@@ -30,7 +37,11 @@ public static class Log
         sb.Append(Environment.NewLine);
         string data = sb.ToString();
 
-        File.AppendAllText(Path, data, Encoding.Unicode);
+        lock (_lock)
+        {
+            File.AppendAllText(Path, data, Encoding.Unicode);
+        }
+        
         return;
     }
 
@@ -42,6 +53,12 @@ public static class Log
     public static void Error(string message, string tag = "Global")
     {
         WriteEntry(message, "Error", tag);
+
+        if (ShowDialog)
+        {
+            _ = MessageBox.Show(message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
         return;
     }
 
@@ -75,6 +92,12 @@ public static class Log
     public static void Error(Exception ex, string tag = "Global")
     {
         WriteEntry(ex.ToString(), "Error", tag);
+
+        if (ShowDialog)
+        {
+            _ = MessageBox.Show(ex.ToString(), "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
         return;
     }
 

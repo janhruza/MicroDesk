@@ -83,17 +83,20 @@ public partial class App : Application
         return;
     }
 
-    internal static Task FetchAllFeeds(List<RssFeed> feeds)
+    internal static async Task FetchAllFeeds(List<RssFeed> feeds)
     {
-        List<Task> tasks = new List<Task>();
+        var tasks = new List<Task<RssFeed>>();
+
         foreach (string source in RssFeedSources)
         {
             tasks.Add(Task.Run(() =>
             {
-                RssFeed feed = RssParser.Parse(source);
-                feeds.Add(feed);
+                var feed = RssReader.Parse(source);
+                return feed;
             }));
         }
-        return Task.WhenAll(tasks);
+
+        var results = await Task.WhenAll(tasks);
+        feeds.AddRange(results);
     }
 }

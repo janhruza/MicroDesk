@@ -12,7 +12,8 @@
                      WindowStartupLocation="CenterScreen"
                      ResizeMode="CanResize"
                      MinWidth="350"
-                     MinHeight="350">
+                     MinHeight="350"
+                     KeyDown="IconlessWindow_KeyDown">
 
     <Frame Name="frm"
            NavigationUIVisibility="Hidden"/>

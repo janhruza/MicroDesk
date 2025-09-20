@@ -8,6 +8,18 @@ namespace Headlines.Core;
 public struct RssFeed
 {
     /// <summary>
+    /// Initializes the struct.
+    /// </summary>
+    public RssFeed()
+    {
+        Title = string.Empty;
+        Link = string.Empty;
+        Description = string.Empty;
+        Image = string.Empty;
+        Items = [];
+    }
+
+    /// <summary>
     /// Representing the feed title.
     /// </summary>
     public string Title;

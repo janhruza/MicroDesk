@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Text;
+using System.Windows;
+using System.Windows.Controls;
 using LibMicroDesk.Windows;
 
 namespace Headlines;
@@ -41,5 +43,29 @@ public partial class MainWindow : IconlessWindow
 
         _instance.Title = $"{page.Title} | {App.AppName}";
         return _instance.frm.Navigate(page);
+    }
+
+    private void IconlessWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    {
+        if (e.Key == System.Windows.Input.Key.F3)
+        {
+            e.Handled = true;
+
+            // show loaded RSS feeds
+
+            if (App.RssFeedSources.Count == 0)
+            {
+                _ = MessageBox.Show("No RSS sources created.", "RSS Sources", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            foreach (string rss in App.RssFeedSources)
+            {
+                sb.AppendLine(rss);
+            }
+
+            _ = MessageBox.Show(sb.ToString(), "RSS sources", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
 }

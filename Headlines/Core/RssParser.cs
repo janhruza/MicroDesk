@@ -1,134 +1,116 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Net.Http;
 using System.Xml;
 using Headlines.Core;
 using LibMicroDesk;
 
-/// <summary>
-/// Representing a simple RSS parser.
-/// </summary>
-public static class RssParser
+public static class RssReader
 {
-    /// <summary>
-    /// Parses the RSS feed from the given URL.
-    /// </summary>
-    /// <param name="rssUrl">Source address.</param>
-    /// <returns>Parsed RSS feed item.</returns>
     public static RssFeed Parse(string rssUrl)
     {
+        var feed = new RssFeed();
+
         try
         {
-            Uri uri = new Uri(rssUrl, UriKind.RelativeOrAbsolute);
-            var feed = new RssFeed
+            using (var client = new HttpClient())
             {
-                Items = new List<RssFeedItem>()
-            };
+                client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; RefSafeRssReader/1.0)");
 
-            using (var reader = XmlReader.Create(uri.AbsoluteUri))
-            {
-                while (reader.Read())
+                using (var response = client.GetAsync(rssUrl).Result)
+                using (var stream = response.Content.ReadAsStreamAsync().Result)
+                using (var reader = XmlReader.Create(stream, new XmlReaderSettings
                 {
-                    if (reader.IsStartElement() && reader.Name == "channel")
+                    IgnoreComments = true,
+                    IgnoreWhitespace = true
+                }))
+                {
+                    while (reader.Read())
                     {
-                        ParseChannel(reader, ref feed);
+                        if (reader.NodeType == XmlNodeType.Element &&
+                            reader.LocalName.Equals("channel", StringComparison.OrdinalIgnoreCase))
+                        {
+                            using (var channelReader = reader.ReadSubtree())
+                            {
+                                channelReader.Read(); // move to <channel>
+                                ParseChannel(ref feed, channelReader);
+                            }
+                        }
                     }
                 }
             }
-
-            return feed;
         }
-
         catch (Exception ex)
         {
-            Log.Error(ex, nameof(Parse));
-            return new RssFeed();
+            Console.Error.WriteLine($"Error parsing feed: {ex}");
         }
+
+        return feed;
     }
 
-    private static void ParseChannel(XmlReader reader, ref RssFeed feed)
+    private static void ParseChannel(ref RssFeed feed, XmlReader reader)
     {
         while (reader.Read())
         {
-            if (reader.NodeType == XmlNodeType.EndElement && reader.Name.ToLower() == "channel")
+            if (reader.NodeType == XmlNodeType.EndElement &&
+                reader.LocalName.Equals("channel", StringComparison.OrdinalIgnoreCase))
                 break;
 
-            if (reader.IsStartElement())
+            if (!reader.IsStartElement())
+                continue;
+
+            switch (reader.LocalName.ToLowerInvariant())
             {
-                switch (reader.Name.ToLower())
-                {
-                    case "title":
-                        feed.Title = reader.ReadElementContentAsString();
-                        break;
-                    case "link":
-                        feed.Link = reader.ReadElementContentAsString();
-                        break;
-                    case "description":
-                        feed.Description = reader.ReadElementContentAsString();
-                        break;
-                    case "image":
-                        feed.Image = ParseImage(reader);
-                        break;
-                    case "item":
-                        var itemReader = reader.ReadSubtree(); // Create a sub-reader for the item
-                        var item = ParseItem(itemReader);
-                        feed.Items.Add(item);
-                        itemReader.Close(); // Important: close the sub-reader
-                        break;
-                }
+                case "title":
+                    feed.Title = reader.ReadElementContentAsString();
+                    break;
+                case "link":
+                    feed.Link = reader.ReadElementContentAsString();
+                    break;
+                case "description":
+                    feed.Description = reader.ReadElementContentAsString();
+                    break;
+                case "item":
+                    var item = new RssFeedItem();
+                    using (var itemReader = reader.ReadSubtree())
+                    {
+                        itemReader.Read(); // move to <item>
+                        ParseItem(ref item, itemReader);
+                    }
+                    feed.Items.Add(item);
+                    break;
             }
         }
     }
 
-    private static string ParseImage(XmlReader reader)
+    private static void ParseItem(ref RssFeedItem item, XmlReader reader)
     {
-        string imageUrl = "";
-
         while (reader.Read())
         {
-            if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "image")
+            if (reader.NodeType == XmlNodeType.EndElement &&
+                reader.LocalName.Equals("item", StringComparison.OrdinalIgnoreCase))
                 break;
 
-            if (reader.IsStartElement() && reader.Name == "url")
+            if (!reader.IsStartElement())
+                continue;
+
+            switch (reader.LocalName.ToLowerInvariant())
             {
-                imageUrl = reader.ReadElementContentAsString();
+                case "title":
+                    item.Title = reader.ReadElementContentAsString();
+                    break;
+                case "link":
+                    item.Link = reader.ReadElementContentAsString();
+                    break;
+                case "description":
+                    item.Description = reader.ReadElementContentAsString();
+                    break;
+                case "pubdate":
+                    item.Date = reader.ReadElementContentAsString();
+                    break;
+                case "guid":
+                    item.Guid = reader.ReadElementContentAsString();
+                    break;
             }
         }
-
-        return imageUrl;
-    }
-
-    private static RssFeedItem ParseItem(XmlReader reader)
-    {
-        var item = new RssFeedItem();
-
-        while (reader.Read())
-        {
-            if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "item")
-                break;
-
-            if (reader.IsStartElement())
-            {
-                switch (reader.Name)
-                {
-                    case "title":
-                        item.Title = reader.ReadElementContentAsString();
-                        break;
-                    case "link":
-                        item.Link = reader.ReadElementContentAsString();
-                        break;
-                    case "description":
-                        item.Description = reader.ReadElementContentAsString();
-                        break;
-                    case "pubDate":
-                        item.Date = reader.ReadElementContentAsString();
-                        break;
-                    case "guid":
-                        item.Guid = reader.ReadElementContentAsString();
-                        break;
-                }
-            }
-        }
-
-        return item;
     }
 }
