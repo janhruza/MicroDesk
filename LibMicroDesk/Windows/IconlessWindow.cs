@@ -28,6 +28,10 @@ public class IconlessWindow : Window
     static extern bool SetWindowPos(IntPtr hwnd, IntPtr hwndInsertAfter,
         int x, int y, int cx, int cy, uint flags);
 
+    /// <summary>
+    /// Raises the <see cref="Window.SourceInitialized"/> event.
+    /// </summary>
+    /// <param name="e"></param>
     protected override void OnSourceInitialized(EventArgs e)
     {
         base.OnSourceInitialized(e);
@@ -51,6 +55,8 @@ public class IconlessWindow : Window
     public IconlessWindow()
     {
         WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        this.SnapsToDevicePixels = true;
+        this.UseLayoutRounding = true;
 
         // custom behavior
         this.KeyDown += this.IconlessWindow_KeyDown;
