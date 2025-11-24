@@ -41,6 +41,7 @@ public class IconlessWindow : Window
     private void RemoveDialogFrame()
     {
         var hwnd = new WindowInteropHelper(this).Handle;
+        this.Handle = hwnd;
         int extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
         SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_DLGMODALFRAME);
 
@@ -60,18 +61,42 @@ public class IconlessWindow : Window
 
         // custom behavior
         this.KeyDown += this.IconlessWindow_KeyDown;
+        this.Activated += (s, e) =>
+        {
+            MDCore.activeWindow = this.Handle;
+        };
     }
+
+    /// <summary>
+    /// Representing the window handle.
+    /// </summary>
+    public nint Handle { get; private set; }
 
     private void IconlessWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
     {
         if (e.Key == System.Windows.Input.Key.F1)
         {
-            _ = new WndAbout().ShowDialog();
+            MDCore.AboutBox();
         }
 
         else if (e.Key == System.Windows.Input.Key.F2)
         {
             _ = new WndGeneralSettings().ShowDialog();
         }
+    }
+
+    /// <summary>
+    /// Overrides the default <see cref="ShowDialog"/> method.
+    /// </summary>
+    /// <returns>Dialog result as <see cref="bool"/>.</returns>
+    /// <remarks>
+    /// This method also adjusts window's position based on whether it has a n owner or not.
+    /// If window has a parent, its startup position is set to <see cref="WindowStartupLocation.CenterOwner"/>,
+    /// otherwise <see cref="WindowStartupLocation.CenterScreen"/>.
+    /// </remarks>
+    public new bool? ShowDialog()
+    {
+        this.WindowStartupLocation = (Owner != null) ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen;
+        return base.ShowDialog();
     }
 }

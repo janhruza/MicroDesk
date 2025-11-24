@@ -12,12 +12,16 @@ namespace LibMicroDesk
     /// </summary>
     public static class MDCore
     {
+        internal static nint activeWindow = nint.Zero;
+
         /// <summary>
         /// Shows the About dialog for the MicroDesk applications.
         /// </summary>
         public static void AboutBox()
         {
-            _ = new WndAbout().ShowDialog();
+            // _ = new WndAbout().ShowDialog();
+            _ = PInvoke.ShellAbout(activeWindow, "MicroDesk", "A simple desktop solution for managing tasks, notes, and more.", nint.Zero);
+            return;
         }
 
         /// <summary>
