@@ -1,9 +1,10 @@
+using LibMicroDesk.Windows;
+
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using LibMicroDesk.Windows;
 
 namespace LibMicroDesk
 {
@@ -38,29 +39,29 @@ namespace LibMicroDesk
         /// <param name="theme">New theme to be applied.</param>
         public static void ApplyTheme(SystemTheme theme)
         {
-            #pragma warning disable WPF0001
+#pragma warning disable WPF0001
 
             switch (theme)
             {
                 default:
                 case SystemTheme.None:
-                Application.Current.ThemeMode = ThemeMode.None;
-                break;
+                    Application.Current.ThemeMode = ThemeMode.None;
+                    break;
 
-            case SystemTheme.Light:
-                Application.Current.ThemeMode = ThemeMode.Light;
-                break;
+                case SystemTheme.Light:
+                    Application.Current.ThemeMode = ThemeMode.Light;
+                    break;
 
-            case SystemTheme.Dark:
-                Application.Current.ThemeMode = ThemeMode.Dark;
-                break;
+                case SystemTheme.Dark:
+                    Application.Current.ThemeMode = ThemeMode.Dark;
+                    break;
 
-            case SystemTheme.Auto:
-                Application.Current.ThemeMode = ThemeMode.System;
-                break;
+                case SystemTheme.Auto:
+                    Application.Current.ThemeMode = ThemeMode.System;
+                    break;
             }
 
-            #pragma warning restore WPF0001
+#pragma warning restore WPF0001
         }
 
         /// <summary>

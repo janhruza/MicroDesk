@@ -1,7 +1,9 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using FileVault.Pages;
+﻿using FileVault.Pages;
+
 using LibMicroDesk;
+
+using System.Windows;
+using System.Windows.Controls;
 
 namespace FileVault
 {

@@ -1,6 +1,7 @@
-﻿using System.Windows;
+﻿using LibMicroDesk.Windows;
+
+using System.Windows;
 using System.Windows.Controls;
-using LibMicroDesk.Windows;
 
 namespace QuickNotes;
 

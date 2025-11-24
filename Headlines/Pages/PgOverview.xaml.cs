@@ -1,13 +1,15 @@
-﻿using System;
+﻿using Headlines.Core;
+using Headlines.Windows;
+
+using LibMicroDesk.Windows;
+
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media.Imaging;
-using Headlines.Core;
-using Headlines.Windows;
-using LibMicroDesk.Windows;
 
 namespace Headlines.Pages;
 
@@ -39,7 +41,7 @@ public partial class PgOverview : Page
         TreeViewItem tvi = new TreeViewItem
         {
             HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch,
-            Padding = new System.Windows.Thickness(0,10,10,10),
+            Padding = new System.Windows.Thickness(0, 10, 10, 10),
             ToolTip = new TextBlock
             {
                 Inlines =

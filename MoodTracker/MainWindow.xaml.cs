@@ -1,5 +1,6 @@
-﻿using System.Windows.Controls;
-using LibMicroDesk.Windows;
+﻿using LibMicroDesk.Windows;
+
+using System.Windows.Controls;
 
 namespace MoodTracker;
 

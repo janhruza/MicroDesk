@@ -1,8 +1,9 @@
-﻿using System;
+﻿using MoodTracker.Core;
+
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using MoodTracker.Core;
 
 namespace MoodTracker.Pages;
 

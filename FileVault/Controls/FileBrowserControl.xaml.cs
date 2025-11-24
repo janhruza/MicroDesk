@@ -1,8 +1,8 @@
-﻿using System;
-using System.Diagnostics;
+﻿using LibMicroDesk;
+
+using System;
 using System.IO;
 using System.Windows.Controls;
-using LibMicroDesk;
 
 namespace FileVault.Controls;
 
@@ -28,7 +28,7 @@ public partial class FileBrowserControl : UserControl
     {
         InitializeComponent();
         _path = path;
-        this.Loaded += (s,e) => Navigate(path);
+        this.Loaded += (s, e) => Navigate(path);
     }
 
     private string _path;

@@ -1,10 +1,13 @@
-﻿using System;
+﻿using LibMicroDesk;
+
+using MoodTracker.Core;
+using MoodTracker.Pages;
+
+using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Forms;
-using LibMicroDesk;
-using MoodTracker.Core;
-using MoodTracker.Pages;
+
 using Application = System.Windows.Application;
 
 namespace MoodTracker

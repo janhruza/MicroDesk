@@ -41,7 +41,7 @@ public static class Log
         {
             File.AppendAllText(Path, data, Encoding.Unicode);
         }
-        
+
         return;
     }
 

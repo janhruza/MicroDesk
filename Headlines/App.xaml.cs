@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using Headlines.Core;
+using Headlines.Pages;
+
+using LibMicroDesk;
+
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
-using Headlines.Core;
-using Headlines.Pages;
-using LibMicroDesk;
 
 namespace Headlines;
 

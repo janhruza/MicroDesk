@@ -1,7 +1,8 @@
-﻿using System;
+﻿using LibMicroDesk;
+
+using System;
 using System.IO;
 using System.Windows.Controls;
-using LibMicroDesk;
 
 namespace FileVault.Controls;
 

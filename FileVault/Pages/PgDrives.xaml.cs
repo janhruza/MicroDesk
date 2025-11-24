@@ -1,7 +1,8 @@
-﻿using System;
+﻿using FileVault.Controls;
+
+using System;
 using System.IO;
 using System.Windows.Controls;
-using FileVault.Controls;
 
 namespace FileVault.Pages;
 

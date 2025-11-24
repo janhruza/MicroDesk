@@ -1,7 +1,8 @@
-﻿using System.Text;
+﻿using LibMicroDesk.Windows;
+
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using LibMicroDesk.Windows;
 
 namespace Headlines;
 

@@ -1,7 +1,8 @@
-﻿using System;
+﻿using QuickNotes.Core;
+
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using QuickNotes.Core;
 
 namespace QuickNotes.Pages;
 

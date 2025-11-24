@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Headlines.Core;
+
+using System;
 using System.Net.Http;
 using System.Xml;
-using Headlines.Core;
-using LibMicroDesk;
 
 public static class RssReader
 {

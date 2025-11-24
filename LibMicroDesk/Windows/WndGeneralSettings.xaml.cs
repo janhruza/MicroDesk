@@ -14,7 +14,7 @@ public partial class WndGeneralSettings : IconlessWindow
     public WndGeneralSettings()
     {
         InitializeComponent();
-        this.Loaded += (s,e) =>ReloadUI();
+        this.Loaded += (s, e) => ReloadUI();
     }
 
     private Dictionary<SystemTheme, string> _themeNames => new Dictionary<SystemTheme, string>

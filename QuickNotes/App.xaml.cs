@@ -1,10 +1,12 @@
-﻿using System;
+﻿using LibMicroDesk;
+
+using QuickNotes.Core;
+using QuickNotes.Pages;
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
-using LibMicroDesk;
-using QuickNotes.Core;
-using QuickNotes.Pages;
 
 namespace QuickNotes;
 

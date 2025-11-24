@@ -71,7 +71,7 @@ public partial class PgMoodHistory : Page
         rBad.Text = badCount.ToString();
 
         // get average mood
-                int totalCount = goodCount + okayCount + badCount;
+        int totalCount = goodCount + okayCount + badCount;
         if (totalCount > 0)
         {
             double averageMood = (goodCount * 2 + okayCount) / (double)totalCount;
