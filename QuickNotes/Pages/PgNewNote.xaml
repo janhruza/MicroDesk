@@ -19,7 +19,8 @@
             <TextBox Name="txtText"
                      Height="50"
                      TextWrapping="Wrap"
-                     SelectionBrush="{x:Static SystemColors.AccentColorBrush}"/>
+                     SelectionBrush="{x:Static SystemColors.AccentColorBrush}"
+                     SpellCheck.IsEnabled="True"/>
 
             <CheckBox Content="Can expire"
                       Name="cbCanExpire"

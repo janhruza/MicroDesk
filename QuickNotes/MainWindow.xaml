@@ -11,6 +11,8 @@
                              Width="350"
                              Height="350"
                              ResizeMode="CanMinimize"
+                             SnapsToDevicePixels="True"
+                             UseLayoutRounding="True"
                              WindowStartupLocation="CenterScreen"
                              Loaded="IconlessWindow_Loaded">
 
