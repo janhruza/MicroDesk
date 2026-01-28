@@ -12,11 +12,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LibMicroDesk\LibMicroDesk.csproj" />
+    <Compile Remove="Controls\**" />
+    <EmbeddedResource Remove="Controls\**" />
+    <None Remove="Controls\**" />
+    <Page Remove="Controls\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controls\" />
+    <ProjectReference Include="..\LibMicroDesk\LibMicroDesk.csproj" />
   </ItemGroup>
 
 </Project>

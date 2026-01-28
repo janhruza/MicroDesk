@@ -121,10 +121,10 @@ public partial class PgOverview : Page
                                         Foreground = SystemColors.AccentColorBrush,
                                     },
 
-                                    new LineBreak(),
+                                    //new LineBreak(),
                                     new LineBreak(),
 
-                                    new Run(item.Description ?? "No description.")
+                                    new Run(item.Description.Trim() ?? "No description.")
                                 }
                             }
                         };
