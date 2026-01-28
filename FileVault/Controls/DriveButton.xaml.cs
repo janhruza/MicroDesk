@@ -22,7 +22,7 @@ public partial class DriveButton : UserControl
         _drive = drive ?? string.Empty;
 
         // events
-        this.Loaded += (s, e) => this.RefreshDriveInfo();
+        Loaded += (s, e) => RefreshDriveInfo();
     }
 
     private string _drive;

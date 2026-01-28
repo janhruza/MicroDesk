@@ -15,7 +15,7 @@ public partial class WndAbout : IconlessWindow
     {
         InitializeComponent();
 
-        this.Loaded += (s, e) =>
+        Loaded += (s, e) =>
         {
             SystemSounds.Beep.Play();
         };

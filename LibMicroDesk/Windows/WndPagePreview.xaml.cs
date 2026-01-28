@@ -20,14 +20,14 @@ public partial class WndPagePreview : IconlessWindow
         _page = page;
         InitializeComponent();
 
-        this.Loaded += IconlessWindow_Loaded;
+        Loaded += IconlessWindow_Loaded;
     }
 
     private Page _page;
 
     private bool LoadPage(Page pg)
     {
-        this.Title = pg.Title;
+        Title = pg.Title;
         return frm.Navigate(pg);
     }
 

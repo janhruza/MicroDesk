@@ -31,7 +31,7 @@ public partial class MainWindow : IconlessWindow
             return false;
         }
 
-        this.Title = page.Title;
+        Title = page.Title;
         return true;
     }
 

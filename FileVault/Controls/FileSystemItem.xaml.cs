@@ -14,7 +14,7 @@ public partial class FileSystemItem : UserControl
     public FileSystemItem(string path)
     {
         InitializeComponent();
-        this.Loaded += (s, e) => ReloadUI(path);
+        Loaded += (s, e) => ReloadUI(path);
     }
 
     const string TYPE_FOLDER = "";

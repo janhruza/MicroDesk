@@ -20,7 +20,7 @@ public partial class WndAddFeed : IconlessWindow
 
     private void btnCancel_Click(object sender, RoutedEventArgs e)
     {
-        this.Close();
+        Close();
     }
 
     private void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -32,7 +32,7 @@ public partial class WndAddFeed : IconlessWindow
         }
 
         App.RssFeedSources.Add(txtUrl.Text.Trim());
-        this.Close();
+        Close();
         return;
     }
 

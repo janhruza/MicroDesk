@@ -19,7 +19,7 @@ public partial class MainWindow : IconlessWindow
         _instance = this;
         InitializeComponent();
 
-        this.Loaded += (s, e) =>
+        Loaded += (s, e) =>
         {
             Navigate(App.PgOverview);
         };

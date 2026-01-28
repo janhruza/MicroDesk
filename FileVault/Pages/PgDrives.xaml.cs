@@ -18,7 +18,7 @@ public partial class PgDrives : Page
     {
         InitializeComponent();
 
-        this.Loaded += (s, e) => RefreshDrives();
+        Loaded += (s, e) => RefreshDrives();
     }
 
     private void RefreshDrives()

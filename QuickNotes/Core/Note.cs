@@ -17,7 +17,7 @@ public record struct Note(string Text, DateTime Creation, DateTime Expiration)
     /// Determines whether the note can expire or not.
     /// </summary>
     /// <returns></returns>
-    public readonly bool IsIndefinite() => this.Expiration == this.Creation;
+    public readonly bool IsIndefinite() => Expiration == Creation;
 
     /// <summary>
     /// Determines whether the note has expired.
@@ -25,8 +25,8 @@ public record struct Note(string Text, DateTime Creation, DateTime Expiration)
     public readonly bool HasExpired()
     {
         // indifinite note
-        if (this.Expiration == this.Creation) return false;
+        if (Expiration == Creation) return false;
 
-        return this.Expiration < this.Creation;
+        return Expiration < Creation;
     }
 }

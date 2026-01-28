@@ -40,7 +40,7 @@ public partial class PgMood : Page
             };
         }
 
-        this.Loaded += (s, e) =>
+        Loaded += (s, e) =>
         {
             App.CenterWindow(App.Current.MainWindow);
         };

@@ -25,7 +25,7 @@ public partial class PgOverview : Page
     {
         InitializeComponent();
 
-        this.Loaded += async (s, e) =>
+        Loaded += async (s, e) =>
         {
             await RefreshFeeds();
         };
@@ -145,7 +145,7 @@ public partial class PgOverview : Page
     private async Task RefreshFeeds()
     {
         // get all feeds
-        this.Cursor = System.Windows.Input.Cursors.AppStarting;
+        Cursor = System.Windows.Input.Cursors.AppStarting;
         List<RssFeed> feeds = [];
         await App.FetchAllFeeds(feeds);
 
@@ -164,7 +164,7 @@ public partial class PgOverview : Page
             CreateFeedItemButton(feed);
         }
 
-        this.Cursor = System.Windows.Input.Cursors.Arrow;
+        Cursor = System.Windows.Input.Cursors.Arrow;
         return;
     }
 

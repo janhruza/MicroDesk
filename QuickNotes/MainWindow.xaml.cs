@@ -21,7 +21,7 @@ public partial class MainWindow : IconlessWindow
 
     private void IconlessWindow_Loaded(object sender, RoutedEventArgs e)
     {
-        this.frmContent.Navigate(App.OverviewPage);
+        frmContent.Navigate(App.OverviewPage);
     }
 
     #region Static code

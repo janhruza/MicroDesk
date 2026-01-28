@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Interop;
 
 namespace LibMicroDesk.Windows;
@@ -42,7 +41,7 @@ public class IconlessWindow : Window
     private void RemoveDialogFrame()
     {
         var hwnd = new WindowInteropHelper(this).Handle;
-        this.Handle = hwnd;
+        Handle = hwnd;
         int extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
         SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_DLGMODALFRAME);
 
@@ -57,14 +56,14 @@ public class IconlessWindow : Window
     public IconlessWindow()
     {
         WindowStartupLocation = WindowStartupLocation.CenterScreen;
-        this.SnapsToDevicePixels = true;
-        this.UseLayoutRounding = true;
+        SnapsToDevicePixels = true;
+        UseLayoutRounding = true;
 
         // custom behavior
-        this.KeyDown += this.IconlessWindow_KeyDown;
-        this.Activated += (s, e) =>
+        KeyDown += IconlessWindow_KeyDown;
+        Activated += (s, e) =>
         {
-            MDCore.activeWindow = this.Handle;
+            MDCore.activeWindow = Handle;
         };
     }
 
@@ -97,7 +96,7 @@ public class IconlessWindow : Window
     /// </remarks>
     public new bool? ShowDialog()
     {
-        this.WindowStartupLocation = (Owner != null) ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen;
+        WindowStartupLocation = (Owner != null) ? WindowStartupLocation.CenterOwner : WindowStartupLocation.CenterScreen;
         return base.ShowDialog();
     }
 }

@@ -14,7 +14,7 @@ public partial class WndGeneralSettings : IconlessWindow
     public WndGeneralSettings()
     {
         InitializeComponent();
-        this.Loaded += (s, e) => ReloadUI();
+        Loaded += (s, e) => ReloadUI();
     }
 
     private Dictionary<SystemTheme, string> _themeNames => new Dictionary<SystemTheme, string>
@@ -79,7 +79,7 @@ public partial class WndGeneralSettings : IconlessWindow
 
     private void btnCancel_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-        this.Close();
+        Close();
     }
 
     private void btnOk_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -103,7 +103,7 @@ public partial class WndGeneralSettings : IconlessWindow
         // Save the settings to file
         if (AppSettings.Save(MDCore.Settings))
         {
-            this.Close();
+            Close();
         }
 
         else

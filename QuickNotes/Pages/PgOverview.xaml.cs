@@ -17,7 +17,7 @@ public partial class PgOverview : Page
     public PgOverview()
     {
         InitializeComponent();
-        this.RefreshUI();
+        RefreshUI();
     }
 
     private Button CreateDeleteButton(Note? target)
@@ -144,7 +144,7 @@ public partial class PgOverview : Page
 
     private void btnRefresh_Click(object sender, RoutedEventArgs e)
     {
-        this.RefreshUI();
+        RefreshUI();
         return;
     }
 
@@ -157,14 +157,14 @@ public partial class PgOverview : Page
     private void cbShowAllNotes_Checked(object sender, RoutedEventArgs e)
     {
         // refresh as the visibility could change
-        this.RefreshUI();
+        RefreshUI();
         return;
     }
 
     private void cbShowAllNotes_Unchecked(object sender, RoutedEventArgs e)
     {
         // refresh as the visibility could change
-        this.RefreshUI();
+        RefreshUI();
         return;
     }
 }

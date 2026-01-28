@@ -28,7 +28,7 @@ public partial class FileBrowserControl : UserControl
     {
         InitializeComponent();
         _path = path;
-        this.Loaded += (s, e) => Navigate(path);
+        Loaded += (s, e) => Navigate(path);
     }
 
     private string _path;

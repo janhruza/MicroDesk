@@ -15,6 +15,6 @@ public record struct MoodRecord(DateTime Timestamp, Mood Mood)
     /// <returns>A CSV-formatted mood record.</returns>
     public string ToCSV()
     {
-        return $"{this.Timestamp};{this.Mood}";
+        return $"{Timestamp};{Mood}";
     }
 }

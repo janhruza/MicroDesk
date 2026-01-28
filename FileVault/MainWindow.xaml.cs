@@ -17,7 +17,7 @@ public partial class MainWindow : IconlessWindow
     {
         InitializeComponent();
         _instance = this;
-        this.Loaded += this.MainWindow_Loaded;
+        Loaded += MainWindow_Loaded;
     }
 
     private void MainWindow_Loaded(object sender, System.Windows.RoutedEventArgs e)
@@ -43,7 +43,7 @@ public partial class MainWindow : IconlessWindow
 
     private void miClose_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-        this.Close();
+        Close();
     }
 
     private void miAbout_Click(object sender, System.Windows.RoutedEventArgs e)

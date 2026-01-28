@@ -14,10 +14,10 @@ public class WndPageView : IconlessWindow
     /// <param name="pgContent">Page with content to view.</param>
     public WndPageView(Page pgContent)
     {
-        this.MinHeight = 300;
-        this.MinWidth = 300;
-        this.Title = "Page Viewer";
-        this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        MinHeight = 300;
+        MinWidth = 300;
+        Title = "Page Viewer";
+        WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
         // frame
         Frame frame = new Frame
@@ -26,14 +26,14 @@ public class WndPageView : IconlessWindow
             NavigationUIVisibility = System.Windows.Navigation.NavigationUIVisibility.Hidden
         };
 
-        this.Loaded += (s, e) =>
+        Loaded += (s, e) =>
         {
             if (frame == null) return;
 
             // display page
             if (frame.Navigate(pgContent) == true)
             {
-                this.Title = pgContent.Title;
+                Title = pgContent.Title;
             }
         };
     }
