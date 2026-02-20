@@ -1,0 +1,21 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+  </Configurations>
+  <Project Path="FileVault/FileVault.csproj">
+    <Platform Solution="Debug|x64" Project="x64" />
+  </Project>
+  <Project Path="Headlines/Headlines.csproj">
+    <Platform Solution="Debug|x64" Project="x64" />
+  </Project>
+  <Project Path="LibMicroDesk/LibMicroDesk.csproj">
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
+  <Project Path="MoodTracker/MoodTracker.csproj">
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
+  <Project Path="QuickNotes/QuickNotes.csproj">
+    <Platform Solution="Debug|x64" Project="x64" />
+  </Project>
+</Solution>
