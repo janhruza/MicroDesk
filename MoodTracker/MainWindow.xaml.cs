@@ -26,7 +26,7 @@ public partial class MainWindow : IconlessWindow
     {
         if (page == null) return false;
 
-        if (frmContent.Navigate(page) == false)
+        if (this.frmContent.Navigate(page) == false)
         {
             return false;
         }
@@ -37,9 +37,9 @@ public partial class MainWindow : IconlessWindow
 
     private void Window_Closed(object sender, System.EventArgs e)
     {
-        if (sender is MainWindow mainWindow)
+        if (sender is MainWindow)
         {
-            App.ShowTrayMessage("Mood Tracker is running in the tray.");
+            _ = App.ShowTrayMessage("Mood Tracker is running in the tray.");
         }
     }
 }

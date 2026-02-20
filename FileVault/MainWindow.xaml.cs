@@ -22,18 +22,18 @@ public partial class MainWindow : IconlessWindow
 
     private void MainWindow_Loaded(object sender, System.Windows.RoutedEventArgs e)
     {
-        miToggleStatusPanel.IsChecked = true;
-        frm.Navigate(App.PgDrives);
+        this.miToggleStatusPanel.IsChecked = true;
+        _ = this.frm.Navigate(App.PgDrives);
     }
 
     private void miToggleStatusPanel_Checked(object sender, System.Windows.RoutedEventArgs e)
     {
-        stb.Visibility = System.Windows.Visibility.Visible;
+        this.stb.Visibility = System.Windows.Visibility.Visible;
     }
 
     private void miToggleStatusPanel_Unchecked(object sender, System.Windows.RoutedEventArgs e)
     {
-        stb.Visibility ^= System.Windows.Visibility.Collapsed;
+        this.stb.Visibility ^= System.Windows.Visibility.Collapsed;
     }
 
     private void miSettings_Click(object sender, System.Windows.RoutedEventArgs e)

@@ -86,7 +86,7 @@ public partial class PgOverview : Page
 
         tvi.Selected += (s, e) =>
         {
-            lbxEntries.Items.Clear();
+            this.lbxEntries.Items.Clear();
             // load the selected feed
             if (feed.Items != null)
             {
@@ -129,15 +129,15 @@ public partial class PgOverview : Page
                             }
                         };
 
-                        wnd.ShowDialog();
+                        _ = wnd.ShowDialog();
                     };
 
-                    lbxEntries.Items.Add(lbi);
+                    _ = this.lbxEntries.Items.Add(lbi);
                 }
             }
         };
 
-        trvFeeds.Items.Add(tvi);
+        _ = this.trvFeeds.Items.Add(tvi);
 
         return true;
     }
@@ -150,8 +150,8 @@ public partial class PgOverview : Page
         await App.FetchAllFeeds(feeds);
 
         // build the feeds list
-        trvFeeds.Items.Clear();
-        lbxEntries.Items.Clear();
+        this.trvFeeds.Items.Clear();
+        this.lbxEntries.Items.Clear();
 
         foreach (RssFeed feed in feeds)
         {
@@ -161,7 +161,7 @@ public partial class PgOverview : Page
                 continue;
             }
 
-            CreateFeedItemButton(feed);
+            _ = CreateFeedItemButton(feed);
         }
 
         Cursor = System.Windows.Input.Cursors.Arrow;

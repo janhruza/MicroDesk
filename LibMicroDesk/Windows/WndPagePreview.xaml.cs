@@ -17,7 +17,7 @@ public partial class WndPagePreview : IconlessWindow
         // check if page is valid
         ArgumentNullException.ThrowIfNull(page);
 
-        _page = page;
+        this._page = page;
         InitializeComponent();
 
         Loaded += IconlessWindow_Loaded;
@@ -28,11 +28,11 @@ public partial class WndPagePreview : IconlessWindow
     private bool LoadPage(Page pg)
     {
         Title = pg.Title;
-        return frm.Navigate(pg);
+        return this.frm.Navigate(pg);
     }
 
     private void IconlessWindow_Loaded(object sender, RoutedEventArgs e)
     {
-        LoadPage(_page);
+        _ = LoadPage(this._page);
     }
 }

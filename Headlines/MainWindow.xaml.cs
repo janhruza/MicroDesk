@@ -21,7 +21,7 @@ public partial class MainWindow : IconlessWindow
 
         Loaded += (s, e) =>
         {
-            Navigate(App.PgOverview);
+            _ = Navigate(App.PgOverview);
         };
     }
 
@@ -63,7 +63,7 @@ public partial class MainWindow : IconlessWindow
             StringBuilder sb = new StringBuilder();
             foreach (string rss in App.RssFeedSources)
             {
-                sb.AppendLine(rss);
+                _ = sb.AppendLine(rss);
             }
 
             _ = MessageBox.Show(sb.ToString(), "RSS sources", MessageBoxButton.OK, MessageBoxImage.Information);

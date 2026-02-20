@@ -19,7 +19,7 @@ public partial class DriveButton : UserControl
     {
         // load ui
         InitializeComponent();
-        _drive = drive ?? string.Empty;
+        this._drive = drive ?? string.Empty;
 
         // events
         Loaded += (s, e) => RefreshDriveInfo();
@@ -44,7 +44,7 @@ public partial class DriveButton : UserControl
     private void RefreshDriveInfo()
     {
         // draw UI
-        if (string.IsNullOrEmpty(_drive) == true)
+        if (string.IsNullOrEmpty(this._drive) == true)
         {
             // no drive selected
             return;
@@ -53,32 +53,32 @@ public partial class DriveButton : UserControl
         // display drive info
         try
         {
-            DriveInfo di = new DriveInfo(_drive);
+            DriveInfo di = new DriveInfo(this._drive);
             if (di.IsReady == false)
             {
                 // drive not ready
-                rLetter.Text = _drive.Replace("\\", string.Empty);
-                rLabel.Text = "Drive";
-                pbFree.Visibility = System.Windows.Visibility.Collapsed;
-                lblFreeSpace.Visibility = System.Windows.Visibility.Collapsed;
+                this.rLetter.Text = this._drive.Replace("\\", string.Empty);
+                this.rLabel.Text = "Drive";
+                this.pbFree.Visibility = System.Windows.Visibility.Collapsed;
+                this.lblFreeSpace.Visibility = System.Windows.Visibility.Collapsed;
                 return;
             }
 
             // general
-            rLetter.Text = _drive.Replace("\\", string.Empty);
-            rLabel.Text = GetLabel(di.VolumeLabel);
-            pbFree.Visibility = System.Windows.Visibility.Visible;
-            lblFreeSpace.Visibility = System.Windows.Visibility.Visible;
+            this.rLetter.Text = this._drive.Replace("\\", string.Empty);
+            this.rLabel.Text = GetLabel(di.VolumeLabel);
+            this.pbFree.Visibility = System.Windows.Visibility.Visible;
+            this.lblFreeSpace.Visibility = System.Windows.Visibility.Visible;
 
             // free space
             long free = di.AvailableFreeSpace;
             long total = di.TotalSize;
 
-            pbFree.Maximum = total;
-            pbFree.Value = total - free;
+            this.pbFree.Maximum = total;
+            this.pbFree.Value = total - free;
 
-            rFree.Text = GetGB(free).ToString();
-            rTotal.Text = GetGB(total).ToString();
+            this.rFree.Text = GetGB(free).ToString();
+            this.rTotal.Text = GetGB(total).ToString();
             return;
         }
 

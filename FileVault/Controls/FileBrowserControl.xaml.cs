@@ -17,7 +17,7 @@ public partial class FileBrowserControl : UserControl
     public FileBrowserControl()
     {
         InitializeComponent();
-        _path = string.Empty;
+        this._path = string.Empty;
     }
 
     /// <summary>
@@ -27,7 +27,7 @@ public partial class FileBrowserControl : UserControl
     public FileBrowserControl(string path)
     {
         InitializeComponent();
-        _path = path;
+        this._path = path;
         Loaded += (s, e) => Navigate(path);
     }
 
@@ -47,7 +47,7 @@ public partial class FileBrowserControl : UserControl
                 return;
             }
 
-            lbxItems.Items.Clear();
+            this.lbxItems.Items.Clear();
 
             // refresh UI
 
@@ -63,7 +63,7 @@ public partial class FileBrowserControl : UserControl
                 if (parent == null)
                 {
                     // go to the drives page
-                    App.Navigate(App.PgDrives);
+                    _ = App.Navigate(App.PgDrives);
                 }
 
                 else
@@ -74,7 +74,7 @@ public partial class FileBrowserControl : UserControl
             };
 
             // add go-back item
-            lbxItems.Items.Add(lbiBack);
+            _ = this.lbxItems.Items.Add(lbiBack);
 
             // get directories
             foreach (string dir in Directory.GetDirectories(path))
@@ -98,7 +98,7 @@ public partial class FileBrowserControl : UserControl
                     return;
                 };
 
-                lbxItems.Items.Add(lbi);
+                _ = this.lbxItems.Items.Add(lbi);
             }
 
             // get files
@@ -117,11 +117,11 @@ public partial class FileBrowserControl : UserControl
                 lbi.MouseDoubleClick += (s, e) =>
                 {
                     // open file
-                    MDCore.CreateShellProcess(file, out _);
+                    _ = MDCore.CreateShellProcess(file, out _);
                     return;
                 };
 
-                lbxItems.Items.Add(lbi);
+                _ = this.lbxItems.Items.Add(lbi);
             }
 
             App.SetStatusMessage(path);

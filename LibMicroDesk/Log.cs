@@ -22,19 +22,19 @@ public static class Log
 
     internal const char Separator = ';';
 
-    static object _lock = new object();
+    private static object _lock = new object();
 
     private static void WriteEntry(string message, string type, string tag = "Global")
     {
         StringBuilder sb = new StringBuilder();
-        sb.Append(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-        sb.Append(Separator);
-        sb.Append(type);
-        sb.Append(Separator);
-        sb.Append(tag);
-        sb.Append(Separator);
-        sb.Append(message);
-        sb.Append(Environment.NewLine);
+        _ = sb.Append(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+        _ = sb.Append(Separator);
+        _ = sb.Append(type);
+        _ = sb.Append(Separator);
+        _ = sb.Append(tag);
+        _ = sb.Append(Separator);
+        _ = sb.Append(message);
+        _ = sb.Append(Environment.NewLine);
         string data = sb.ToString();
 
         lock (_lock)

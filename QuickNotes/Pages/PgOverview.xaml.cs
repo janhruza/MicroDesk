@@ -57,13 +57,13 @@ public partial class PgOverview : Page
         return btn;
     }
 
-    private bool _showAllNotes => cbShowAllNotes.IsChecked == true;
+    private bool _showAllNotes => this.cbShowAllNotes.IsChecked == true;
 
     private void RefreshUI()
     {
         // load all notes and display them
         // into the list box
-        lbxNotes.Items.Clear();
+        this.lbxNotes.Items.Clear();
 
         if (App.Notes.Count == 0)
         {
@@ -136,7 +136,7 @@ public partial class PgOverview : Page
             lbiNote.MouseLeave += (s, e) => btnDelete.Visibility = Visibility.Collapsed;
 
             lbiNote.Tag = note;
-            lbxNotes.Items.Add(lbiNote);
+            _ = this.lbxNotes.Items.Add(lbiNote);
         }
 
         return;
@@ -150,7 +150,7 @@ public partial class PgOverview : Page
 
     private void btnNewNote_Click(object sender, RoutedEventArgs e)
     {
-        MainWindow.Navigate(App.NewNotePage);
+        _ = MainWindow.Navigate(App.NewNotePage);
         return;
     }
 

@@ -12,11 +12,11 @@ public struct RssFeed
     /// </summary>
     public RssFeed()
     {
-        Title = string.Empty;
-        Link = string.Empty;
-        Description = string.Empty;
-        Image = string.Empty;
-        Items = [];
+        this.Title = string.Empty;
+        this.Link = string.Empty;
+        this.Description = string.Empty;
+        this.Image = string.Empty;
+        this.Items = [];
     }
 
     /// <summary>

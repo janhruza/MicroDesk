@@ -22,18 +22,18 @@ public partial class PgNewNote : Page
     private void cbCanExpire_Checked(object sender, System.Windows.RoutedEventArgs e)
     {
         // show expiration date box
-        dtExpiration.Visibility = System.Windows.Visibility.Visible;
+        this.dtExpiration.Visibility = System.Windows.Visibility.Visible;
     }
 
     private void cbCanExpire_Unchecked(object sender, System.Windows.RoutedEventArgs e)
     {
         // hide expiration date box
-        dtExpiration.Visibility = System.Windows.Visibility.Collapsed;
+        this.dtExpiration.Visibility = System.Windows.Visibility.Collapsed;
     }
 
     private void btnCancel_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-        MainWindow.Navigate(App.OverviewPage);
+        _ = MainWindow.Navigate(App.OverviewPage);
         return;
     }
 
@@ -42,21 +42,21 @@ public partial class PgNewNote : Page
         DateTime dtCurrent = DateTime.Now;
 
         // check text first
-        text = txtText.Text;
+        text = this.txtText.Text;
         if (string.IsNullOrEmpty(text)) goto Error;
         if (string.IsNullOrWhiteSpace(text)) goto Error;
 
         creation = dtCurrent;
 
-        if (cbCanExpire.IsChecked == true)
+        if (this.cbCanExpire.IsChecked == true)
         {
-            if (dtExpiration.SelectedDate.HasValue == false)
+            if (this.dtExpiration.SelectedDate.HasValue == false)
             {
                 expiration = DateTime.MinValue;
                 return false;
             }
 
-            expiration = dtExpiration.SelectedDate.Value;
+            expiration = this.dtExpiration.SelectedDate.Value;
             return true;
         }
 
@@ -84,7 +84,7 @@ public partial class PgNewNote : Page
             App.Notes.Add(note);
 
             // navigate to the overview page
-            MainWindow.Navigate(App.OverviewPage);
+            _ = MainWindow.Navigate(App.OverviewPage);
             return;
         }
 

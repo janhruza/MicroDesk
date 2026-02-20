@@ -30,18 +30,18 @@ public partial class PgMoodHistory : Page
     {
         if (File.Exists(App._moodFile) == false)
         {
-            rGood.Text = "0";
-            rOkay.Text = "0";
-            rBad.Text = "0";
+            this.rGood.Text = "0";
+            this.rOkay.Text = "0";
+            this.rBad.Text = "0";
             return;
         }
 
         // read mood history file
         if (App.ReadMoodHistoryFile(out MoodTracker.Core.MoodRecord[] moodRecords) == false)
         {
-            rGood.Text = "0";
-            rOkay.Text = "0";
-            rBad.Text = "0";
+            this.rGood.Text = "0";
+            this.rOkay.Text = "0";
+            this.rBad.Text = "0";
             return;
         }
 
@@ -66,34 +66,34 @@ public partial class PgMoodHistory : Page
             }
         }
 
-        rGood.Text = goodCount.ToString();
-        rOkay.Text = okayCount.ToString();
-        rBad.Text = badCount.ToString();
+        this.rGood.Text = goodCount.ToString();
+        this.rOkay.Text = okayCount.ToString();
+        this.rBad.Text = badCount.ToString();
 
         // get average mood
         int totalCount = goodCount + okayCount + badCount;
         if (totalCount > 0)
         {
             double averageMood = (goodCount * 2 + okayCount) / (double)totalCount;
-            lblAverage.Content = averageMood.ToString("F2");
+            this.lblAverage.Content = averageMood.ToString("F2");
 
             // get average mood character
             if (averageMood >= 1.5)
             {
-                tbAverage.Text = moodChars[0]; // good
+                this.tbAverage.Text = moodChars[0]; // good
             }
             else if (averageMood >= 0.5)
             {
-                tbAverage.Text = moodChars[1]; // okay
+                this.tbAverage.Text = moodChars[1]; // okay
             }
             else
             {
-                tbAverage.Text = moodChars[2]; // bad
+                this.tbAverage.Text = moodChars[2]; // bad
             }
         }
         else
         {
-            lblAverage.Content = "N/A"; // no records to calculate average
+            this.lblAverage.Content = "N/A"; // no records to calculate average
         }
     }
 }

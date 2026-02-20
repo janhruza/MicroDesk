@@ -25,19 +25,19 @@ public partial class WndAddFeed : IconlessWindow
 
     private void btnAdd_Click(object sender, RoutedEventArgs e)
     {
-        if (string.IsNullOrEmpty(txtUrl.Text))
+        if (string.IsNullOrEmpty(this.txtUrl.Text))
         {
-            MessageBox.Show(this, "Please enter a valid URL.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            _ = MessageBox.Show(this, "Please enter a valid URL.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
 
-        App.RssFeedSources.Add(txtUrl.Text.Trim());
+        App.RssFeedSources.Add(this.txtUrl.Text.Trim());
         Close();
         return;
     }
 
     private void txtUrl_TextChanged(object sender, TextChangedEventArgs e)
     {
-        btnAdd.IsEnabled = !string.IsNullOrWhiteSpace(txtUrl.Text);
+        this.btnAdd.IsEnabled = !string.IsNullOrWhiteSpace(this.txtUrl.Text);
     }
 }

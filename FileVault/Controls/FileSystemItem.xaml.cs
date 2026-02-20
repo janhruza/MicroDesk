@@ -17,8 +17,8 @@ public partial class FileSystemItem : UserControl
         Loaded += (s, e) => ReloadUI(path);
     }
 
-    const string TYPE_FOLDER = "";
-    const string TYPE_FILE = "";
+    private const string TYPE_FOLDER = "";
+    private const string TYPE_FILE = "";
 
     private void ReloadUI(string path)
     {
@@ -37,7 +37,7 @@ public partial class FileSystemItem : UserControl
                 info = new FileInfo(path);
 
                 // ui
-                lblFileType.Content = TYPE_FILE;
+                this.lblFileType.Content = TYPE_FILE;
             }
 
             else
@@ -46,10 +46,10 @@ public partial class FileSystemItem : UserControl
                 info = new DirectoryInfo(path);
 
                 // ui
-                lblFileType.Content = TYPE_FOLDER;
+                this.lblFileType.Content = TYPE_FOLDER;
             }
 
-            lblName.Content = info.Name;
+            this.lblName.Content = info.Name;
         }
     }
 }

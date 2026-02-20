@@ -20,7 +20,7 @@ public partial class App : Application
     /// </summary>
     public const string AppName = "Headlines";
 
-    const string SourcesFile = "sources.txt";
+    private const string SourcesFile = "sources.txt";
 
     internal static PgOverview PgOverview => new PgOverview();
 
@@ -32,7 +32,7 @@ public partial class App : Application
     private async void Application_Startup(object sender, StartupEventArgs e)
     {
         // load app settings
-        MDCore.EnsureSettings();
+        _ = MDCore.EnsureSettings();
 
         // load rss sources list
         await LoadSources();

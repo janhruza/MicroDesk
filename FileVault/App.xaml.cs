@@ -5,41 +5,40 @@ using LibMicroDesk;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace FileVault
+namespace FileVault;
+
+/// <summary>
+/// Interaction logic for App.xaml
+/// </summary>
+public partial class App : Application
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    private void Application_Startup(object sender, StartupEventArgs e)
     {
-        private void Application_Startup(object sender, StartupEventArgs e)
-        {
-            // load settings
-            MDCore.EnsureSettings();
+        // load settings
+        _ = MDCore.EnsureSettings();
 
-            // app startup
-            MainWindow mw = new MainWindow();
-            MainWindow = mw;
-            MainWindow.Show();
-        }
+        // app startup
+        MainWindow mw = new MainWindow();
+        MainWindow = mw;
+        MainWindow.Show();
+    }
 
-        private void Application_Exit(object sender, ExitEventArgs e)
-        {
-            // post exit cleanup
-            return;
-        }
+    private void Application_Exit(object sender, ExitEventArgs e)
+    {
+        // post exit cleanup
+        return;
+    }
 
-        internal static PgDrives PgDrives = new PgDrives();
+    internal static PgDrives PgDrives = new PgDrives();
 
-        internal static bool Navigate(Page page)
-        {
-            return FileVault.MainWindow.Navigate(page);
-        }
+    internal static bool Navigate(Page page)
+    {
+        return FileVault.MainWindow.Navigate(page);
+    }
 
-        internal static void SetStatusMessage(string message)
-        {
-            FileVault.MainWindow.SetStatusMessage(message);
-            return;
-        }
+    internal static void SetStatusMessage(string message)
+    {
+        FileVault.MainWindow.SetStatusMessage(message);
+        return;
     }
 }

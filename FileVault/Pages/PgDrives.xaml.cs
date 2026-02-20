@@ -24,8 +24,8 @@ public partial class PgDrives : Page
     private void RefreshDrives()
     {
         // clear data
-        ugAvailable.Children.Clear();
-        ugUnavailable.Children.Clear();
+        this.ugAvailable.Children.Clear();
+        this.ugUnavailable.Children.Clear();
 
         // get drives
         string[] drives = Environment.GetLogicalDrives();
@@ -49,13 +49,13 @@ public partial class PgDrives : Page
 
                 btn.Click += (s, e) =>
                 {
-                    App.Navigate(new Page
+                    _ = App.Navigate(new Page
                     {
                         Content = new FileBrowserControl(drive)
                     });
                 };
 
-                ugAvailable.Children.Add(btn);
+                _ = this.ugAvailable.Children.Add(btn);
             }
 
             else
@@ -68,7 +68,7 @@ public partial class PgDrives : Page
                     Margin = new System.Windows.Thickness(10, 0, 10, 0)
                 };
 
-                ugUnavailable.Children.Add(btn);
+                _ = this.ugUnavailable.Children.Add(btn);
             }
         }
     }

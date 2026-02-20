@@ -31,7 +31,7 @@ public static class RssReader
                         {
                             using (var channelReader = reader.ReadSubtree())
                             {
-                                channelReader.Read(); // move to <channel>
+                                _ = channelReader.Read(); // move to <channel>
                                 ParseChannel(ref feed, channelReader);
                             }
                         }
@@ -73,7 +73,7 @@ public static class RssReader
                     var item = new RssFeedItem();
                     using (var itemReader = reader.ReadSubtree())
                     {
-                        itemReader.Read(); // move to <item>
+                        _ = itemReader.Read(); // move to <item>
                         ParseItem(ref item, itemReader);
                     }
                     feed.Items.Add(item);

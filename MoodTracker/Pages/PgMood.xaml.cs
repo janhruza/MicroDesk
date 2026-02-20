@@ -20,9 +20,9 @@ public partial class PgMood : Page
         InitializeComponent();
 
         // assign mood tags to buttons
-        tbGood.Tag = Mood.Good;
-        tbOkay.Tag = Mood.Okay;
-        tbBad.Tag = Mood.Bad;
+        this.tbGood.Tag = Mood.Good;
+        this.tbOkay.Tag = Mood.Okay;
+        this.tbBad.Tag = Mood.Bad;
 
         // mood buttons events
         foreach (ToggleButton tb in _moddButtons)
@@ -42,15 +42,15 @@ public partial class PgMood : Page
 
         Loaded += (s, e) =>
         {
-            App.CenterWindow(App.Current.MainWindow);
+            _ = App.CenterWindow(App.Current.MainWindow);
         };
     }
 
     private ToggleButton[] _moddButtons => new ToggleButton[3]
     {
-        tbGood,
-        tbOkay,
-        tbBad
+        this.tbGood,
+        this.tbOkay,
+        this.tbBad
     };
 
     private Mood GetSelectedMood()
