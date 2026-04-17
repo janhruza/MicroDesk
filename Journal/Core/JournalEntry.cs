@@ -41,8 +41,8 @@ public class JournalEntry
 
     #region Static methods
 
-    static string sDataDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Journals");
-    static string sJournalFile = Path.Combine(sDataDir, $"{Environment.UserName}.journal");
+    private static string sDataDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Journals");
+    private static string sJournalFile = Path.Combine(sDataDir, $"{Environment.UserName}.journal");
 
     public static List<JournalEntry> Entries { get; } = new List<JournalEntry>();
 
@@ -56,7 +56,7 @@ public class JournalEntry
         return;
     }
 
-    static void CopyList(List<JournalEntry> src,  List<JournalEntry> dst)
+    private static void CopyList(List<JournalEntry> src, List<JournalEntry> dst)
     {
         dst.Clear();
         foreach (JournalEntry entry in src)

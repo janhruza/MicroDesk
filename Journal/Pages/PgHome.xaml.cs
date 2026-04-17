@@ -1,21 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Journal.Core;
+
+using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-
-using Journal.Core;
 using Microsoft.UI.Xaml.Documents;
-using Microsoft.UI.Text;
+using Microsoft.UI.Xaml.Input;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -34,13 +23,13 @@ public sealed partial class PgHome : Page
 
     private void LoadUI()
     {
-        txtPreviewTitle.Text = string.Empty;
-        txtPreviewContent.Text = string.Empty;
+        this.txtPreviewTitle.Text = string.Empty;
+        this.txtPreviewContent.Text = string.Empty;
 
         // determine if any entries exist
         if (JournalEntry.Entries.Count == 0)
         {
-            lbxHistory.Items.Add(new ListBoxItem
+            this.lbxHistory.Items.Add(new ListBoxItem
             {
                 Content = "No entries so far.",
             });
@@ -49,10 +38,10 @@ public sealed partial class PgHome : Page
         else
         {
             // populate the list
-            lbxHistory.Items.Clear();
+            this.lbxHistory.Items.Clear();
             foreach (JournalEntry entry in JournalEntry.Entries)
             {
-                string displayText = entry.Content.Length > 50 ? entry.Content.Substring(0, 47) + "..." : entry.Content;
+                string displayText = entry.Content.Length > 50 ? entry.Content[..47] + "..." : entry.Content;
                 ListBoxItem lbi = new ListBoxItem
                 {
                     Tag = entry,
@@ -69,7 +58,7 @@ public sealed partial class PgHome : Page
                     }
                 };
 
-                lbxHistory.Items.Add(lbi);
+                this.lbxHistory.Items.Add(lbi);
             }
         }
 
@@ -96,12 +85,12 @@ public sealed partial class PgHome : Page
 
     private void lbxHistory_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (lbxHistory.SelectedItem is ListBoxItem lbi)
+        if (this.lbxHistory.SelectedItem is ListBoxItem lbi)
         {
             if (lbi.Tag is JournalEntry entry)
             {
-                txtPreviewTitle.Text = entry.Title;
-                txtPreviewContent.Text = entry.Content;
+                this.txtPreviewTitle.Text = entry.Title;
+                this.txtPreviewContent.Text = entry.Content;
             }
         }
     }
