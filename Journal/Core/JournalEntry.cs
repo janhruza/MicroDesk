@@ -94,7 +94,12 @@ public class JournalEntry
     public static bool Register(JournalEntry entry)
     {
         Entries.Add(entry);
-        return true;
+        return Entries.Contains(entry);
+    }
+
+    public static bool Unregister(JournalEntry entry)
+    {
+        return Entries.Remove(entry);
     }
 
     #endregion

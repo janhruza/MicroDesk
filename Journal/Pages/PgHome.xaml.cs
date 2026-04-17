@@ -6,6 +6,8 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Documents;
 using Microsoft.UI.Xaml.Input;
 
+using System;
+
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
@@ -21,24 +23,35 @@ public sealed partial class PgHome : Page
         InitializeComponent();
     }
 
+    private ListBoxItem LbiNoItems()
+    {
+        ListBoxItem item = new ListBoxItem
+        {
+            Content = "No entries so far."
+        };
+
+        return item;
+    }
+
     private void LoadUI()
     {
+        // clear first
+        this.lbxHistory.Items.Clear();
         this.txtPreviewTitle.Text = string.Empty;
         this.txtPreviewContent.Text = string.Empty;
 
         // determine if any entries exist
         if (JournalEntry.Entries.Count == 0)
         {
-            this.lbxHistory.Items.Add(new ListBoxItem
-            {
-                Content = "No entries so far.",
-            });
+            ListBoxItem lbiNoItems = LbiNoItems();
+            lbiNoItems.IsSelected = true;
+            this.lbxHistory.Items.Add(lbiNoItems);
+            return;
         }
 
         else
         {
             // populate the list
-            this.lbxHistory.Items.Clear();
             foreach (JournalEntry entry in JournalEntry.Entries)
             {
                 string displayText = entry.Content.Length > 50 ? entry.Content[..47] + "..." : entry.Content;
@@ -51,15 +64,63 @@ public sealed partial class PgHome : Page
                         TextWrapping = TextWrapping.NoWrap,
                         Inlines =
                         {
-                            new Run { Text = entry.Title, FontSize = 16, FontWeight = FontWeights.Bold },
+                            new Run { Text = entry.Title, FontSize = 18, FontWeight = FontWeights.SemiBold },
                             new LineBreak(),
-                            new Run { Text = displayText }
+                            new Run { Text = displayText, FontSize = 14 }
                         }
+                    }
+                };
+
+                MenuFlyoutItem mfiDelete = new MenuFlyoutItem
+                {
+                    Text = "Delete",
+                    KeyboardAccelerators =
+                    {
+                        new KeyboardAccelerator()
+                        {
+                            Key = Windows.System.VirtualKey.Delete
+                        }
+                    }
+                };
+
+                // evil, spaghetti, but works
+                mfiDelete.Click += async (s, e) =>
+                {
+                    // confirm & remove
+                    ContentDialog dlg = new ContentDialog
+                    {
+                        XamlRoot = XamlRoot,
+                        Title = $"Delete \'{entry.Title ?? "Untitled"}\'",
+                        Content = "Do you wan to delete this entry? This action is irreversable.",
+                        PrimaryButtonText = "Delete",
+                        CloseButtonText = "Cancel",
+                        DefaultButton = ContentDialogButton.Close
+                    };
+
+                    var res = await dlg.ShowAsync();
+                    if (res == ContentDialogResult.Primary)
+                    {
+                        // delete
+                        if (JournalEntry.Unregister(entry) == true)
+                        {
+                            LoadUI();
+                        }
+                    }
+                };
+
+                lbi.ContextFlyout = new MenuFlyout
+                {
+                    Items =
+                    {
+                        mfiDelete
                     }
                 };
 
                 this.lbxHistory.Items.Add(lbi);
             }
+
+            // select the first item
+            this.lbxHistory.SelectedIndex = 0;
         }
 
         return;
@@ -91,6 +152,14 @@ public sealed partial class PgHome : Page
             {
                 this.txtPreviewTitle.Text = entry.Title;
                 this.txtPreviewContent.Text = entry.Content;
+                this.txtPreviewTitle.Visibility = Visibility.Visible;
+                this.txtPreviewContent.Visibility = Visibility.Visible;
+            }
+
+            else
+            {
+                this.txtPreviewTitle.Visibility = Visibility.Collapsed;
+                this.txtPreviewContent.Visibility = Visibility.Collapsed;
             }
         }
     }

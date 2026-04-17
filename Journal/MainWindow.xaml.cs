@@ -20,6 +20,7 @@ public sealed partial class MainWindow : Window
 
         // set default params
         ExtendsContentIntoTitleBar = true;
+        AppWindow.TitleBar.PreferredHeightOption = TitleBarHeightOption.Standard;
         AppWindow.SetPresenter(CreatePresenter());
         AppWindow.ResizeClient(new Windows.Graphics.SizeInt32(800, 600));
         OnInitialized();
@@ -51,6 +52,11 @@ public sealed partial class MainWindow : Window
             else if (e.Content is PgNewEntry)
             {
                 this.titleBar.Subtitle = "New Entry";
+            }
+
+            else if (e.Content is PgSettings)
+            {
+                this.titleBar.Subtitle = "Settings";
             }
         };
 

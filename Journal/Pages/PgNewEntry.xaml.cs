@@ -29,6 +29,13 @@ public sealed partial class PgNewEntry : Page
         entry.Content = this.txtContent.Text ?? string.Empty;
 
         string msg;
+        if (string.IsNullOrWhiteSpace(entry.Title) && string.IsNullOrWhiteSpace(entry.Content))
+        {
+            msg = "Invalid input. You must provide at least one of the two fields.";
+            goto dialogDisplay;
+        }
+
+
         if (JournalEntry.Register(entry) == false)
         {
             msg = "Unable to register your journal entry.";
@@ -39,6 +46,7 @@ public sealed partial class PgNewEntry : Page
             msg = "Your journal entry was successfully registered!";
         }
 
+    dialogDisplay:
         ContentDialog dlg = new ContentDialog
         {
             Content = msg,
