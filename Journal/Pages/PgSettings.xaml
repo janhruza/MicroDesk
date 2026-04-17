@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Journal.Pages.PgSettings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Journal.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Margin="10">
+
+        <TextBlock Text="Theme"
+                   Margin="0,0,0,4"/>
+
+        <ComboBox Name="cbxTheme"
+                  HorizontalAlignment="Stretch"
+                  SelectionChanged="cbxTheme_SelectionChanged">
+
+            <ComboBoxItem Tag="themeLight"
+                          Content="Light"/>
+            
+            <ComboBoxItem Tag="themeDark"
+                          Content="Dark"/>
+            
+            <ComboBoxItem Tag="themeSystem"
+                          Content="System"/>
+        </ComboBox>
+
+        <TextBlock Text="Backdrop Style"
+                   Margin="0,8,0,4"/>
+
+        <ComboBox Name="cbxBackdrop"
+                  HorizontalAlignment="Stretch"
+                  SelectionChanged="cbxBackdrop_SelectionChanged">
+            
+            <ComboBoxItem Tag="bpNone"
+                          Content="None"/>
+
+            <ComboBoxItem Tag="bpAcrylic"
+                          Content="Acrylic"/>
+
+            <ComboBoxItem Tag="bpMica"
+                          Content="Mica"/>
+        </ComboBox>
+
+    </StackPanel>
+</Page>

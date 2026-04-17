@@ -9,6 +9,10 @@
   <Project Path="Headlines/Headlines.csproj">
     <Platform Solution="Debug|x64" Project="x64" />
   </Project>
+  <Project Path="Journal/Journal.csproj" Id="a784ce3d-9829-4d5a-b5e7-a352e57902fc">
+    <Platform Project="x64" />
+    <Deploy />
+  </Project>
   <Project Path="LibMicroDesk/LibMicroDesk.csproj">
     <Platform Solution="*|x64" Project="x64" />
   </Project>
