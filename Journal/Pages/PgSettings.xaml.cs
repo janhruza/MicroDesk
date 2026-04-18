@@ -65,6 +65,10 @@ public sealed partial class PgSettings : Page
                     case "bpMica":
                         App.SetAppBackdrop(new MicaBackdrop() { Kind = Microsoft.UI.Composition.SystemBackdrops.MicaKind.Base });
                         break;
+
+                    case "bpMicaAlt":
+                        App.SetAppBackdrop(new MicaBackdrop() { Kind = Microsoft.UI.Composition.SystemBackdrops.MicaKind.BaseAlt });
+                        break;
                 }
             }
         }

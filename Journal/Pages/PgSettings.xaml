@@ -42,6 +42,9 @@
 
             <ComboBoxItem Tag="bpMica"
                           Content="Mica"/>
+
+            <ComboBoxItem Tag="bpMicaAlt"
+                          Content="Mica (Alt)"/>
         </ComboBox>
 
     </StackPanel>
