@@ -14,6 +14,9 @@ namespace Journal;
 /// </summary>
 public sealed partial class MainWindow : Window
 {
+    /// <summary>
+    /// Creates the main application window.
+    /// </summary>
     public MainWindow()
     {
         InitializeComponent();

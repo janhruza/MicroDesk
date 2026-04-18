@@ -15,6 +15,9 @@ namespace Journal.Pages;
 /// </summary>
 public sealed partial class PgNewEntry : Page
 {
+    /// <summary>
+    /// Representing the new journal entry page.
+    /// </summary>
     public PgNewEntry()
     {
         InitializeComponent();

@@ -11,6 +11,9 @@ namespace Journal.Pages;
 /// </summary>
 public sealed partial class PgSettings : Page
 {
+    /// <summary>
+    /// Creates the settings page.
+    /// </summary>
     public PgSettings()
     {
         InitializeComponent();

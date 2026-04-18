@@ -18,6 +18,9 @@ namespace Journal.Pages;
 /// </summary>
 public sealed partial class PgHome : Page
 {
+    /// <summary>
+    /// Creates the home page.
+    /// </summary>
     public PgHome()
     {
         InitializeComponent();

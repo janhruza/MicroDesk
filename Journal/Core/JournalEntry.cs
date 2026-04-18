@@ -9,7 +9,7 @@ namespace Journal.Core;
 /// <summary>
 /// Representing a single journal entry.
 /// </summary>
-public class JournalEntry
+public struct JournalEntry
 {
     /// <summary>
     /// Id of the entry.
@@ -31,6 +31,9 @@ public class JournalEntry
     /// </summary>
     public string Content { get; set; }
 
+    /// <summary>
+    /// Representing a single journal entry.
+    /// </summary>
     public JournalEntry()
     {
         Id = Guid.CreateVersion7();
@@ -44,8 +47,14 @@ public class JournalEntry
     private static string sDataDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Journals");
     private static string sJournalFile = Path.Combine(sDataDir, $"{Environment.UserName}.journal");
 
+    /// <summary>
+    /// Representing the in-memory list of all existing user journal entries.
+    /// </summary>
     public static List<JournalEntry> Entries { get; } = new List<JournalEntry>();
 
+    /// <summary>
+    /// Set-ups all the required properties.
+    /// </summary>
     public static void SetupJournals()
     {
         if (Directory.Exists(sDataDir) == false)
@@ -65,6 +74,10 @@ public class JournalEntry
         }
     }
 
+    /// <summary>
+    /// Loads all user's stored entries.
+    /// </summary>
+    /// <returns>List of the stored entries.</returns>
     public static List<JournalEntry> LoadEntries()
     {
         if (File.Exists(sJournalFile) == false)
@@ -78,6 +91,11 @@ public class JournalEntry
         return entries;
     }
 
+    /// <summary>
+    /// Saves the given list of entries into the user's journal file.
+    /// </summary>
+    /// <param name="entries">List of journal entries.</param>
+    /// <returns>Operation result.</returns>
     public static bool SaveEntries(List<JournalEntry> entries)
     {
         string json = JsonSerializer.Serialize<List<JournalEntry>>(entries);
@@ -90,13 +108,22 @@ public class JournalEntry
         return true;
     }
 
-
+    /// <summary>
+    /// Registers the journal <paramref name="entry"/> in the global <see cref="Entries"/> list.
+    /// </summary>
+    /// <param name="entry">The new journal entry.</param>
+    /// <returns>Operation result.</returns>
     public static bool Register(JournalEntry entry)
     {
         Entries.Add(entry);
         return Entries.Contains(entry);
     }
 
+    /// <summary>
+    /// Removes the journal <paramref name="entry"/> from the global <see cref="Entries"/> list.
+    /// </summary>
+    /// <param name="entry">The target entry.</param>
+    /// <returns>Operation result.</returns>
     public static bool Unregister(JournalEntry entry)
     {
         return Entries.Remove(entry);

@@ -11,7 +11,7 @@
   <Identity
     Name="2c8d097a-0c68-4ccf-ab8c-5c3b84c333d0"
     Publisher="CN=Honza"
-    Version="1.0.0.0" />
+    Version="1.0.1.0" />
 
   <mp:PhoneIdentity PhoneProductId="2c8d097a-0c68-4ccf-ab8c-5c3b84c333d0" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
