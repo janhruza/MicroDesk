@@ -22,19 +22,31 @@
     <Grid ColumnSpacing="16"
           Padding="16">
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
 
+        <TextBlock Grid.Row="0"
+                   Text="Journals"
+                   Style="{ThemeResource BodyStrongTextBlockStyle}"
+                   Margin="0,0,0,16"/>
+
         <ListBox Grid.Column="0"
+                 Grid.Row="1"
                  Name="lbxHistory"
                  SelectionChanged="lbxHistory_SelectionChanged"
                  Background="{ThemeResource LayerOnAcrylicFillColorDefaultBrush}"
                  CornerRadius="4"/>
 
         <Grid RowSpacing="8"
-              Grid.Column="1">
+              Grid.Column="1"
+              Grid.Row="1">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

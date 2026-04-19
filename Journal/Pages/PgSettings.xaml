@@ -8,7 +8,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel Margin="10">
+    <StackPanel Margin="16">
+
+        <TextBlock Margin="0,0,0,16"
+                   Style="{ThemeResource BodyStrongTextBlockStyle}"
+                   Text="Settings"/>
 
         <TextBlock Text="Theme"
                    Margin="0,0,0,4"/>

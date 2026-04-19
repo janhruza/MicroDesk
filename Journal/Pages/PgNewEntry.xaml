@@ -17,14 +17,26 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
+        <Grid Grid.Row="0">
 
-        <CommandBar Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-            <AppBarButton Label="Save"
-                          Icon="Save"
-                          Name="btnSave"
-                          Click="btnSave_Click"/>
-        </CommandBar>
+            <TextBlock Text="New Entry"
+                       Style="{ThemeResource BodyStrongTextBlockStyle}"/>
+
+            <CommandBar Grid.Column="1"
+                        OverflowButtonVisibility="Collapsed">
+
+                <AppBarButton Label="Save"
+                              Icon="Save"
+                              Name="btnSave"
+                              Click="btnSave_Click"/>
+            </CommandBar>
+
+        </Grid>
 
         <StackPanel Grid.Row="1">
 
