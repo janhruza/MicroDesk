@@ -1,3 +1,4 @@
+using Journal.Core;
 using Journal.Pages;
 
 using Microsoft.UI.Windowing;
@@ -25,7 +26,6 @@ public sealed partial class MainWindow : Window
         ExtendsContentIntoTitleBar = true;
         AppWindow.TitleBar.PreferredHeightOption = TitleBarHeightOption.Standard;
         AppWindow.SetPresenter(CreatePresenter());
-        AppWindow.ResizeClient(new Windows.Graphics.SizeInt32(800, 600));
         OnInitialized();
     }
 
@@ -96,6 +96,20 @@ public sealed partial class MainWindow : Window
                         break;
                 }
             }
+        }
+    }
+
+    private void Window_Closed(object sender, WindowEventArgs args)
+    {
+        AppSettings? settings = AppSettings.GetCurrent();
+        if (settings.HasValue)
+        {
+            AppSettings newSettings = settings.Value;
+            newSettings.Width = (int)this.AppWindow.Size.Width;
+            newSettings.Height = (int)this.AppWindow.Size.Height;
+            newSettings.Left = this.AppWindow.Position.X;
+            newSettings.Top = this.AppWindow.Position.Y;
+            AppSettings.SetCurrent(newSettings);
         }
     }
 }

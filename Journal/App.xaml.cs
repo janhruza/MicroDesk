@@ -60,11 +60,32 @@ public partial class App : Application
 
         _window = new MainWindow();
         _window.Closed += _window_Closed;
+
+        // load app settings
+        AppSettings.LoadSettings();
+        AppSettings? settings = AppSettings.GetCurrent();
+        if (settings.HasValue == false)
+        {
+            // set new settings
+            AppSettings.SetCurrent(settings);
+        }
+
+        else
+        {
+            // apply the loaded settings
+            AppSettings value = settings.Value;
+            _window.AppWindow.MoveAndResize(new Windows.Graphics.RectInt32(value.Left, value.Top, value.Width, value.Height));
+        }
+
         _window.Activate();
     }
 
     private void _window_Closed(object sender, WindowEventArgs args)
     {
+        // save data
         _ = JournalEntry.SaveEntries(JournalEntry.Entries);
+
+        // save app settings
+        AppSettings.SaveSettings();
     }
 }
