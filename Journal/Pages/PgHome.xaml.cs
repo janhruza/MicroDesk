@@ -151,9 +151,9 @@ public sealed partial class PgHome : Page
 
     private void lvHistory_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (this.lvHistory.SelectedItem is ListBoxItem lbi)
+        if (this.lvHistory.SelectedItem is ListViewItem lvi)
         {
-            if (lbi.Tag is JournalEntry entry)
+            if (lvi.Tag is JournalEntry entry)
             {
                 this.txtPreviewTitle.Text = entry.Title;
                 this.txtPreviewContent.Text = entry.Content;
