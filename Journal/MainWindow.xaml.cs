@@ -105,10 +105,10 @@ public sealed partial class MainWindow : Window
         if (settings.HasValue)
         {
             AppSettings newSettings = settings.Value;
-            newSettings.Width = (int)this.AppWindow.Size.Width;
-            newSettings.Height = (int)this.AppWindow.Size.Height;
-            newSettings.Left = this.AppWindow.Position.X;
-            newSettings.Top = this.AppWindow.Position.Y;
+            newSettings.Width = AppWindow.Size.Width;
+            newSettings.Height = AppWindow.Size.Height;
+            newSettings.Left = AppWindow.Position.X;
+            newSettings.Top = AppWindow.Position.Y;
             AppSettings.SetCurrent(newSettings);
         }
     }

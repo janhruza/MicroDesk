@@ -30,8 +30,8 @@ public struct AppSettings
     /// </summary>
     public int Left;
 
-    static string _settingsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "settings.json");
-    static AppSettings? _current = null;
+    private static string _settingsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "settings.json");
+    private static AppSettings? _current = null;
 
     /// <summary>
     /// Retrieves the current application settings instance.
@@ -56,7 +56,7 @@ public struct AppSettings
         return;
     }
 
-    static JsonSerializerOptions _options { get; } = new JsonSerializerOptions
+    private static JsonSerializerOptions _options { get; } = new JsonSerializerOptions
     {
         IncludeFields = true,
         WriteIndented = true
