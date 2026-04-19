@@ -69,7 +69,7 @@ public sealed partial class MainWindow : Window
 
     internal void NavigateHome()
     {
-        nav.SelectedItem = navHome;
+        this.nav.SelectedItem = this.navHome;
         return;
     }
 
