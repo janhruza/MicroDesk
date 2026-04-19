@@ -34,20 +34,21 @@ public sealed partial class PgNewEntry : Page
         string msg;
         if (string.IsNullOrWhiteSpace(entry.Title) && string.IsNullOrWhiteSpace(entry.Content))
         {
+            // invalid input, skip to displaying the dialog
             msg = "Invalid input. You must provide at least one of the two fields.";
             goto dialogDisplay;
         }
 
-
-        if (JournalEntry.Register(entry) == false)
+        if (JournalEntry.Register(entry) == true)
         {
-            msg = "Unable to register your journal entry.";
+            // journal entry created successfully
+            // navigate to the overview (home) page
+            App.NavigateHome();
+            return;
         }
 
-        else
-        {
-            msg = "Your journal entry was successfully registered!";
-        }
+        // journal entry can't be created
+        msg = "Unable to register your journal entry.";
 
     dialogDisplay:
         ContentDialog dlg = new ContentDialog

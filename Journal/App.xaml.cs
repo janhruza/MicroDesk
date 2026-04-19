@@ -49,6 +49,19 @@ public partial class App : Application
     }
 
     /// <summary>
+    /// Navigates the main application window to the home view.
+    /// </summary>
+    /// <remarks>This method has no effect if the main window is not available or does not support home
+    /// navigation.</remarks>
+    public static void NavigateHome()
+    {
+        if (_window is MainWindow mw)
+        {
+            mw.NavigateHome();
+        }
+    }
+
+    /// <summary>
     /// Invoked when the application is launched.
     /// </summary>
     /// <param name="args">Details about the launch request and process.</param>

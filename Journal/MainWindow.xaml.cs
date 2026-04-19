@@ -67,6 +67,12 @@ public sealed partial class MainWindow : Window
         _ = this.frm.Navigate(typeof(PgHome), App.HomePage);
     }
 
+    internal void NavigateHome()
+    {
+        nav.SelectedItem = navHome;
+        return;
+    }
+
     private void titleBar_PaneToggleRequested(TitleBar sender, object args)
     {
         // toogle the navigation bar
