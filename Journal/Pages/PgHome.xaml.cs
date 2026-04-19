@@ -26,11 +26,12 @@ public sealed partial class PgHome : Page
         InitializeComponent();
     }
 
-    private ListBoxItem LbiNoItems()
+    private ListViewItem LbiNoItems()
     {
-        ListBoxItem item = new ListBoxItem
+        ListViewItem item = new ListViewItem
         {
-            Content = "No entries so far."
+            Content = "No entries so far.",
+            IsEnabled = false
         };
 
         return item;
@@ -39,16 +40,16 @@ public sealed partial class PgHome : Page
     private void LoadUI()
     {
         // clear first
-        this.lbxHistory.Items.Clear();
+        this.lvHistory.Items.Clear();
         this.txtPreviewTitle.Text = string.Empty;
         this.txtPreviewContent.Text = string.Empty;
 
         // determine if any entries exist
         if (JournalEntry.Entries.Count == 0)
         {
-            ListBoxItem lbiNoItems = LbiNoItems();
+            ListViewItem lbiNoItems = LbiNoItems();
             lbiNoItems.IsSelected = true;
-            this.lbxHistory.Items.Add(lbiNoItems);
+            this.lvHistory.Items.Add(lbiNoItems);
             return;
         }
 
@@ -58,11 +59,12 @@ public sealed partial class PgHome : Page
             foreach (JournalEntry entry in JournalEntry.Entries)
             {
                 string displayText = entry.Content.Length > 50 ? entry.Content[..47] + "..." : entry.Content;
-                ListBoxItem lbi = new ListBoxItem
+                ListViewItem lbi = new ListViewItem
                 {
                     Tag = entry,
                     Content = new TextBlock
                     {
+                        Margin = new Thickness(8),
                         TextTrimming = TextTrimming.CharacterEllipsis,
                         TextWrapping = TextWrapping.NoWrap,
                         Inlines =
@@ -119,11 +121,11 @@ public sealed partial class PgHome : Page
                     }
                 };
 
-                this.lbxHistory.Items.Add(lbi);
+                this.lvHistory.Items.Add(lbi);
             }
 
             // select the first item
-            this.lbxHistory.SelectedIndex = 0;
+            this.lvHistory.SelectedIndex = 0;
         }
 
         return;
@@ -147,9 +149,9 @@ public sealed partial class PgHome : Page
         }
     }
 
-    private void lbxHistory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void lvHistory_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (this.lbxHistory.SelectedItem is ListBoxItem lbi)
+        if (this.lvHistory.SelectedItem is ListBoxItem lbi)
         {
             if (lbi.Tag is JournalEntry entry)
             {
