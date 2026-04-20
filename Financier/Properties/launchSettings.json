@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Financier (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Financier (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
