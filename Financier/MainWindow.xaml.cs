@@ -24,8 +24,12 @@ namespace Financier;
 /// </summary>
 public sealed partial class MainWindow : Window
 {
+    /// <summary>
+    /// Creates a new, empty, main window instance.
+    /// </summary>
     public MainWindow()
     {
         InitializeComponent();
+        this.ExtendsContentIntoTitleBar = true;
     }
 }
