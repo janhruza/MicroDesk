@@ -1,22 +1,10 @@
+using Financier.Core;
 using Financier.Pages;
 
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -70,11 +58,11 @@ public sealed partial class MainWindow : Window
                         break;
 
                     case "expanses":
-                        frm.Navigate(typeof(NewTransactionPage), App.PgNewExpanse);
+                        frm.Navigate(typeof(NewTransactionPage), Core.TransactionType.Expanse);
                         break;
 
                     case "incomes":
-                        frm.Navigate(typeof(NewTransactionPage), App.PgNewIncome);
+                        frm.Navigate(typeof(NewTransactionPage), Core.TransactionType.Income);
                         break;
                 }
             }
@@ -83,12 +71,19 @@ public sealed partial class MainWindow : Window
 
     private void frm_Navigated(object sender, NavigationEventArgs e)
     {
-        if (e.Content is Page pg)
+        if (e.Parameter is TransactionType type)
         {
-            if (pg.Tag is string sValue)
+            titleBar.Subtitle = type switch
             {
-                titleBar.Subtitle = sValue;
-            }
+                TransactionType.Income => "New Income",
+                TransactionType.Expanse => "New Expanse",
+                _ => "Transaction"
+            };
+        }
+        else if (e.Content is Page pg && pg.Tag is string sValue)
+        {
+            // Fallback pro ostatní stránky (Home atd.)
+            titleBar.Subtitle = sValue;
         }
     }
 }

@@ -63,7 +63,7 @@
 
             <!--Frame to display pages-->
             <Frame Name="frm"
-                   Padding="16"
+                   Margin="16"
                    Navigated="frm_Navigated"/>
 
         </NavigationView>

@@ -42,8 +42,8 @@ public partial class App : Application
 
     #region Page definitions
     internal static HomePage PgHome { get; } = new HomePage();
-    internal static NewTransactionPage PgNewIncome { get; } = new NewTransactionPage(Core.TransactionType.Income);
-    internal static NewTransactionPage PgNewExpanse { get; } = new NewTransactionPage(Core.TransactionType.Expanse);
+    internal static NewTransactionPage PgNewIncome { get; } = new NewTransactionPage();
+    internal static NewTransactionPage PgNewExpanse { get; } = new NewTransactionPage();
     internal static SettingsPage PgSettings { get; } = new SettingsPage();
     #endregion
 

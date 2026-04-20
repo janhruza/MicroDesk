@@ -15,7 +15,6 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Pages\HomePage.xaml" />
-    <None Remove="Pages\NewTransactionPage.xaml" />
     <None Remove="Pages\SettingsPage.xaml" />
   </ItemGroup>
 
@@ -51,7 +50,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Pages\NewTransactionPage.xaml">
+    <Page Update="Pages\BaseTransactionPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

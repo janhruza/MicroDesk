@@ -14,6 +14,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 
 using Financier.Core;
+using Microsoft.UI.System;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -23,7 +24,7 @@ namespace Financier.Pages;
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.
 /// </summary>
-public sealed partial class NewTransactionPage : Page
+public partial class NewTransactionPage : Page
 {
     private TransactionType _type;
 
@@ -39,12 +40,36 @@ public sealed partial class NewTransactionPage : Page
     }
 
     /// <summary>
+    /// Handles navigation to the page and initializes the transaction type based on the navigation parameter.
+    /// </summary>
+    /// <remarks>If the navigation parameter is a valid TransactionType, the page is configured accordingly.
+    /// Otherwise, the method returns without making changes.</remarks>
+    /// <param name="e">The event data containing navigation parameters and state information.</param>
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        if (e.Parameter is TransactionType type)
+        {
+            _type = type;
+            switch (type)
+            {
+                case TransactionType.Expanse:
+                    Tag = "New Expanse";
+                    break;
+
+                case TransactionType.Income:
+                    Tag = "New Income";
+                    break;
+            }
+        }
+    }
+
+    /// <summary>
     /// Initializes a new instance of the NewTransactionPage class for the specified transaction type.
     /// </summary>
     /// <param name="eType">The type of transaction to be created. Determines the behavior and layout of the page.</param>
-    public NewTransactionPage(TransactionType eType)
-    {
-        InitializeComponent();
-        _type = eType;
-    }
+    //public BaseTransactionPage(TransactionType eType)
+    //{
+    //    InitializeComponent();
+    //    _type = eType;
+    //}
 }
