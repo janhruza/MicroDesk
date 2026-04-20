@@ -1,4 +1,5 @@
-﻿using Financier.Pages;
+﻿using Financier.Core;
+using Financier.Pages;
 
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -53,6 +54,9 @@ public partial class App : Application
     /// <param name="args">Details about the launch request and process.</param>
     protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
     {
+        // TODO testing setup
+        UserProfile.SetCurrent(AppData.TestProfile);
+
         _window = new MainWindow();
         _window.Activate();
     }

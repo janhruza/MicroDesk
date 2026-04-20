@@ -9,7 +9,97 @@
     mc:Ignorable="d"
     Tag="Dashboard">
 
-    <Grid>
+    <Grid RowSpacing="16"
+          ColumnSpacing="16">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Style="{ThemeResource BodyLargeTextBlockStyle}"
+                   Grid.Row="0"
+                   Grid.Column="0">
+            
+            <Run Text="Hello,"/>
+            <Run x:Name="rUsername"
+                 FontWeight="SemiBold"
+                 Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/><Run Text="!"/>
+        </TextBlock>
+
+        <TextBlock Grid.Row="0"
+                   Grid.Column="1"
+                   Style="{ThemeResource BodyLargeTextBlockStyle}"
+                   Name="tbBalance"
+                   HorizontalAlignment="Right"/>
+
+        <TextBlock Text="Transaction history"
+                   Grid.Row="1"
+                   Style="{ThemeResource BodyStrongTextBlockStyle}"/>
+
+        <TextBlock Text="Preview"
+                   Grid.Row="1"
+                   Grid.Column="1"
+                   Style="{ThemeResource BodyStrongTextBlockStyle}"/>
+
+        <ListView Grid.Row="2"
+                  Grid.Column="0"
+                  Name="lvHistory"
+                  Background="{ThemeResource LayerOnMicaBaseAltFillColorDefault}"
+                  CornerRadius="{ThemeResource ControlCornerRadius}"
+                  SelectionChanged="lvHistory_SelectionChanged"/>
+
+        <StackPanel Grid.Row="2"
+                    Grid.Column="1"
+                    Name="stpPreview">
+
+            <TextBlock Text="Date"
+                       Style="{ThemeResource BodyTextBlockStyle}"
+                       Margin="0,0,0,8"/>
+            
+            <DatePicker Name="dpDate"
+                        IsEnabled="False"
+                        Margin="0,0,0,8"/>
+
+            <TextBlock Text="Value"
+                       Style="{ThemeResource BodyTextBlockStyle}"
+                       Margin="0,0,0,8"/>
+
+            <TextBox Name="txtValue"
+                     IsReadOnly="True"
+                     Margin="0,0,0,8"/>
+
+            <TextBlock Text="Type"
+                       Style="{ThemeResource BodyTextBlockStyle}"
+                       Margin="0,0,0,8"/>
+
+            <TextBox Name="txtType"
+                     IsReadOnly="True"
+                     Margin="0,0,0,8"/>
+
+            <TextBlock Text="Category"
+                       Style="{ThemeResource BodyTextBlockStyle}"
+                       Margin="0,0,0,8"/>
+
+            <TextBox Name="txtCategory"
+                     IsReadOnly="True"
+                     Margin="0,0,0,8"/>
+
+            <TextBlock Text="Description"
+                       Style="{ThemeResource BodyTextBlockStyle}"
+                       Margin="0,0,0,8"/>
+
+            <TextBox Name="txtDesc"
+                     IsReadOnly="True"
+                     AcceptsReturn="True"/>
+
+        </StackPanel>
 
     </Grid>
 </Page>

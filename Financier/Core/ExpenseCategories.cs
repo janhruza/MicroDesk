@@ -8,7 +8,7 @@ public enum ExpenseCategories : byte
     /// <summary>
     /// Housing expenses, such as a rent, utilities, etc.
     /// </summary>
-    Housing,
+    Housing = 128,
 
     /// <summary>
     /// All expenses related to grocery shopping.

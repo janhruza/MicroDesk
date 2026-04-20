@@ -32,6 +32,48 @@ public struct UserProfile
 
     #region Profile methods
 
+    static UserProfile? _current = null;
+
+    /// <summary>
+    /// Determines whether any user profile is loaded.
+    /// </summary>
+    /// <returns>
+    /// <see langword="true"/> if any user profile is loaded, otherwise <see langword="false"/>.
+    /// </returns>
+    public static bool IsLoaded()
+    {
+        return _current.HasValue;
+    }
+
+    /// <summary>
+    /// Gets the currently loaded profile or an empty profile if no profile is loaded.
+    /// Use <see cref="IsLoaded"/> to determine whether any user profile is loaded.
+    /// </summary>
+    /// <returns></returns>
+    public static UserProfile GetCurrent()
+    {
+        if (_current.HasValue)
+        {
+            return _current.Value;
+        }
+
+        else
+        {
+            return new UserProfile();
+        }
+    }
+
+    /// <summary>
+    /// Sets the currently loaded user profile.
+    /// </summary>
+    /// <param name="profile">The new active user profile. Can be null to signalize no actively loaded profile.</param>
+    /// <returns>Value representing whether the new profile is valid to be loaded or not.</returns>
+    public static bool SetCurrent(UserProfile? profile)
+    {
+        _current = profile;
+        return _current.HasValue;
+    }
+
     static JsonSerializerOptions _options = new JsonSerializerOptions
     {
         IncludeFields = true
@@ -47,7 +89,7 @@ public struct UserProfile
 
         else
         {
-            return Path.Combine(_dataFolder, profile.Value.Name);
+            return Path.Combine(_dataFolder, $"{profile.Value.Name}.json");
         }
     }
 
