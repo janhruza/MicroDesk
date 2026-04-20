@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Financier"
+    xmlns:core="using:Financier.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -45,7 +46,8 @@
                 <!--Dashboard tab-->
                 <NavigationViewItem Content="Dashboard"
                                     Icon="Home"
-                                    Tag="home"/>
+                                    Tag="home"
+                                    IsSelected="True"/>
 
                 <!--Expanses tab-->
                 <NavigationViewItem Content="Expanses"
@@ -61,7 +63,8 @@
 
             <!--Frame to display pages-->
             <Frame Name="frm"
-                   Padding="16"/>
+                   Padding="16"
+                   Navigated="frm_Navigated"/>
 
         </NavigationView>
 

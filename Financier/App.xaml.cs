@@ -1,4 +1,6 @@
-﻿using Microsoft.UI.Xaml;
+﻿using Financier.Pages;
+
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -37,6 +39,13 @@ public partial class App : Application
     {
         InitializeComponent();
     }
+
+    #region Page definitions
+    internal static HomePage PgHome { get; } = new HomePage();
+    internal static NewTransactionPage PgNewIncome { get; } = new NewTransactionPage(Core.TransactionType.Income);
+    internal static NewTransactionPage PgNewExpanse { get; } = new NewTransactionPage(Core.TransactionType.Expanse);
+    internal static SettingsPage PgSettings { get; } = new SettingsPage();
+    #endregion
 
     /// <summary>
     /// Invoked when the application is launched.

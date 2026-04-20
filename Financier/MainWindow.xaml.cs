@@ -1,3 +1,5 @@
+using Financier.Pages;
+
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -52,11 +54,41 @@ public sealed partial class MainWindow : Window
     {
         if (args.IsSettingsSelected)
         {
-            // TODO settings requested
+            frm.Navigate(typeof(SettingsPage), App.PgSettings);
             return;
         }
 
         // change pages
-        return;
+        if (args.SelectedItem is NavigationViewItem item)
+        {
+            if (item.Tag is string sId)
+            {
+                switch (sId)
+                {
+                    case "home":
+                        frm.Navigate(typeof(HomePage), App.PgHome);
+                        break;
+
+                    case "expanses":
+                        frm.Navigate(typeof(NewTransactionPage), App.PgNewExpanse);
+                        break;
+
+                    case "incomes":
+                        frm.Navigate(typeof(NewTransactionPage), App.PgNewIncome);
+                        break;
+                }
+            }
+        }
+    }
+
+    private void frm_Navigated(object sender, NavigationEventArgs e)
+    {
+        if (e.Content is Page pg)
+        {
+            if (pg.Tag is string sValue)
+            {
+                titleBar.Subtitle = sValue;
+            }
+        }
     }
 }
