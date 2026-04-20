@@ -26,6 +26,9 @@ namespace Financier.Pages;
 /// </summary>
 public partial class NewTransactionPage : Page
 {
+    internal const string TITLE_EXPANSES = "New Expense";
+    internal const string TITLE_INCOMES = "New Income";
+
     private TransactionType _type;
 
     /// <summary>
@@ -52,12 +55,12 @@ public partial class NewTransactionPage : Page
             _type = type;
             switch (type)
             {
-                case TransactionType.Expanse:
-                    Tag = "New Expanse";
+                case TransactionType.Expense:
+                    Tag = TITLE_EXPANSES;
                     break;
 
                 case TransactionType.Income:
-                    Tag = "New Income";
+                    Tag = TITLE_INCOMES;
                     break;
             }
         }

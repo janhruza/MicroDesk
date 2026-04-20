@@ -43,6 +43,7 @@ public sealed partial class MainWindow : Window
         if (args.IsSettingsSelected)
         {
             frm.Navigate(typeof(SettingsPage), App.PgSettings);
+            tbTitle.Text = "Settings";
             return;
         }
 
@@ -51,20 +52,31 @@ public sealed partial class MainWindow : Window
         {
             if (item.Tag is string sId)
             {
+                string pageTitle = string.Empty;
                 switch (sId)
                 {
+                    default:
+                        pageTitle = "Unknown Page";
+                        break;
+
                     case "home":
                         frm.Navigate(typeof(HomePage), App.PgHome);
+                        pageTitle = "Dashboard";
                         break;
 
                     case "expanses":
-                        frm.Navigate(typeof(NewTransactionPage), Core.TransactionType.Expanse);
+                        frm.Navigate(typeof(NewTransactionPage), Core.TransactionType.Expense);
+                        pageTitle = NewTransactionPage.TITLE_EXPANSES;
                         break;
 
                     case "incomes":
                         frm.Navigate(typeof(NewTransactionPage), Core.TransactionType.Income);
+                        pageTitle = NewTransactionPage.TITLE_INCOMES;
                         break;
                 }
+
+                // update the UI page title
+                tbTitle.Text = pageTitle;
             }
         }
     }
@@ -76,7 +88,7 @@ public sealed partial class MainWindow : Window
             titleBar.Subtitle = type switch
             {
                 TransactionType.Income => "New Income",
-                TransactionType.Expanse => "New Expanse",
+                TransactionType.Expense => "New Expense",
                 _ => "Transaction"
             };
         }

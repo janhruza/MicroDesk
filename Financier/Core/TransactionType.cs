@@ -3,7 +3,7 @@
 /// <summary>
 /// Representing the transaction type.
 /// </summary>
-public enum TransactionType
+public enum TransactionType : byte
 {
     /// <summary>
     /// Representing the income transaction type.
@@ -13,5 +13,5 @@ public enum TransactionType
     /// <summary>
     /// Representing the expanse transaction type.
     /// </summary>
-    Expanse
+    Expense
 }
