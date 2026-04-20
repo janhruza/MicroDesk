@@ -1,3 +1,4 @@
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -31,5 +32,31 @@ public sealed partial class MainWindow : Window
     {
         InitializeComponent();
         this.ExtendsContentIntoTitleBar = true;
+
+        // minimum window size
+        OverlappedPresenter presenter = OverlappedPresenter.Create();
+        presenter.PreferredMinimumWidth = 640;
+        presenter.PreferredMinimumHeight = 480;
+        this.AppWindow.SetPresenter(presenter);
+
+        // default window size
+        this.AppWindow.ResizeClient(new Windows.Graphics.SizeInt32(800, 600));
+    }
+
+    private void titleBar_PaneToggleRequested(TitleBar sender, object args)
+    {
+        nav.IsPaneOpen = !nav.IsPaneOpen;
+    }
+
+    private void nav_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+    {
+        if (args.IsSettingsSelected)
+        {
+            // TODO settings requested
+            return;
+        }
+
+        // change pages
+        return;
     }
 }

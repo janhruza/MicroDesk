@@ -15,5 +15,55 @@
 
     <Grid>
 
+        <Grid.RowDefinitions>
+
+            <!--Caption bar row-->
+            <RowDefinition Height="Auto"/>
+            
+            <!--Content row-->
+            <RowDefinition />
+
+        </Grid.RowDefinitions>
+
+        <!--Title bar-->
+        <TitleBar Grid.Row="0"
+                  Name="titleBar"
+                  Title="Financier"
+                  IsPaneToggleButtonVisible="True"
+                  PaneToggleRequested="titleBar_PaneToggleRequested"/>
+
+        <!--Navigation bar-->
+        <NavigationView Grid.Row="1"
+                        Name="nav"
+                        IsBackButtonVisible="Collapsed"
+                        IsPaneToggleButtonVisible="False"
+                        SelectionChanged="nav_SelectionChanged">
+
+            <!--Navigation options-->
+            <NavigationView.MenuItems>
+
+                <!--Dashboard tab-->
+                <NavigationViewItem Content="Dashboard"
+                                    Icon="Home"
+                                    Tag="home"/>
+
+                <!--Expanses tab-->
+                <NavigationViewItem Content="Expanses"
+                                    Icon="Remove"
+                                    Tag="expanses"/>
+
+                <!--Incomes tab-->
+                <NavigationViewItem Content="Incomes"
+                                    Icon="Add"
+                                    Tag="incomes"/>
+
+            </NavigationView.MenuItems>
+
+            <!--Frame to display pages-->
+            <Frame Name="frm"
+                   Padding="16"/>
+
+        </NavigationView>
+
     </Grid>
 </Window>
