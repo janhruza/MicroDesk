@@ -20,7 +20,7 @@ public static class AppData
                 Category = (byte)IncomeCategories.Salary,
                 Value = 2850,
                 Timestamp = DateTime.Now.AddDays(-7),
-                Text = "Weekly Pay"
+                Note = "Weekly Pay"
             },
 
             new TransactionInfo {

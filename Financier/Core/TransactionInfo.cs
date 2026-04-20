@@ -33,5 +33,5 @@ public struct TransactionInfo
     /// <summary>
     /// Representing the additional user-defined textual description of the transaction.
     /// </summary>
-    public string Text;
+    public string Note;
 }

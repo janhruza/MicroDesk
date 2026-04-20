@@ -97,7 +97,7 @@
                      IsReadOnly="True"
                      Margin="0,0,0,8"/>
 
-            <TextBlock Text="Description"
+            <TextBlock Text="Notes"
                        Style="{ThemeResource BodyTextBlockStyle}"
                        Margin="0,0,0,8"/>
 

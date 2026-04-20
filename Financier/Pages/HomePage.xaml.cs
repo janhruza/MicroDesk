@@ -166,7 +166,7 @@ public sealed partial class HomePage : Page
                 txtValue.Text = tr.Value.ToString("C");
                 txtType.Text = tr.Type == TransactionType.Income ? "Income" : "Expense";
                 txtCategory.Text = tr.Type == TransactionType.Income ? AppData.IncomeNames[(IncomeCategories)tr.Category] : AppData.ExpenseNames[(ExpenseCategories)tr.Category];
-                txtDesc.Text = string.IsNullOrWhiteSpace(tr.Text) ? string.Empty : tr.Text.Trim();
+                txtDesc.Text = string.IsNullOrWhiteSpace(tr.Note) ? string.Empty : tr.Note.Trim();
                 stpPreview.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
                 return;
             }
