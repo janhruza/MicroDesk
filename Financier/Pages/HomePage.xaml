@@ -23,6 +23,7 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
+        <!--Username label-->
         <TextBlock Style="{ThemeResource BodyLargeTextBlockStyle}"
                    Grid.Row="0"
                    Grid.Column="0">
@@ -33,21 +34,25 @@
                  Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/><Run Text="!"/>
         </TextBlock>
 
+        <!--Balance label-->
         <TextBlock Grid.Row="0"
                    Grid.Column="1"
                    Style="{ThemeResource BodyLargeTextBlockStyle}"
                    Name="tbBalance"
                    HorizontalAlignment="Right"/>
 
+        <!--Transaction history label-->
         <TextBlock Text="Transaction history"
                    Grid.Row="1"
                    Style="{ThemeResource BodyStrongTextBlockStyle}"/>
 
+        <!--Preview panel label-->
         <TextBlock Text="Preview"
                    Grid.Row="1"
                    Grid.Column="1"
                    Style="{ThemeResource BodyStrongTextBlockStyle}"/>
 
+        <!--History panel-->
         <ListView Grid.Row="2"
                   Grid.Column="0"
                   Name="lvHistory"
@@ -55,6 +60,7 @@
                   CornerRadius="{ThemeResource ControlCornerRadius}"
                   SelectionChanged="lvHistory_SelectionChanged"/>
 
+        <!--Preview panel-->
         <StackPanel Grid.Row="2"
                     Grid.Column="1"
                     Name="stpPreview">
