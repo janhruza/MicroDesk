@@ -19,8 +19,6 @@ namespace Financier.Pages;
 /// </summary>
 public sealed partial class HomePage : Page
 {
-    const int HISTORY_SIZE = 5;
-
     /// <summary>
     /// Creates a new home page instance.
     /// </summary>
@@ -58,7 +56,7 @@ public sealed partial class HomePage : Page
     private void DisplayHistory(ref UserProfile profile)
     {
         lvHistory.Items.Clear();
-        TransactionInfo[] history = [.. profile.Transactions.OrderBy(x => x.Timestamp).TakeLast(HISTORY_SIZE)];
+        TransactionInfo[] history = [.. profile.Transactions.OrderByDescending(x => x.Timestamp)];
         if (history.Length == 0)
         {
             ListViewItem lvi = new ListViewItem
@@ -148,7 +146,7 @@ public sealed partial class HomePage : Page
         LoadUI();
     }
 
-    private void lvHistory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private async void lvHistory_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (lvHistory.SelectedIndex == -1)
         {
@@ -161,7 +159,7 @@ public sealed partial class HomePage : Page
         {
             if (lvi.Tag is TransactionInfo tr)
             {
-                // TODO display the selected item
+                // display the selected item in the preview panel
                 dpDate.SelectedDate = tr.Timestamp;
                 txtValue.Text = tr.Value.ToString("C");
                 txtType.Text = tr.Type == TransactionType.Income ? "Income" : "Expense";
@@ -172,6 +170,7 @@ public sealed partial class HomePage : Page
             }
         }
 
+        // unable to show a preview, hide the panel completely
         stpPreview.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
         return;
     }

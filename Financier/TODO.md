@@ -5,11 +5,14 @@ Here is a list of all the and past TODOs. This also serves as a development mile
 
 - [x] **Home** (dashboard) page
 - [ ] **New Transaction** page
+	- [ ] Transaction fields
+	- [ ] Separate income and expense transaction types
 - [ ] **Settings** page
 
 ## Controls
-- [ ] Better history view item
-- [ ] General transaction item card
+- [ ] Better history view item (transaction item)
+- [ ] General transaction item instead of a simple TextBlock
+	- [ ] Add a color to visually separate transaction categories
 
 ## Logic
 - [ ] **User profile** IO
