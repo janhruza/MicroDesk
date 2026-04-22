@@ -44,7 +44,7 @@ public partial class App : Application
             PrimaryButtonText = "OK"
         };
 
-        await dlg.ShowAsync();
+        _ = await dlg.ShowAsync();
         return;
     }
 
@@ -55,9 +55,9 @@ public partial class App : Application
     protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
     {
         // TODO testing setup
-        UserProfile.SetCurrent(AppData.TestProfile);
+        _ = UserProfile.SetCurrent(AppData.TestProfile);
 
-        _window = new MainWindow();
-        _window.Activate();
+        this._window = new MainWindow();
+        this._window.Activate();
     }
 }

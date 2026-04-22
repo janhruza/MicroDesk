@@ -7,8 +7,6 @@ using Microsoft.UI.Xaml.Navigation;
 
 using System.Linq;
 
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
@@ -29,7 +27,7 @@ public sealed partial class HomePage : Page
 
     private void DisplayName(ref UserProfile profile)
     {
-        rUsername.Text = profile.Name;
+        this.rUsername.Text = profile.Name;
     }
 
     private void GetBalance(ref UserProfile profile)
@@ -50,12 +48,12 @@ public sealed partial class HomePage : Page
         }
 
         // display in the currency format - default system currency
-        tbBalance.Text = sum.ToString("C");
+        this.tbBalance.Text = sum.ToString("C");
     }
 
     private void DisplayHistory(ref UserProfile profile)
     {
-        lvHistory.Items.Clear();
+        this.lvHistory.Items.Clear();
         TransactionInfo[] history = [.. profile.Transactions.OrderByDescending(x => x.Timestamp)];
         if (history.Length == 0)
         {
@@ -67,7 +65,7 @@ public sealed partial class HomePage : Page
                     Margin = new Microsoft.UI.Xaml.Thickness(8)
                 },
             };
-            lvHistory.Items.Add(lvi);
+            this.lvHistory.Items.Add(lvi);
             return;
         }
 
@@ -111,11 +109,11 @@ public sealed partial class HomePage : Page
                 Tag = tr
             };
 
-            lvHistory.Items.Add(lvi);
+            this.lvHistory.Items.Add(lvi);
         }
 
         // select the first item
-        lvHistory.SelectedIndex = 0;
+        this.lvHistory.SelectedIndex = 0;
     }
 
     private void LoadUI()
@@ -148,30 +146,30 @@ public sealed partial class HomePage : Page
 
     private async void lvHistory_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (lvHistory.SelectedIndex == -1)
+        if (this.lvHistory.SelectedIndex == -1)
         {
             // no items selected
-            stpPreview.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+            this.stpPreview.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
             return;
         }
 
-        if (lvHistory.SelectedItem is ListViewItem lvi)
+        if (this.lvHistory.SelectedItem is ListViewItem lvi)
         {
             if (lvi.Tag is TransactionInfo tr)
             {
                 // display the selected item in the preview panel
-                dpDate.SelectedDate = tr.Timestamp;
-                txtValue.Text = tr.Value.ToString("C");
-                txtType.Text = tr.Type == TransactionType.Income ? "Income" : "Expense";
-                txtCategory.Text = tr.Type == TransactionType.Income ? AppData.IncomeNames[(IncomeCategories)tr.Category] : AppData.ExpenseNames[(ExpenseCategories)tr.Category];
-                txtDesc.Text = string.IsNullOrWhiteSpace(tr.Note) ? string.Empty : tr.Note.Trim();
-                stpPreview.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
+                this.dpDate.SelectedDate = tr.Timestamp;
+                this.txtValue.Text = tr.Value.ToString("C");
+                this.txtType.Text = tr.Type == TransactionType.Income ? "Income" : "Expense";
+                this.txtCategory.Text = tr.Type == TransactionType.Income ? AppData.IncomeNames[(IncomeCategories)tr.Category] : AppData.ExpenseNames[(ExpenseCategories)tr.Category];
+                this.txtDesc.Text = string.IsNullOrWhiteSpace(tr.Note) ? string.Empty : tr.Note.Trim();
+                this.stpPreview.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
                 return;
             }
         }
 
         // unable to show a preview, hide the panel completely
-        stpPreview.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+        this.stpPreview.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
         return;
     }
 }

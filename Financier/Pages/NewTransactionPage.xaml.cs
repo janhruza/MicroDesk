@@ -1,22 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Financier.Core;
+
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 
-using Financier.Core;
-using Microsoft.UI.System;
-using Windows.UI.Popups;
-using System.Threading.Tasks;
+using System;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -41,7 +29,7 @@ public partial class NewTransactionPage : Page
     public NewTransactionPage()
     {
         InitializeComponent();
-        _type = default;
+        this._type = default;
     }
 
     /// <summary>
@@ -54,7 +42,7 @@ public partial class NewTransactionPage : Page
     {
         if (e.Parameter is TransactionType type)
         {
-            _type = type;
+            this._type = type;
             switch (type)
             {
                 case TransactionType.Expense:
@@ -72,8 +60,8 @@ public partial class NewTransactionPage : Page
 
     private void LoadUI()
     {
-        cbxCategory.Items.Clear();
-        switch (_type)
+        this.cbxCategory.Items.Clear();
+        switch (this._type)
         {
             case TransactionType.Expense:
                 LoadExpenses();
@@ -88,22 +76,22 @@ public partial class NewTransactionPage : Page
         }
 
         // clear the other fields to defaults
-        txtValue.Text = "0";
-        txtNote.Text = string.Empty;
+        this.txtValue.Text = "0";
+        this.txtNote.Text = string.Empty;
     }
 
     private void LoadExpenses()
     {
         foreach (var kvp in AppData.ExpenseNames)
         {
-            cbxCategory.Items.Add(new ComboBoxItem
+            this.cbxCategory.Items.Add(new ComboBoxItem
             {
                 Tag = (byte)kvp.Key,
                 Content = kvp.Value
             });
         }
 
-        cbxCategory.SelectedIndex = 0;
+        this.cbxCategory.SelectedIndex = 0;
         return;
     }
 
@@ -111,14 +99,14 @@ public partial class NewTransactionPage : Page
     {
         foreach (var kvp in AppData.IncomeNames)
         {
-            cbxCategory.Items.Add(new ComboBoxItem
+            this.cbxCategory.Items.Add(new ComboBoxItem
             {
                 Tag = (byte)kvp.Key,
                 Content = kvp.Value
             });
         }
 
-        cbxCategory.SelectedIndex = 0;
+        this.cbxCategory.SelectedIndex = 0;
         return;
     }
 
@@ -132,16 +120,16 @@ public partial class NewTransactionPage : Page
         if (UserProfile.IsLoaded() == false)
         {
             // no profile loaded
-            await App.ShowDialog(this.XamlRoot, "Unable to create a new transaction. No user profile is loaded.", "Error");
+            await App.ShowDialog(XamlRoot, "Unable to create a new transaction. No user profile is loaded.", "Error");
             return;
         }
 
         UserProfile profile = UserProfile.GetCurrent();
 
         // check if the transaction is valid
-        if (decimal.TryParse(txtValue.Text, out decimal dValue) == false)
+        if (decimal.TryParse(this.txtValue.Text, out decimal dValue) == false)
         {
-            await App.ShowDialog(this.XamlRoot, "Unable to create a new transaction. Please make sure the transaction value is in the correct numeric format.", "Invalid value");
+            await App.ShowDialog(XamlRoot, "Unable to create a new transaction. Please make sure the transaction value is in the correct numeric format.", "Invalid value");
             return;
         }
 
@@ -151,7 +139,7 @@ public partial class NewTransactionPage : Page
         // get the category
         byte categoryCode = 0xFF;
 
-        if (cbxCategory.SelectedItem is ComboBoxItem cbi)
+        if (this.cbxCategory.SelectedItem is ComboBoxItem cbi)
         {
             if (cbi.Tag is byte bVal)
             {
@@ -163,7 +151,7 @@ public partial class NewTransactionPage : Page
         {
             // invalid category
             // default to 0
-            switch (_type)
+            switch (this._type)
             {
                 case TransactionType.Income:
                     categoryCode = (byte)default(IncomeCategories);
@@ -183,20 +171,20 @@ public partial class NewTransactionPage : Page
         TransactionInfo tr = new TransactionInfo
         {
             Timestamp = DateTime.Now,
-            Type = _type,
+            Type = this._type,
             Category = categoryCode,
             Value = dValue,
-            Note = txtNote.Text
+            Note = this.txtNote.Text
         };
 
         // assign the transaction to the active profile,
         // save it and update it to sync changes
         profile.Transactions.Add(tr);
-        UserProfile.Save(profile);
-        UserProfile.SetCurrent(profile);
+        _ = UserProfile.Save(profile);
+        _ = UserProfile.SetCurrent(profile);
 
         // display a confirmation message
-        await App.ShowDialog(this.XamlRoot, "Transaction added successfully.", "Transaction added");
+        await App.ShowDialog(XamlRoot, "Transaction added successfully.", "Transaction added");
 
         // clear the UI
         LoadUI();

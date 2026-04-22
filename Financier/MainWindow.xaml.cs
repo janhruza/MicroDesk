@@ -21,29 +21,29 @@ public sealed partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        this.ExtendsContentIntoTitleBar = true;
+        ExtendsContentIntoTitleBar = true;
 
         // minimum window size
         OverlappedPresenter presenter = OverlappedPresenter.Create();
         presenter.PreferredMinimumWidth = 640;
         presenter.PreferredMinimumHeight = 480;
-        this.AppWindow.SetPresenter(presenter);
+        AppWindow.SetPresenter(presenter);
 
         // default window size
-        this.AppWindow.ResizeClient(new Windows.Graphics.SizeInt32(800, 600));
+        AppWindow.ResizeClient(new Windows.Graphics.SizeInt32(800, 600));
     }
 
     private void titleBar_PaneToggleRequested(TitleBar sender, object args)
     {
-        nav.IsPaneOpen = !nav.IsPaneOpen;
+        this.nav.IsPaneOpen = !this.nav.IsPaneOpen;
     }
 
     private void nav_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
     {
         if (args.IsSettingsSelected)
         {
-            frm.Navigate(typeof(SettingsPage), App.PgSettings);
-            tbTitle.Text = "Settings";
+            _ = this.frm.Navigate(typeof(SettingsPage), App.PgSettings);
+            this.tbTitle.Text = "Settings";
             return;
         }
 
@@ -52,7 +52,7 @@ public sealed partial class MainWindow : Window
         {
             if (item.Tag is string sId)
             {
-                string pageTitle = string.Empty;
+                string pageTitle;
                 switch (sId)
                 {
                     default:
@@ -60,23 +60,23 @@ public sealed partial class MainWindow : Window
                         break;
 
                     case "home":
-                        frm.Navigate(typeof(HomePage), App.PgHome);
+                        _ = this.frm.Navigate(typeof(HomePage), App.PgHome);
                         pageTitle = "Dashboard";
                         break;
 
                     case "expanses":
-                        frm.Navigate(typeof(NewTransactionPage), Core.TransactionType.Expense);
+                        _ = this.frm.Navigate(typeof(NewTransactionPage), Core.TransactionType.Expense);
                         pageTitle = NewTransactionPage.TITLE_EXPANSES;
                         break;
 
                     case "incomes":
-                        frm.Navigate(typeof(NewTransactionPage), Core.TransactionType.Income);
+                        _ = this.frm.Navigate(typeof(NewTransactionPage), Core.TransactionType.Income);
                         pageTitle = NewTransactionPage.TITLE_INCOMES;
                         break;
                 }
 
                 // update the UI page title
-                tbTitle.Text = pageTitle;
+                this.tbTitle.Text = pageTitle;
             }
         }
     }
@@ -85,7 +85,7 @@ public sealed partial class MainWindow : Window
     {
         if (e.Parameter is TransactionType type)
         {
-            titleBar.Subtitle = type switch
+            this.titleBar.Subtitle = type switch
             {
                 TransactionType.Income => "New Income",
                 TransactionType.Expense => "New Expense",
@@ -95,7 +95,7 @@ public sealed partial class MainWindow : Window
         else if (e.Content is Page pg && pg.Tag is string sValue)
         {
             // Fallback pro ostatní stránky (Home atd.)
-            titleBar.Subtitle = sValue;
+            this.titleBar.Subtitle = sValue;
         }
     }
 }

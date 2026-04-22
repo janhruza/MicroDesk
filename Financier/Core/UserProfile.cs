@@ -32,7 +32,7 @@ public struct UserProfile
 
     #region Profile methods
 
-    static UserProfile? _current = null;
+    private static UserProfile? _current = null;
 
     /// <summary>
     /// Determines whether any user profile is loaded.
@@ -74,14 +74,14 @@ public struct UserProfile
         return _current.HasValue;
     }
 
-    static JsonSerializerOptions _options = new JsonSerializerOptions
+    private static JsonSerializerOptions _options = new JsonSerializerOptions
     {
         IncludeFields = true,
         WriteIndented = true
     };
 
-    static string _dataFolder { get; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Profiles");
-    static string GetFileName(UserProfile? profile)
+    private static string _dataFolder { get; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Profiles");
+    private static string GetFileName(UserProfile? profile)
     {
         if (profile.HasValue == false)
         {
@@ -92,7 +92,7 @@ public struct UserProfile
         {
             if (Directory.Exists(_dataFolder) == false)
             {
-                Directory.CreateDirectory(_dataFolder);
+                _ = Directory.CreateDirectory(_dataFolder);
             }
 
             return Path.Combine(_dataFolder, $"{profile.Value.Name}.json");
@@ -117,7 +117,7 @@ public struct UserProfile
         }
 
         string data = JsonSerializer.Serialize<UserProfile>(profile, _options);
-        File.WriteAllTextAsync(filename, data, Encoding.UTF8);
+        _ = File.WriteAllTextAsync(filename, data, Encoding.UTF8);
         return true;
     }
 
