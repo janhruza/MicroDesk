@@ -76,10 +76,11 @@ public struct UserProfile
 
     static JsonSerializerOptions _options = new JsonSerializerOptions
     {
-        IncludeFields = true
+        IncludeFields = true,
+        WriteIndented = true
     };
 
-    static string _dataFolder { get; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "profiles");
+    static string _dataFolder { get; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Profiles");
     static string GetFileName(UserProfile? profile)
     {
         if (profile.HasValue == false)
@@ -89,6 +90,11 @@ public struct UserProfile
 
         else
         {
+            if (Directory.Exists(_dataFolder) == false)
+            {
+                Directory.CreateDirectory(_dataFolder);
+            }
+
             return Path.Combine(_dataFolder, $"{profile.Value.Name}.json");
         }
     }

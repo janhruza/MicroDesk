@@ -4,10 +4,11 @@ Here is a list of all the and past TODOs. This also serves as a development mile
 ## Pages
 
 - [x] **Home** (dashboard) page
-- [ ] **New Transaction** page
-	- [ ] Transaction fields
-	- [ ] Separate income and expense transaction types
+- [x] **New Transaction** page
+	- [x] Transaction fields
+	- [x] Separate income and expense transaction types
 - [ ] **Settings** page
+- [ ] Profile switcher page
 
 ## Controls
 - [ ] Better history view item (transaction item)
@@ -15,8 +16,7 @@ Here is a list of all the and past TODOs. This also serves as a development mile
 	- [ ] Add a color to visually separate transaction categories
 
 ## Logic
-- [ ] **User profile** IO
-- [ ] Multi-profile support
+- [x] **User profile** IO
 - [ ] Code optimization
 
 ## Miscellaneous

@@ -22,11 +22,15 @@
             <AppBarButton Icon="Clear"
                           Label="Clear"
                           Name="btnClear"
+                          ToolTipService.Placement="Mouse"
+                          ToolTipService.ToolTip="Clear fields"
                           Click="btnClear_Click"/>
             
             <AppBarButton Icon="Save"
                           Label="Save"
                           Name="btnSave"
+                          ToolTipService.Placement="Mouse"
+                          ToolTipService.ToolTip="Save"
                           Click="btnSave_Click"/>
         </CommandBar>
 
