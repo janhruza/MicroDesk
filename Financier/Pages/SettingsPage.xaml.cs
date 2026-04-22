@@ -21,7 +21,7 @@ public sealed partial class SettingsPage : Page
 
     private void cbxThemeMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (cbxThemeMode.SelectedItem is ComboBoxItem cbi)
+        if (this.cbxThemeMode.SelectedItem is ComboBoxItem cbi)
         {
             if (cbi.Tag is string sThemeMode)
             {
@@ -45,7 +45,7 @@ public sealed partial class SettingsPage : Page
 
     private void cbxBackdrop_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (cbxBackdrop.SelectedItem is ComboBoxItem item)
+        if (this.cbxBackdrop.SelectedItem is ComboBoxItem item)
         {
             if (item.Tag is string sBackdrop)
             {
