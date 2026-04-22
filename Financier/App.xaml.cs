@@ -3,23 +3,9 @@ using Financier.Pages;
 
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Microsoft.UI.Xaml.Shapes;
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using System.Threading.Tasks;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -47,6 +33,20 @@ public partial class App : Application
     internal static NewTransactionPage PgNewExpanse { get; } = new NewTransactionPage();
     internal static SettingsPage PgSettings { get; } = new SettingsPage();
     #endregion
+
+    internal static async Task ShowDialog(XamlRoot xamlRoot, string message, string title)
+    {
+        ContentDialog dlg = new ContentDialog
+        {
+            XamlRoot = xamlRoot,
+            Content = message,
+            Title = title,
+            PrimaryButtonText = "OK"
+        };
+
+        await dlg.ShowAsync();
+        return;
+    }
 
     /// <summary>
     /// Invoked when the application is launched.

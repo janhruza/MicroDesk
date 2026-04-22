@@ -15,6 +15,8 @@ using Microsoft.UI.Xaml.Navigation;
 
 using Financier.Core;
 using Microsoft.UI.System;
+using Windows.UI.Popups;
+using System.Threading.Tasks;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -63,7 +65,142 @@ public partial class NewTransactionPage : Page
                     Tag = TITLE_INCOMES;
                     break;
             }
+
+            LoadUI();
         }
+    }
+
+    private void LoadUI()
+    {
+        cbxCategory.Items.Clear();
+        switch (_type)
+        {
+            case TransactionType.Expense:
+                LoadExpenses();
+                break;
+
+            case TransactionType.Income:
+                LoadIncomes();
+                break;
+
+            default:
+                break;
+        }
+
+        // clear the other fields to defaults
+        txtValue.Text = "0";
+        txtNote.Text = string.Empty;
+    }
+
+    private void LoadExpenses()
+    {
+        foreach (var kvp in AppData.ExpenseNames)
+        {
+            cbxCategory.Items.Add(new ComboBoxItem
+            {
+                Tag = (byte)kvp.Key,
+                Content = kvp.Value
+            });
+        }
+
+        cbxCategory.SelectedIndex = 0;
+        return;
+    }
+
+    private void LoadIncomes()
+    {
+        foreach (var kvp in AppData.IncomeNames)
+        {
+            cbxCategory.Items.Add(new ComboBoxItem
+            {
+                Tag = (byte)kvp.Key,
+                Content = kvp.Value
+            });
+        }
+
+        cbxCategory.SelectedIndex = 0;
+        return;
+    }
+
+    private void btnClear_Click(object sender, RoutedEventArgs e)
+    {
+        LoadUI();
+    }
+
+    private async void btnSave_Click(object sender, RoutedEventArgs e)
+    {
+        if (UserProfile.IsLoaded() == false)
+        {
+            // no profile loaded
+            await App.ShowDialog(this.XamlRoot, "Unable to create a new transaction. No user profile is loaded.", "Error");
+            return;
+        }
+
+        UserProfile profile = UserProfile.GetCurrent();
+
+        // check if the transaction is valid
+        if (decimal.TryParse(txtValue.Text, out decimal dValue) == false)
+        {
+            await App.ShowDialog(this.XamlRoot, "Unable to create a new transaction. Please make sure the transaction value is in the correct numeric format.", "Invalid value");
+            return;
+        }
+
+        // get the absolute value of the transaction
+        dValue = decimal.Abs(dValue);
+
+        // get the category
+        byte categoryCode = 0xFF;
+
+        if (cbxCategory.SelectedItem is ComboBoxItem cbi)
+        {
+            if (cbi.Tag is byte bVal)
+            {
+                categoryCode = bVal;
+            }
+        }
+
+        if (categoryCode == 0xFF)
+        {
+            // invalid category
+            // default to 0
+            switch (_type)
+            {
+                case TransactionType.Income:
+                    categoryCode = (byte)default(IncomeCategories);
+                    break;
+
+                case TransactionType.Expense:
+                    categoryCode = (byte)default(ExpenseCategories);
+                    break;
+
+                default:
+                    categoryCode = 0;
+                    break;
+            }
+        }
+
+        // create the transaction
+        TransactionInfo tr = new TransactionInfo
+        {
+            Timestamp = DateTime.Now,
+            Type = _type,
+            Category = categoryCode,
+            Value = dValue,
+            Note = txtNote.Text
+        };
+
+        // assign the transaction to the active profile,
+        // save it and update it to sync changes
+        profile.Transactions.Add(tr);
+        UserProfile.Save(profile);
+        UserProfile.SetCurrent(profile);
+
+        // display a confirmation message
+        await App.ShowDialog(this.XamlRoot, "Transaction added successfully.", "Transaction added");
+
+        // clear the UI
+        LoadUI();
+        return;
     }
 
     /// <summary>
