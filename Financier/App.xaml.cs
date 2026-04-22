@@ -1,11 +1,16 @@
 ﻿using Financier.Core;
 using Financier.Pages;
 
+using Microsoft.UI.Composition.SystemBackdrops;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 
 using System;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+
+using WinRT.Interop;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -16,7 +21,7 @@ namespace Financier;
 /// </summary>
 public partial class App : Application
 {
-    private Window? _window;
+    private static Window? _window;
 
     /// <summary>
     /// Initializes the singleton application object.  This is the first line of authored code
@@ -26,6 +31,9 @@ public partial class App : Application
     {
         InitializeComponent();
     }
+
+    [DllImport("dwmapi")]
+    internal static extern int DwmSetWindowAttribute(IntPtr hWnd, int dwAttribute, int[] pwAttribute, int cbSize);
 
     #region Page definitions
     internal static HomePage PgHome { get; } = new HomePage();
@@ -48,6 +56,22 @@ public partial class App : Application
         return;
     }
 
+    internal static void SetAppThemeMode(ElementTheme theme)
+    {
+        if (_window is null) return;
+        if (_window.Content is FrameworkElement elm)
+        {
+            elm.RequestedTheme = theme;
+        }
+    }
+
+    internal static void SetAppBackdropMode(SystemBackdrop? backdrop)
+    {
+        if (_window is null) return;
+        _window.SystemBackdrop = backdrop;
+        return;
+    }
+
     /// <summary>
     /// Invoked when the application is launched.
     /// </summary>
@@ -57,7 +81,7 @@ public partial class App : Application
         // TODO testing setup
         _ = UserProfile.SetCurrent(AppData.TestProfile);
 
-        this._window = new MainWindow();
-        this._window.Activate();
+        _window = new MainWindow();
+        _window.Activate();
     }
 }

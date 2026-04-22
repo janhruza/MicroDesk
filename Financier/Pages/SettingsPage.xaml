@@ -9,7 +9,33 @@
     mc:Ignorable="d"
     Tag="Settings">
 
-    <Grid>
+    <StackPanel>
+        <TextBlock Text="Theme Mode"
+                   Margin="0,0,0,8"/>
 
-    </Grid>
+        <ComboBox Name="cbxThemeMode"
+                  HorizontalAlignment="Stretch"
+                  SelectionChanged="cbxThemeMode_SelectionChanged">
+
+            <ComboBoxItem Content="Light" Tag="themeLight"/>
+            <ComboBoxItem Content="Dark" Tag="themeDark"/>
+            <ComboBoxItem Content="System" Tag="themeSystem"/>
+
+        </ComboBox>
+
+        <TextBlock Text="Window Backdrop"
+                   Margin="0,16,0,8"/>
+
+        <ComboBox Name="cbxBackdrop"
+                  HorizontalAlignment="Stretch"
+                  SelectionChanged="cbxBackdrop_SelectionChanged">
+
+            <ComboBoxItem Content="Mica" Tag="backdropMica"/>
+            <ComboBoxItem Content="Acrylic" Tag="backdropAcrylic"/>
+            <ComboBoxItem Content="None" Tag="backdropNone"/>
+
+        </ComboBox>
+
+    </StackPanel>
+    
 </Page>

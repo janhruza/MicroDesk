@@ -8,6 +8,8 @@ Here is a list of all the and past TODOs. This also serves as a development mile
 	- [x] Transaction fields
 	- [x] Separate income and expense transaction types
 - [ ] **Settings** page
+	- [x] Basic settings page
+	- [ ] More advanced settings page with other than styling options
 - [ ] Profile switcher page
 
 ## Controls
