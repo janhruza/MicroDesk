@@ -11,6 +11,10 @@ Here is a list of all the and past TODOs. This also serves as a development mile
 	- [x] Basic settings page
 	- [ ] More advanced settings page with other than styling options
 - [ ] Profile switcher page
+- [ ] New profile page
+	- [x] Add the basics
+	- [ ] Add the save button
+	- [ ] Add the clear fields button
 
 ## Controls
 - [ ] Better history view item (transaction item)

@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 
 using System;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
@@ -18,7 +19,7 @@ namespace Financier;
 /// </summary>
 public partial class App : Application
 {
-    private static Window? _window;
+    private static MainWindow? _window;
 
     /// <summary>
     /// Initializes the singleton application object.  This is the first line of authored code
@@ -37,6 +38,7 @@ public partial class App : Application
     internal static NewTransactionPage PgNewIncome { get; } = new NewTransactionPage();
     internal static NewTransactionPage PgNewExpanse { get; } = new NewTransactionPage();
     internal static SettingsPage PgSettings { get; } = new SettingsPage();
+    internal static NewProfilePage PgNewProfile { get; } = new NewProfilePage();
     #endregion
 
     internal static async Task ShowDialog(XamlRoot xamlRoot, string message, string title)
@@ -73,12 +75,35 @@ public partial class App : Application
     /// Invoked when the application is launched.
     /// </summary>
     /// <param name="args">Details about the launch request and process.</param>
-    protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+    protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
-        // TODO testing setup
-        _ = UserProfile.SetCurrent(AppData.TestProfile);
-
         _window = new MainWindow();
+
+        if (Directory.Exists(UserProfile.ProfilesFolder))
+        {
+            foreach (string filename in Directory.EnumerateFiles(UserProfile.ProfilesFolder))
+            {
+                if (Path.GetFileNameWithoutExtension(filename) == Environment.UserName)
+                {
+                    string data = File.ReadAllText(filename);
+                    if (UserProfile.Load(data, out UserProfile profile) == true)
+                    {
+                        // current user profile loaded
+                        UserProfile.SetCurrent(profile);
+                        _window.nviHome.IsSelected = true;
+                    }
+                }
+            }
+        }
+
+        if (UserProfile.IsLoaded() == false)
+        {
+            // no profile loaded, create a new profile
+            // set test profile for now
+            UserProfile.SetCurrent(AppData.TestProfile);
+            _window.WindowFrame.Navigate(typeof(NewProfilePage));
+        }
+
         _window.Activate();
     }
 }

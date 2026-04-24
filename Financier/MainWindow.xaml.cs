@@ -38,6 +38,11 @@ public sealed partial class MainWindow : Window
         this.nav.IsPaneOpen = !this.nav.IsPaneOpen;
     }
 
+    /// <summary>
+    /// Gets the associated frame control.
+    /// </summary>
+    public Frame WindowFrame => frm;
+
     private void nav_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
     {
         if (args.IsSettingsSelected)
@@ -96,6 +101,11 @@ public sealed partial class MainWindow : Window
         {
             // Fallback pro ostatní stránky (Home atd.)
             this.titleBar.Subtitle = sValue;
+
+            if (e.Content is NewProfilePage)
+            {
+                tbTitle.Text = "New Profile";
+            }
         }
     }
 }

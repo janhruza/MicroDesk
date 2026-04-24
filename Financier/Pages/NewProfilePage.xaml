@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Financier.Pages.NewProfilePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Financier.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Tag="New Profile">
+
+    <Grid RowSpacing="16">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <InfoBar Grid.Column="0"
+                 IsOpen="True"
+                 Severity="Informational"
+                 Title="Create profile"
+                 Message="In order to continue, please set up a local user profile."/>
+
+        <CommandBar Grid.Row="1"
+                    OverflowButtonVisibility="Collapsed">
+
+            <!--TODO add the save and close button-->
+            
+        </CommandBar>
+
+        <StackPanel Grid.Row="2">
+
+            <TextBlock Text="Name"
+                       Margin="0,0,0,8"/>
+
+            <TextBox Name="txtName"/>
+
+        </StackPanel>
+
+    </Grid>
+</Page>

@@ -81,6 +81,12 @@ public struct UserProfile
     };
 
     private static string _dataFolder { get; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Profiles");
+
+    /// <summary>
+    /// Folder where all user profiles are located.
+    /// </summary>
+    public static string ProfilesFolder => _dataFolder;
+
     private static string GetFileName(UserProfile? profile)
     {
         if (profile.HasValue == false)

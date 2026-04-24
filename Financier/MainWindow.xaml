@@ -47,7 +47,8 @@
                 <NavigationViewItem Content="Dashboard"
                                     Icon="Home"
                                     Tag="home"
-                                    IsSelected="True"/>
+                                    Name="nviHome"
+                                    x:FieldModifier="internal"/>
 
                 <!--Expanses tab-->
                 <NavigationViewItem Content="Expanses"
