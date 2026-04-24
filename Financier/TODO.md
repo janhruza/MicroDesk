@@ -4,17 +4,25 @@ Here is a list of all the and past TODOs. This also serves as a development mile
 ## Pages
 
 - [x] **Home** (dashboard) page
+	- [ ] Logout button (return to profile selection)
+
 - [x] **New Transaction** page
 	- [x] Transaction fields
 	- [x] Separate income and expense transaction types
 - [ ] **Settings** page
 	- [x] Basic settings page
 	- [ ] More advanced settings page with other than styling options
-- [ ] Profile switcher page
-- [ ] New profile page
+
+- [x] Profile switcher page
+	- [x] Profile items
+	- [x] Refresh button
+	- [x] Login/use button
+	- [x] No profile info text
+
+- [x] New profile page
 	- [x] Add the basics
-	- [ ] Add the save button
-	- [ ] Add the clear fields button
+	- [x] Add the save button
+	- [x] Add the clear fields button
 
 ## Controls
 - [ ] Better history view item (transaction item)

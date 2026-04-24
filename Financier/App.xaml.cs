@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -20,6 +21,11 @@ namespace Financier;
 public partial class App : Application
 {
     private static MainWindow? _window;
+
+    /// <summary>
+    /// Gets the main window object if any.
+    /// </summary>
+    internal static MainWindow? MainWindow => _window;
 
     /// <summary>
     /// Initializes the singleton application object.  This is the first line of authored code
@@ -81,27 +87,31 @@ public partial class App : Application
 
         if (Directory.Exists(UserProfile.ProfilesFolder))
         {
+            HashSet<UserProfile> profiles = [];
             foreach (string filename in Directory.EnumerateFiles(UserProfile.ProfilesFolder))
             {
-                if (Path.GetFileNameWithoutExtension(filename) == Environment.UserName)
+                // get profile data
+                string data = File.ReadAllText(filename);
+                if (UserProfile.Load(data, out UserProfile profile) == true)
                 {
-                    string data = File.ReadAllText(filename);
-                    if (UserProfile.Load(data, out UserProfile profile) == true)
-                    {
-                        // current user profile loaded
-                        UserProfile.SetCurrent(profile);
-                        _window.nviHome.IsSelected = true;
-                    }
+                    // add profile to the profile selector
+                    profiles.Add(profile);
                 }
             }
-        }
 
-        if (UserProfile.IsLoaded() == false)
-        {
-            // no profile loaded, create a new profile
-            // set test profile for now
-            UserProfile.SetCurrent(AppData.TestProfile);
-            _window.WindowFrame.Navigate(typeof(NewProfilePage));
+            if (profiles.Count == 0)
+            {
+                // no accouts cretaed, create a new one
+                UserProfile.SetCurrent(AppData.TestProfile);
+                _window.WindowFrame.Navigate(typeof(NewProfilePage));
+            }
+
+            else
+            {
+                // profile selector
+                // pick from the loaded profiles
+                _window.WindowFrame.Navigate(typeof(ProfileSelectionPage), profiles);
+            }
         }
 
         _window.Activate();

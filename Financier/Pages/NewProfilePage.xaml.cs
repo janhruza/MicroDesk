@@ -1,19 +1,8 @@
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
+using Financier.Core;
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+using Microsoft.UI.Xaml.Controls;
 
 using Windows.Foundation;
-using Windows.Foundation.Collections;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -24,8 +13,69 @@ namespace Financier.Pages;
 /// </summary>
 public sealed partial class NewProfilePage : Page
 {
+    /// <summary>
+    /// Creates a new <see cref="NewProfilePage"/> instance.
+    /// </summary>
     public NewProfilePage()
     {
         InitializeComponent();
+    }
+
+    private void btnSave_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        string name = txtName.Text.Trim();
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            // input error
+            ib.Severity = InfoBarSeverity.Error;
+            ib.Title = "Error";
+            ib.Message = "Invalid input.";
+            ib.IsOpen = true;
+            return;
+        }
+
+        UserProfile profile = new UserProfile
+        {
+            Name = name,
+            WinPos = default(Rect),
+            Transactions = []
+        };
+
+        if (UserProfile.Save(profile) == false)
+        {
+            // saving error
+            ib.Severity = InfoBarSeverity.Error;
+            ib.Title = "Error";
+            ib.Message = "Unable to save the user profile.";
+            ib.IsOpen = true;
+            return;
+        }
+
+        UserProfile.SetCurrent(profile);
+
+        // navigate to the home page
+        if (App.MainWindow is null)
+        {
+            // error, impossible if this page is visible to the user
+            ib.Severity = InfoBarSeverity.Error;
+            ib.Title = "Error";
+            ib.Message = "Unable to get the main window.";
+            ib.IsOpen = true;
+            return;
+        }
+
+        // set the home page
+        App.MainWindow.nviHome.IsSelected = true;
+        return;
+    }
+
+    private void btnClear_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        txtName.Text = string.Empty;
+        ib.Severity = InfoBarSeverity.Success;
+        ib.Title = "Success";
+        ib.Message = "Input fields cleared.";
+        ib.IsOpen = true;
+        return;
     }
 }

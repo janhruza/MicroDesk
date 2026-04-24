@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="Financier.Pages.ProfileSelectionPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Financier.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid RowSpacing="16">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <InfoBar Name="ib"
+                 Grid.Row="0"
+                 IsOpen="False"/>
+
+        <!--TODO add the profiles view and the refresh and select button-->
+        <CommandBar Grid.Row="1"
+                    OverflowButtonVisibility="Collapsed">
+
+            <AppBarButton Label="Refresh"
+                          Icon="Refresh"
+                          Name="btnRefresh"
+                          Click="btnRefresh_Click"/>
+
+            <AppBarButton Label="Select"
+                          Icon="Accept"
+                          Name="btnAccept"
+                          IsEnabled="False"
+                          Click="btnAccept_Click"/>
+
+        </CommandBar>
+
+        <ListView Grid.Row="2"
+                  Name="lvProfiles"
+                  SelectionChanged="lvProfiles_SelectionChanged"/>
+
+    </Grid>
+</Page>

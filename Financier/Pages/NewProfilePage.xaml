@@ -18,16 +18,28 @@
         </Grid.RowDefinitions>
 
         <InfoBar Grid.Column="0"
+                 Name="ib"
                  IsOpen="True"
                  Severity="Informational"
                  Title="Create profile"
                  Message="In order to continue, please set up a local user profile."/>
 
+        <!--COmmand bar-->
         <CommandBar Grid.Row="1"
                     OverflowButtonVisibility="Collapsed">
-
-            <!--TODO add the save and close button-->
             
+            <!--Clear fields-->
+            <AppBarButton Label="Clear"
+                          Icon="Clear"
+                          Name="btnClear"
+                          Click="btnClear_Click"/>
+
+            <!--Create profile-->
+            <AppBarButton Label="Create"
+                          Icon="Save"
+                          Name="btnSave"
+                          Click="btnSave_Click"/>
+
         </CommandBar>
 
         <StackPanel Grid.Row="2">
@@ -35,6 +47,7 @@
             <TextBlock Text="Name"
                        Margin="0,0,0,8"/>
 
+            <!--Profile name-->
             <TextBox Name="txtName"/>
 
         </StackPanel>

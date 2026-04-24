@@ -16,6 +16,7 @@
   <ItemGroup>
     <None Remove="Pages\HomePage.xaml" />
     <None Remove="Pages\NewProfilePage.xaml" />
+    <None Remove="Pages\ProfileSelectionPage.xaml" />
     <None Remove="Pages\SettingsPage.xaml" />
   </ItemGroup>
 
@@ -62,6 +63,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\ProfileSelectionPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\NewProfilePage.xaml">
