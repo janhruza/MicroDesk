@@ -102,7 +102,7 @@ public partial class App : Application
             if (profiles.Count == 0)
             {
                 // no accouts cretaed, create a new one
-                UserProfile.SetCurrent(AppData.TestProfile);
+                UserProfile.SetCurrent(null);
                 _window.WindowFrame.Navigate(typeof(NewProfilePage));
             }
 
@@ -110,6 +110,7 @@ public partial class App : Application
             {
                 // profile selector
                 // pick from the loaded profiles
+                UserProfile.SetCurrent(null);
                 _window.WindowFrame.Navigate(typeof(ProfileSelectionPage), profiles);
             }
         }

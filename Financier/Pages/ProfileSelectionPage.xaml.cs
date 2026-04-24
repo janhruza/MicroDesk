@@ -74,7 +74,6 @@ public sealed partial class ProfileSelectionPage : Page
             ListViewItem lvi = new ListViewItem
             {
                 Tag = profile,
-                Padding = new Thickness(8),
                 Content = new TextBlock
                 {
                     Inlines =
@@ -82,7 +81,9 @@ public sealed partial class ProfileSelectionPage : Page
                         new Run { Text = profile.Name, FontSize = 18, FontWeight = FontWeights.SemiBold },
                         new LineBreak(),
                         new Run { Text = $"Transactions: {profile.Transactions.Count.ToString()}", FontSize = 14 }
-                    }
+                    },
+
+                    Margin = new Thickness(8)
                 }
             };
 

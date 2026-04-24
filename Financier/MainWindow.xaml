@@ -20,6 +20,7 @@
 
             <!--Caption bar row-->
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             
             <!--Content row-->
             <RowDefinition />
@@ -33,8 +34,13 @@
                   IsPaneToggleButtonVisible="True"
                   PaneToggleRequested="titleBar_PaneToggleRequested"/>
 
+        <!--Global info bar-->
+        <InfoBar Name="ib"
+                 Grid.Row="1"
+                 IsOpen="False"/>
+
         <!--Navigation bar-->
-        <NavigationView Grid.Row="1"
+        <NavigationView Grid.Row="2"
                         Name="nav"
                         IsBackButtonVisible="Collapsed"
                         IsPaneToggleButtonVisible="False"

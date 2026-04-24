@@ -43,6 +43,21 @@ public sealed partial class MainWindow : Window
     /// </summary>
     public Frame WindowFrame => frm;
 
+    /// <summary>
+    /// Displays an in-app banner message.
+    /// </summary>
+    /// <param name="severity">Message severity.</param>
+    /// <param name="title">Message title.</param>
+    /// <param name="message">Message text.</param>
+    public void DisplayMessage(InfoBarSeverity severity, string title, string message)
+    {
+        ib.Severity = severity;
+        ib.Title = title;
+        ib.Message = message;
+        ib.IsOpen = true;
+        return;
+    }
+
     private void nav_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
     {
         if (args.IsSettingsSelected)
@@ -105,6 +120,11 @@ public sealed partial class MainWindow : Window
             if (e.Content is NewProfilePage)
             {
                 tbTitle.Text = "New Profile";
+            }
+
+            else if (e.Content is ProfileSelectionPage)
+            {
+                tbTitle.Text = "Select a profile";
             }
         }
     }
