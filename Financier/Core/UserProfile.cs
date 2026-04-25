@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
 
@@ -40,10 +38,10 @@ public class UserProfile
     /// </summary>
     public UserProfile()
     {
-        Transactions = [];
-        Culture = "en-US";
-        Name = string.Empty;
-        WinPos = new Rect();
+        this.Transactions = [];
+        this.Culture = "en-US";
+        this.Name = string.Empty;
+        this.WinPos = new Rect();
     }
 
     #region Profile methods

@@ -116,8 +116,8 @@ public sealed partial class ProfileSelectionPage : Page
                 CultureInfo cu = new CultureInfo(profile.Culture);
                 CultureInfo.CurrentCulture = cu;
                 CultureInfo.CurrentUICulture = cu;
-                App.MainWindow.WindowFrame.Navigate(typeof(HomePage));
-                
+                _ = App.MainWindow.WindowFrame.Navigate(typeof(HomePage));
+
                 return;
             }
         }
@@ -132,7 +132,7 @@ public sealed partial class ProfileSelectionPage : Page
     private void btnNewProfile_Click(object sender, RoutedEventArgs e)
     {
         if (App.MainWindow is null) return;
-        UserProfile.SetCurrent(new UserProfile());
+        _ = UserProfile.SetCurrent(new UserProfile());
         _ = App.MainWindow.WindowFrame.Navigate(typeof(NewProfilePage));
     }
 }

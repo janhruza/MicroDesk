@@ -1,11 +1,10 @@
 using Financier.Core;
-using Microsoft.UI;
+
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using System;
-using System.Collections.Generic;
+
 using System.Linq;
 
 namespace Financier.Pages;
@@ -15,7 +14,7 @@ public sealed partial class HomePage : Page
     public HomePage()
     {
         InitializeComponent();
-        lvHistory.ContainerContentChanging += OnContainerContentChanging;
+        this.lvHistory.ContainerContentChanging += OnContainerContentChanging;
     }
 
     private void OnContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
@@ -91,21 +90,21 @@ public sealed partial class HomePage : Page
         if (!UserProfile.IsLoaded()) return;
 
         var profile = UserProfile.GetCurrent();
-        rUsername.Text = profile.Name;
+        this.rUsername.Text = profile.Name;
 
         decimal balance = profile.Transactions.Sum(t => t.Type == TransactionType.Income ? t.Value : -t.Value);
-        tbBalance.Text = balance.ToString("C");
-        tbBalance.Foreground = (Brush)Application.Current.Resources["AccentTextFillColorPrimaryBrush"];
+        this.tbBalance.Text = balance.ToString("C");
+        this.tbBalance.Foreground = (Brush)Application.Current.Resources["AccentTextFillColorPrimaryBrush"];
 
-        lvHistory.ItemsSource = profile.Transactions.OrderByDescending(t => t.Timestamp).ToList();
-        
-        if (lvHistory.Items.Count > 0)
+        this.lvHistory.ItemsSource = profile.Transactions.OrderByDescending(t => t.Timestamp).ToList();
+
+        if (this.lvHistory.Items.Count > 0)
         {
-            lvHistory.SelectedIndex = 0;
+            this.lvHistory.SelectedIndex = 0;
         }
         else
         {
-            stpPreview.Visibility = Visibility.Collapsed;
+            this.stpPreview.Visibility = Visibility.Collapsed;
         }
     }
 
@@ -116,31 +115,31 @@ public sealed partial class HomePage : Page
 
     private void lvHistory_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (lvHistory.SelectedItem is TransactionInfo tr)
+        if (this.lvHistory.SelectedItem is TransactionInfo tr)
         {
-            stpPreview.Visibility = Visibility.Visible;
-            txtDateDisplay.Text = tr.Timestamp.ToString("D");
-            txtValueDisplay.Text = tr.Value.ToString("C");
-            
+            this.stpPreview.Visibility = Visibility.Visible;
+            this.txtDateDisplay.Text = tr.Timestamp.ToString("D");
+            this.txtValueDisplay.Text = tr.Value.ToString("C");
+
             var accentBrush = (Brush)Application.Current.Resources["AccentTextFillColorPrimaryBrush"];
             var defaultForeground = (Brush)Application.Current.Resources["TextFillColorPrimaryBrush"];
-            
-            txtValueDisplay.Foreground = tr.Type == TransactionType.Income ? accentBrush : defaultForeground;
-            txtCategoryDisplay.Text = tr.Type == TransactionType.Income ? AppData.IncomeNames[(IncomeCategories)tr.Category] : AppData.ExpenseNames[(ExpenseCategories)tr.Category];
-            
+
+            this.txtValueDisplay.Foreground = tr.Type == TransactionType.Income ? accentBrush : defaultForeground;
+            this.txtCategoryDisplay.Text = tr.Type == TransactionType.Income ? AppData.IncomeNames[(IncomeCategories)tr.Category] : AppData.ExpenseNames[(ExpenseCategories)tr.Category];
+
             if (string.IsNullOrWhiteSpace(tr.Note))
             {
-                spNotes.Visibility = Visibility.Collapsed;
+                this.spNotes.Visibility = Visibility.Collapsed;
             }
             else
             {
-                spNotes.Visibility = Visibility.Visible;
-                txtNotesDisplay.Text = tr.Note;
+                this.spNotes.Visibility = Visibility.Visible;
+                this.txtNotesDisplay.Text = tr.Note;
             }
         }
         else
         {
-            stpPreview.Visibility = Visibility.Collapsed;
+            this.stpPreview.Visibility = Visibility.Collapsed;
         }
     }
 }

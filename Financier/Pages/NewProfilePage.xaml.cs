@@ -4,7 +4,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
 using System.Globalization;
-using System.Text;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -26,18 +25,18 @@ public sealed partial class NewProfilePage : Page
 
     private void LoadCultures()
     {
-        cbxCultures.Items.Clear();
+        this.cbxCultures.Items.Clear();
 
         foreach (var culture in CultureInfo.GetCultures(CultureTypes.SpecificCultures))
         {
-            cbxCultures.Items.Add(new ComboBoxItem
+            this.cbxCultures.Items.Add(new ComboBoxItem
             {
                 Content = $"{culture.DisplayName} ({culture.Name})",
                 Tag = culture.Name
             });
         }
 
-        cbxCultures.SelectedIndex = 0;
+        this.cbxCultures.SelectedIndex = 0;
     }
 
     private void btnSave_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
@@ -53,7 +52,7 @@ public sealed partial class NewProfilePage : Page
             return;
         }
 
-        if (cbxCultures.SelectedItem is not ComboBoxItem cbi || cbi.Tag is not string sCulture)
+        if (this.cbxCultures.SelectedItem is not ComboBoxItem cbi || cbi.Tag is not string sCulture)
         {
             // input error
             this.ib.Severity = InfoBarSeverity.Error;

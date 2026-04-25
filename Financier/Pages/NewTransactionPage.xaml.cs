@@ -56,7 +56,7 @@ public partial class NewTransactionPage : Page
 
             LoadUI();
         }
-        tbTitle.Text = Tag?.ToString();
+        this.tbTitle.Text = Tag?.ToString();
     }
 
     private void LoadUI()
