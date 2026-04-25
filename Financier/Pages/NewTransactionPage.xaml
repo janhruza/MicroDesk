@@ -36,8 +36,15 @@
         <StackPanel Grid.Row="1">
 
             <TextBlock Style="{ThemeResource BodyStrongTextBlockStyle}"
-                       Text="Category"
+                       Text="Date"
                        Margin="0,0,0,8"/>
+
+            <CalendarDatePicker Name="dpDate"
+                                HorizontalAlignment="Stretch"/>
+
+            <TextBlock Style="{ThemeResource BodyStrongTextBlockStyle}"
+                       Text="Category"
+                       Margin="0,8,0,8"/>
 
             <ComboBox Name="cbxCategory"
                       HorizontalAlignment="Stretch"/>

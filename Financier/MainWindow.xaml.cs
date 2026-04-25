@@ -128,4 +128,21 @@ public sealed partial class MainWindow : Window
             }
         }
     }
+
+    private void frm_Navigating(object sender, NavigatingCancelEventArgs e)
+    {
+        // If the user profile is not loaded, prevent navigation to any page except the profile selection page
+        if (UserProfile.IsLoaded() == false && e.SourcePageType != typeof(ProfileSelectionPage))
+        {
+            e.Cancel = true;
+            _ = this.frm.Navigate(typeof(ProfileSelectionPage));
+
+            // notify the user that they need to select a profile first
+            ib.Severity = InfoBarSeverity.Warning;
+            ib.Title = "No profile loaded";
+            ib.Message = "Please select a user profile to continue.";
+            ib.IsOpen = true;
+            return;
+        }
+    }
 }

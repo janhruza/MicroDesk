@@ -87,6 +87,7 @@
 
                     <!--Frame to display pages-->
                     <Frame Name="frm"
+                           Navigating="frm_Navigating"
                            Navigated="frm_Navigated"
                            CornerRadius="{ThemeResource ControlCornerRadius}"/>
                     
