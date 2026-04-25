@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Documents;
 using Microsoft.UI.Xaml.Navigation;
 
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading.Tasks;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -110,6 +111,13 @@ public sealed partial class ProfileSelectionPage : Page
             {
                 _ = UserProfile.SetCurrent(profile);
                 App.MainWindow.nviHome.IsSelected = true;
+
+                // set the culture for the app
+                CultureInfo cu = new CultureInfo(profile.Culture);
+                CultureInfo.CurrentCulture = cu;
+                CultureInfo.CurrentUICulture = cu;
+                App.MainWindow.WindowFrame.Navigate(typeof(HomePage));
+                
                 return;
             }
         }

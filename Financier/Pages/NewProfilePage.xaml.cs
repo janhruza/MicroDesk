@@ -3,6 +3,9 @@ using Financier.Core;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
+using System.Globalization;
+using System.Text;
+
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
@@ -18,6 +21,23 @@ public sealed partial class NewProfilePage : Page
     public NewProfilePage()
     {
         InitializeComponent();
+        LoadCultures();
+    }
+
+    private void LoadCultures()
+    {
+        cbxCultures.Items.Clear();
+
+        foreach (var culture in CultureInfo.GetCultures(CultureTypes.SpecificCultures))
+        {
+            cbxCultures.Items.Add(new ComboBoxItem
+            {
+                Content = $"{culture.DisplayName} ({culture.Name})",
+                Tag = culture.Name
+            });
+        }
+
+        cbxCultures.SelectedIndex = 0;
     }
 
     private void btnSave_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
@@ -33,9 +53,20 @@ public sealed partial class NewProfilePage : Page
             return;
         }
 
+        if (cbxCultures.SelectedItem is not ComboBoxItem cbi || cbi.Tag is not string sCulture)
+        {
+            // input error
+            this.ib.Severity = InfoBarSeverity.Error;
+            this.ib.Title = "Error";
+            this.ib.Message = "Invalid culture selection.";
+            this.ib.IsOpen = true;
+            return;
+        }
+
         UserProfile profile = new UserProfile
         {
             Name = name,
+            Culture = sCulture,
             WinPos = default,
             Transactions = []
         };

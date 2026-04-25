@@ -45,6 +45,17 @@
                            Style="{ThemeResource CaptionTextBlockStyle}" 
                            Opacity="0.6" 
                            TextWrapping="Wrap"/>
+
+
+                <ComboBox Header="Culture"
+                          Name="cbxCultures"
+                          HorizontalAlignment="Stretch"/>
+
+                <TextBlock Opacity="0.6"
+                           Text="Culture info is used to format dates, numbers, and currencies according to your locale."
+                           Style="{ThemeResource CaptionTextBlockStyle}"
+                           TextWrapping="Wrap"/>
+
             </StackPanel>
         </Border>
 

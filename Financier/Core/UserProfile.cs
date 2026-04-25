@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -28,6 +29,22 @@ public class UserProfile
     /// Representing the list of all transactions.
     /// </summary>
     public List<TransactionInfo> Transactions;
+
+    /// <summary>
+    /// Representing the user's preferred culture info for formatting and parsing numbers, dates, etc.
+    /// </summary>
+    public string Culture;
+
+    /// <summary>
+    /// Creates a new instance of the <see cref="UserProfile"/> class with default values.
+    /// </summary>
+    public UserProfile()
+    {
+        Transactions = [];
+        Culture = "en-US";
+        Name = string.Empty;
+        WinPos = new Rect();
+    }
 
     #region Profile methods
 
