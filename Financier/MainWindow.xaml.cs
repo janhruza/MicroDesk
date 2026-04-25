@@ -93,6 +93,13 @@ public sealed partial class MainWindow : Window
                         _ = this.frm.Navigate(typeof(NewTransactionPage), Core.TransactionType.Income);
                         pageTitle = NewTransactionPage.TITLE_INCOMES;
                         break;
+
+                    case "logout":
+                        UserProfile.SetCurrent(null);
+                        _ = this.frm.Navigate(typeof(ProfileSelectionPage));
+                        pageTitle = string.Empty;
+                        DisplayMessage(InfoBarSeverity.Success, "Logout", "Logout successful.");
+                        break;
                 }
 
                 // update the UI page title
@@ -138,10 +145,7 @@ public sealed partial class MainWindow : Window
             _ = this.frm.Navigate(typeof(ProfileSelectionPage));
 
             // notify the user that they need to select a profile first
-            ib.Severity = InfoBarSeverity.Warning;
-            ib.Title = "No profile loaded";
-            ib.Message = "Please select a user profile to continue.";
-            ib.IsOpen = true;
+            DisplayMessage(InfoBarSeverity.Warning, "No profile loaded", "Please select a user profile to continue.");
             return;
         }
     }

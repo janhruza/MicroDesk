@@ -78,6 +78,7 @@ public partial class NewTransactionPage : Page
         // clear the other fields to defaults
         this.txtValue.Text = "0";
         this.txtNote.Text = string.Empty;
+        this.dpDate.Date = DateTime.Today;
     }
 
     private void LoadExpenses()
@@ -167,10 +168,17 @@ public partial class NewTransactionPage : Page
             }
         }
 
+        // get current date from dpDate
+        DateTime dt = DateTime.Now;
+        if (dpDate.Date.HasValue)
+        {
+            dt = dpDate.Date.Value.DateTime;
+        }
+
         // create the transaction
         TransactionInfo tr = new TransactionInfo
         {
-            Timestamp = DateTime.Now,
+            Timestamp = dt,
             Type = this._type,
             Category = categoryCode,
             Value = dValue,

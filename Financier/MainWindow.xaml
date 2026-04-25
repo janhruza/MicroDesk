@@ -68,6 +68,15 @@
 
             </NavigationView.MenuItems>
 
+            <NavigationView.FooterMenuItems>
+
+                <NavigationViewItem Icon="Cancel"
+                                    Content="Sign Out"
+                                    Tag="logout"
+                                    Name="nviLogout"/>
+
+            </NavigationView.FooterMenuItems>
+            
             <!--A whole grid to display pages and their properties-->
             <Grid Margin="16">
 
