@@ -121,6 +121,11 @@ public class UserProfile
             return false;
         }
 
+        if (App.MainWindow is not null)
+        {
+            profile.WinPos = new Rect(App.MainWindow.AppWindow.Position.X, App.MainWindow.AppWindow.Position.Y, App.MainWindow.AppWindow.Size.Width, App.MainWindow.AppWindow.Size.Height);
+        }
+
         string data = JsonSerializer.Serialize<UserProfile>(profile, _options);
         _ = File.WriteAllTextAsync(filename, data, Encoding.UTF8);
         return true;
@@ -152,6 +157,9 @@ public class UserProfile
             profile = new UserProfile();
             return false;
         }
+
+        // move and resize the app window to the saved position and size
+        App.MainWindow?.AppWindow.MoveAndResize(new Windows.Graphics.RectInt32((int)loadedProfile.WinPos.X, (int)loadedProfile.WinPos.Y, (int)loadedProfile.WinPos.Width, (int)loadedProfile.WinPos.Height));
 
         // profile has value
         profile = loadedProfile;

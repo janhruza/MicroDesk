@@ -33,8 +33,7 @@
                 Padding="32"
                 CornerRadius="12"
                 VerticalAlignment="Top"
-                MaxWidth="500"
-                HorizontalAlignment="Left">
+                HorizontalAlignment="Stretch">
             
             <StackPanel Spacing="20">
                 <TextBox Name="txtName"
