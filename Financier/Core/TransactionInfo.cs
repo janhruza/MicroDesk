@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 
 namespace Financier.Core;
@@ -6,8 +6,7 @@ namespace Financier.Core;
 /// <summary>
 /// Representing a single transaction info struct.
 /// </summary>
-[StructLayout(LayoutKind.Sequential)]
-public struct TransactionInfo
+public class TransactionInfo
 {
     /// <summary>
     /// Representing the value of the transaction.

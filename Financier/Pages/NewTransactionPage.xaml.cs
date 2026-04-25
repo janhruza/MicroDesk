@@ -56,6 +56,7 @@ public partial class NewTransactionPage : Page
 
             LoadUI();
         }
+        tbTitle.Text = Tag?.ToString();
     }
 
     private void LoadUI()
@@ -76,7 +77,7 @@ public partial class NewTransactionPage : Page
         }
 
         // clear the other fields to defaults
-        this.txtValue.Text = "0";
+        this.txtValue.Value = 0;
         this.txtNote.Text = string.Empty;
         this.dpDate.Date = DateTime.Today;
     }
@@ -128,11 +129,13 @@ public partial class NewTransactionPage : Page
         UserProfile profile = UserProfile.GetCurrent();
 
         // check if the transaction is valid
-        if (decimal.TryParse(this.txtValue.Text, out decimal dValue) == false)
+        if (double.IsNaN(this.txtValue.Value))
         {
             await App.ShowDialog(XamlRoot, "Unable to create a new transaction. Please make sure the transaction value is in the correct numeric format.", "Invalid value");
             return;
         }
+
+        decimal dValue = (decimal)this.txtValue.Value;
 
         // get the absolute value of the transaction
         dValue = decimal.Abs(dValue);

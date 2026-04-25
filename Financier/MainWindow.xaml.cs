@@ -28,9 +28,6 @@ public sealed partial class MainWindow : Window
         presenter.PreferredMinimumWidth = 640;
         presenter.PreferredMinimumHeight = 480;
         AppWindow.SetPresenter(presenter);
-
-        // default window size
-        AppWindow.ResizeClient(new Windows.Graphics.SizeInt32(800, 600));
     }
 
     private void titleBar_PaneToggleRequested(TitleBar sender, object args)
@@ -63,7 +60,6 @@ public sealed partial class MainWindow : Window
         if (args.IsSettingsSelected)
         {
             _ = this.frm.Navigate(typeof(SettingsPage), App.PgSettings);
-            this.tbTitle.Text = "Settings";
             return;
         }
 
@@ -72,38 +68,26 @@ public sealed partial class MainWindow : Window
         {
             if (item.Tag is string sId)
             {
-                string pageTitle;
                 switch (sId)
                 {
-                    default:
-                        pageTitle = "Unknown Page";
-                        break;
-
                     case "home":
                         _ = this.frm.Navigate(typeof(HomePage), App.PgHome);
-                        pageTitle = "Dashboard";
                         break;
 
                     case "expanses":
                         _ = this.frm.Navigate(typeof(NewTransactionPage), Core.TransactionType.Expense);
-                        pageTitle = NewTransactionPage.TITLE_EXPANSES;
                         break;
 
                     case "incomes":
                         _ = this.frm.Navigate(typeof(NewTransactionPage), Core.TransactionType.Income);
-                        pageTitle = NewTransactionPage.TITLE_INCOMES;
                         break;
 
                     case "logout":
                         _ = UserProfile.SetCurrent(null);
                         _ = this.frm.Navigate(typeof(ProfileSelectionPage));
-                        pageTitle = string.Empty;
                         DisplayMessage(InfoBarSeverity.Success, "Logout", "Logout successful.");
                         break;
                 }
-
-                // update the UI page title
-                this.tbTitle.Text = pageTitle;
             }
         }
     }
@@ -121,18 +105,7 @@ public sealed partial class MainWindow : Window
         }
         else if (e.Content is Page pg && pg.Tag is string sValue)
         {
-            // Fallback pro ostatní stránky (Home atd.)
             this.titleBar.Subtitle = sValue;
-
-            if (e.Content is NewProfilePage)
-            {
-                this.tbTitle.Text = "New Profile";
-            }
-
-            else if (e.Content is ProfileSelectionPage)
-            {
-                this.tbTitle.Text = "Select a profile";
-            }
         }
     }
 

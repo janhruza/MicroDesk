@@ -7,63 +7,65 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Tag="New Transaction"> <!-- Overwritten in code based on the transaction type -->
+    Tag="New Transaction">
 
-    <Grid RowSpacing="16">
+    <Grid Padding="24" RowSpacing="24">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <CommandBar Grid.Row="0"
-                    OverflowButtonVisibility="Collapsed">
+        <!-- Header -->
+        <TextBlock x:Name="tbTitle" Style="{ThemeResource TitleTextBlockStyle}" FontWeight="Bold"/>
+
+        <!-- Form Card -->
+        <Border Grid.Row="1" 
+                Background="{ThemeResource LayerFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                Padding="32"
+                CornerRadius="12"
+                VerticalAlignment="Top"
+                MaxWidth="500"
+                HorizontalAlignment="Stretch">
             
-            <AppBarButton Icon="Clear"
-                          Label="Clear"
-                          Name="btnClear"
-                          ToolTipService.Placement="Mouse"
-                          ToolTipService.ToolTip="Clear fields"
-                          Click="btnClear_Click"/>
+            <StackPanel Spacing="20">
+                <CalendarDatePicker Name="dpDate"
+                                    Header="Date"
+                                    HorizontalAlignment="Stretch"
+                                    FirstDayOfWeek="Monday"/>
+
+                <ComboBox Name="cbxCategory"
+                          Header="Category"
+                          HorizontalAlignment="Stretch"/>
+
+                <NumberBox Name="txtValue"
+                           Header="Amount"
+                           Value="0"
+                           SpinButtonPlacementMode="Compact"
+                           HorizontalAlignment="Stretch"/>
+
+                <TextBox Name="txtNote"
+                         Header="Note (Optional)"
+                         PlaceholderText="Add a description..."
+                         AcceptsReturn="True"
+                         MinHeight="100"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Actions -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="12">
+            <Button x:Name="btnSave" 
+                    Content="Save Transaction" 
+                    Style="{ThemeResource AccentButtonStyle}"
+                    Padding="24,8"
+                    Click="btnSave_Click"/>
             
-            <AppBarButton Icon="Save"
-                          Label="Save"
-                          Name="btnSave"
-                          ToolTipService.Placement="Mouse"
-                          ToolTipService.ToolTip="Save"
-                          Click="btnSave_Click"/>
-        </CommandBar>
-
-        <StackPanel Grid.Row="1">
-
-            <TextBlock Style="{ThemeResource BodyStrongTextBlockStyle}"
-                       Text="Date"
-                       Margin="0,0,0,8"/>
-
-            <CalendarDatePicker Name="dpDate"
-                                HorizontalAlignment="Stretch"
-                                FirstDayOfWeek="Monday"/>
-
-            <TextBlock Style="{ThemeResource BodyStrongTextBlockStyle}"
-                       Text="Category"
-                       Margin="0,8,0,8"/>
-
-            <ComboBox Name="cbxCategory"
-                      HorizontalAlignment="Stretch"/>
-
-            <TextBlock Style="{ThemeResource BodyStrongTextBlockStyle}"
-                       Text="Value"
-                       Margin="0,8,0,8"/>
-
-            <TextBox Name="txtValue"/>
-
-            <TextBlock Style="{ThemeResource BodyStrongTextBlockStyle}"
-                       Text="Note"
-                       Margin="0,8,0,8"/>
-
-            <TextBox AcceptsReturn="True"
-                     Name="txtNote"/>
-
+            <Button x:Name="btnClear" 
+                    Content="Clear" 
+                    Padding="24,8"
+                    Click="btnClear_Click"/>
         </StackPanel>
-        
     </Grid>
 </Page>

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -12,8 +12,7 @@ namespace Financier.Core;
 /// <summary>
 /// Representing a user profile structure.
 /// </summary>
-[StructLayout(LayoutKind.Sequential)]
-public struct UserProfile
+public class UserProfile
 {
     /// <summary>
     /// Representing the profile namme.
@@ -42,7 +41,7 @@ public struct UserProfile
     /// </returns>
     public static bool IsLoaded()
     {
-        return _current.HasValue;
+        return _current != null;
     }
 
     /// <summary>
@@ -52,9 +51,9 @@ public struct UserProfile
     /// <returns></returns>
     public static UserProfile GetCurrent()
     {
-        if (_current.HasValue)
+        if (_current != null)
         {
-            return _current.Value;
+            return _current;
         }
 
         else
@@ -71,7 +70,7 @@ public struct UserProfile
     public static bool SetCurrent(UserProfile? profile)
     {
         _current = profile;
-        return _current.HasValue;
+        return _current != null;
     }
 
     private static JsonSerializerOptions _options = new JsonSerializerOptions
@@ -89,7 +88,7 @@ public struct UserProfile
 
     private static string GetFileName(UserProfile? profile)
     {
-        if (profile.HasValue == false)
+        if (profile == null)
         {
             return string.Empty;
         }
@@ -101,7 +100,7 @@ public struct UserProfile
                 _ = Directory.CreateDirectory(_dataFolder);
             }
 
-            return Path.Combine(_dataFolder, $"{profile.Value.Name}.json");
+            return Path.Combine(_dataFolder, $"{profile.Name}.json");
         }
     }
 
@@ -148,14 +147,14 @@ public struct UserProfile
         }
 
         UserProfile? loadedProfile = JsonSerializer.Deserialize<UserProfile>(jsonData, _options);
-        if (loadedProfile.HasValue == false)
+        if (loadedProfile == null)
         {
             profile = new UserProfile();
             return false;
         }
 
         // profile has value
-        profile = loadedProfile.Value;
+        profile = loadedProfile;
         return true;
     }
 

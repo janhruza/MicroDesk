@@ -1,175 +1,146 @@
 using Financier.Core;
-
-using Microsoft.UI.Text;
+using Microsoft.UI;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Documents;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-
+using System;
+using System.Collections.Generic;
 using System.Linq;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace Financier.Pages;
 
-/// <summary>
-/// An empty page that can be used on its own or navigated to within a Frame.
-/// </summary>
 public sealed partial class HomePage : Page
 {
-    /// <summary>
-    /// Creates a new home page instance.
-    /// </summary>
     public HomePage()
     {
         InitializeComponent();
+        lvHistory.ContainerContentChanging += OnContainerContentChanging;
     }
 
-    private void DisplayName(ref UserProfile profile)
+    private void OnContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
     {
-        this.rUsername.Text = profile.Name;
+        if (args.InRecycleQueue) return;
+
+        var transaction = args.Item as TransactionInfo;
+        if (transaction == null) return;
+
+        var container = args.ItemContainer;
+        if (container == null) return;
+
+        var iconBorder = FindChildByName<Border>(container, "IconBorder");
+        var typeIcon = FindChildByName<FontIcon>(container, "TypeIcon");
+        var categoryText = FindChildByName<TextBlock>(container, "CategoryText");
+        var valueText = FindChildByName<TextBlock>(container, "ValueText");
+
+        // Use Theme Resources for a professional look
+        var accentBrush = (Brush)Application.Current.Resources["AccentTextFillColorPrimaryBrush"];
+        var subtleBackground = (Brush)Application.Current.Resources["SystemControlBackgroundListLowBrush"];
+        var defaultForeground = (Brush)Application.Current.Resources["TextFillColorPrimaryBrush"];
+
+        if (transaction.Type == TransactionType.Income)
+        {
+            if (iconBorder != null) iconBorder.Background = subtleBackground;
+            if (typeIcon != null)
+            {
+                typeIcon.Glyph = "\uE74A"; // Chevron Up
+                typeIcon.Foreground = accentBrush;
+            }
+            if (valueText != null)
+            {
+                valueText.Text = $"+{transaction.Value:C}";
+                valueText.Foreground = accentBrush;
+            }
+            if (categoryText != null) categoryText.Text = AppData.IncomeNames[(IncomeCategories)transaction.Category];
+        }
+        else
+        {
+            if (iconBorder != null) iconBorder.Background = subtleBackground;
+            if (typeIcon != null)
+            {
+                typeIcon.Glyph = "\uE74B"; // Chevron Down
+                typeIcon.Foreground = defaultForeground;
+            }
+            if (valueText != null)
+            {
+                valueText.Text = $"-{transaction.Value:C}";
+                valueText.Foreground = defaultForeground;
+            }
+            if (categoryText != null) categoryText.Text = AppData.ExpenseNames[(ExpenseCategories)transaction.Category];
+        }
     }
 
-    private void GetBalance(ref UserProfile profile)
+    private T FindChildByName<T>(DependencyObject parent, string name) where T : DependencyObject
     {
-        decimal sum = 0;
-        for (int i = 0; i < profile.Transactions.Count; i++)
+        int count = VisualTreeHelper.GetChildrenCount(parent);
+        for (int i = 0; i < count; i++)
         {
-            TransactionInfo tr = profile.Transactions[i];
-            if (tr.Type == TransactionType.Income)
+            var child = VisualTreeHelper.GetChild(parent, i);
+            if (child is T t && (child as FrameworkElement)?.Name == name)
             {
-                sum += tr.Value;
+                return t;
             }
-
-            else /* Expense */
-            {
-                sum -= tr.Value;
-            }
+            var result = FindChildByName<T>(child, name);
+            if (result != null) return result;
         }
-
-        // display in the currency format - default system currency
-        this.tbBalance.Text = sum.ToString("C");
-    }
-
-    private void DisplayHistory(ref UserProfile profile)
-    {
-        this.lvHistory.Items.Clear();
-        TransactionInfo[] history = [.. profile.Transactions.OrderByDescending(x => x.Timestamp)];
-        if (history.Length == 0)
-        {
-            ListViewItem lvi = new ListViewItem
-            {
-                Content = new TextBlock
-                {
-                    Text = "No transaction history.",
-                    Margin = new Microsoft.UI.Xaml.Thickness(8)
-                },
-            };
-            this.lvHistory.Items.Add(lvi);
-            return;
-        }
-
-        foreach (TransactionInfo tr in history)
-        {
-            string category = string.Empty;
-            if (tr.Type == TransactionType.Expense)
-            {
-                category = AppData.ExpenseNames[(ExpenseCategories)tr.Category];
-            }
-
-            else
-            {
-                category = AppData.IncomeNames[(IncomeCategories)tr.Category];
-            }
-
-            ListViewItem lvi = new ListViewItem
-            {
-                Content = new TextBlock
-                {
-                    Inlines =
-                    {
-                        new Run
-                        {
-                            Text = tr.Value.ToString("C"),
-                            FontWeight = FontWeights.SemiBold,
-                            FontSize = 18
-                        },
-
-                        new LineBreak(),
-
-                        new Run
-                        {
-                            Text = category,
-                            FontSize = 14
-                        }
-                    },
-                    Margin = new Microsoft.UI.Xaml.Thickness(8)
-                },
-
-                Tag = tr
-            };
-
-            this.lvHistory.Items.Add(lvi);
-        }
-
-        // select the first item
-        this.lvHistory.SelectedIndex = 0;
+        return null;
     }
 
     private void LoadUI()
     {
-        if (UserProfile.IsLoaded() == false)
+        if (!UserProfile.IsLoaded()) return;
+
+        var profile = UserProfile.GetCurrent();
+        rUsername.Text = profile.Name;
+
+        decimal balance = profile.Transactions.Sum(t => t.Type == TransactionType.Income ? t.Value : -t.Value);
+        tbBalance.Text = balance.ToString("C");
+        tbBalance.Foreground = (Brush)Application.Current.Resources["AccentTextFillColorPrimaryBrush"];
+
+        lvHistory.ItemsSource = profile.Transactions.OrderByDescending(t => t.Timestamp).ToList();
+        
+        if (lvHistory.Items.Count > 0)
         {
-            // unable to load ui - no profile is loaded
-            return;
+            lvHistory.SelectedIndex = 0;
         }
-
-        // get profile data
-        UserProfile profile = UserProfile.GetCurrent();
-        DisplayName(ref profile);
-
-        // get user's balance - sum of all transactions
-        GetBalance(ref profile);
-
-        // get and display the transaction history
-        DisplayHistory(ref profile);
+        else
+        {
+            stpPreview.Visibility = Visibility.Collapsed;
+        }
     }
 
-    /// <summary>
-    /// Custom method that gets called on navigation to this page.
-    /// </summary>
-    /// <param name="e">Arguments.</param>
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
         LoadUI();
     }
 
-    private async void lvHistory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void lvHistory_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (this.lvHistory.SelectedIndex == -1)
+        if (lvHistory.SelectedItem is TransactionInfo tr)
         {
-            // no items selected
-            this.stpPreview.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
-            return;
-        }
-
-        if (this.lvHistory.SelectedItem is ListViewItem lvi)
-        {
-            if (lvi.Tag is TransactionInfo tr)
+            stpPreview.Visibility = Visibility.Visible;
+            txtDateDisplay.Text = tr.Timestamp.ToString("D");
+            txtValueDisplay.Text = tr.Value.ToString("C");
+            
+            var accentBrush = (Brush)Application.Current.Resources["AccentTextFillColorPrimaryBrush"];
+            var defaultForeground = (Brush)Application.Current.Resources["TextFillColorPrimaryBrush"];
+            
+            txtValueDisplay.Foreground = tr.Type == TransactionType.Income ? accentBrush : defaultForeground;
+            txtCategoryDisplay.Text = tr.Type == TransactionType.Income ? AppData.IncomeNames[(IncomeCategories)tr.Category] : AppData.ExpenseNames[(ExpenseCategories)tr.Category];
+            
+            if (string.IsNullOrWhiteSpace(tr.Note))
             {
-                // display the selected item in the preview panel
-                this.dpDate.SelectedDate = tr.Timestamp;
-                this.txtValue.Text = tr.Value.ToString("C");
-                this.txtType.Text = tr.Type == TransactionType.Income ? "Income" : "Expense";
-                this.txtCategory.Text = tr.Type == TransactionType.Income ? AppData.IncomeNames[(IncomeCategories)tr.Category] : AppData.ExpenseNames[(ExpenseCategories)tr.Category];
-                this.txtDesc.Text = string.IsNullOrWhiteSpace(tr.Note) ? string.Empty : tr.Note.Trim();
-                this.stpPreview.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
-                return;
+                spNotes.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                spNotes.Visibility = Visibility.Visible;
+                txtNotesDisplay.Text = tr.Note;
             }
         }
-
-        // unable to show a preview, hide the panel completely
-        this.stpPreview.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
-        return;
+        else
+        {
+            stpPreview.Visibility = Visibility.Collapsed;
+        }
     }
 }

@@ -9,33 +9,66 @@
     mc:Ignorable="d"
     Tag="Settings">
 
-    <StackPanel>
-        <TextBlock Text="Theme Mode"
-                   Margin="0,0,0,8"/>
+    <Grid Padding="24" RowSpacing="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <ComboBox Name="cbxThemeMode"
-                  HorizontalAlignment="Stretch"
-                  SelectionChanged="cbxThemeMode_SelectionChanged">
+        <TextBlock Text="Settings" Style="{ThemeResource TitleTextBlockStyle}" FontWeight="Bold"/>
 
-            <ComboBoxItem Content="Light" Tag="themeLight"/>
-            <ComboBoxItem Content="Dark" Tag="themeDark"/>
-            <ComboBoxItem Content="System" Tag="themeSystem"/>
+        <ScrollViewer Grid.Row="1">
+            <StackPanel Spacing="24" MaxWidth="600" HorizontalAlignment="Left">
+                
+                <!-- Appearance Group -->
+                <StackPanel Spacing="12">
+                    <TextBlock Text="Appearance" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
+                    
+                    <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            Padding="24"
+                            CornerRadius="12">
+                        <StackPanel Spacing="16">
+                            <ComboBox Name="cbxThemeMode"
+                                      Header="App Theme"
+                                      HorizontalAlignment="Stretch"
+                                      SelectionChanged="cbxThemeMode_SelectionChanged">
+                                <ComboBoxItem Content="Light" Tag="themeLight"/>
+                                <ComboBoxItem Content="Dark" Tag="themeDark"/>
+                                <ComboBoxItem Content="System" Tag="themeSystem"/>
+                            </ComboBox>
 
-        </ComboBox>
+                            <ComboBox Name="cbxBackdrop"
+                                      Header="Window Backdrop"
+                                      HorizontalAlignment="Stretch"
+                                      SelectionChanged="cbxBackdrop_SelectionChanged">
+                                <ComboBoxItem Content="Mica" Tag="backdropMica"/>
+                                <ComboBoxItem Content="Mica Alt" Tag="backdropMicaAlt"/>
+                                <ComboBoxItem Content="Acrylic" Tag="backdropAcrylic"/>
+                                <ComboBoxItem Content="None" Tag="backdropNone"/>
+                            </ComboBox>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
 
-        <TextBlock Text="Window Backdrop"
-                   Margin="0,16,0,8"/>
+                <!-- About Group -->
+                <StackPanel Spacing="12">
+                    <TextBlock Text="About" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
+                    <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            Padding="24"
+                            CornerRadius="12">
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Financier" FontWeight="Bold"/>
+                            <TextBlock Text="Version 1.0.0" Style="{ThemeResource CaptionTextBlockStyle}" Opacity="0.6"/>
+                            <TextBlock Text="A simple personal finance manager built with WinUI 3." Style="{ThemeResource BodyTextBlockStyle}" Margin="0,8,0,0"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
 
-        <ComboBox Name="cbxBackdrop"
-                  HorizontalAlignment="Stretch"
-                  SelectionChanged="cbxBackdrop_SelectionChanged">
-
-            <ComboBoxItem Content="Mica" Tag="backdropMica"/>
-            <ComboBoxItem Content="Acrylic" Tag="backdropAcrylic"/>
-            <ComboBoxItem Content="None" Tag="backdropNone"/>
-
-        </ComboBox>
-
-    </StackPanel>
-    
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
 </Page>

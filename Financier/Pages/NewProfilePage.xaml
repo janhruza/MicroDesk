@@ -9,55 +9,62 @@
     mc:Ignorable="d"
     Tag="New Profile">
 
-    <Grid RowSpacing="16">
-
+    <Grid Padding="24" RowSpacing="24">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <InfoBar Grid.Column="0"
+        <TextBlock Text="Create New Profile" Style="{ThemeResource TitleTextBlockStyle}" FontWeight="Bold"/>
+
+        <InfoBar Grid.Row="1"
                  Name="ib"
                  IsOpen="True"
                  Severity="Informational"
-                 Title="Create profile"
-                 Message="In order to continue, please set up a local user profile."/>
+                 Title="Local Storage"
+                 Message="Your data will be stored locally on this machine."/>
 
-        <!--Command bar-->
-        <CommandBar Grid.Row="1"
-                    OverflowButtonVisibility="Collapsed">
+        <Border Grid.Row="2" 
+                Background="{ThemeResource LayerFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                Padding="32"
+                CornerRadius="12"
+                VerticalAlignment="Top"
+                MaxWidth="500"
+                HorizontalAlignment="Left">
+            
+            <StackPanel Spacing="20">
+                <TextBox Name="txtName"
+                         Header="Profile Name"
+                         PlaceholderText="Enter a name for this profile..."
+                         HorizontalAlignment="Stretch"/>
+                
+                <TextBlock Text="This name will be used to identify your data files." 
+                           Style="{ThemeResource CaptionTextBlockStyle}" 
+                           Opacity="0.6" 
+                           TextWrapping="Wrap"/>
+            </StackPanel>
+        </Border>
 
-            <AppBarButton Label="Profile Selector"
-                          Icon="Switch"
-                          Name="btnSwitchProfiles"
-                          Click="btnSwitchProfiles_Click"/>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Spacing="12">
+            <Button x:Name="btnSave" 
+                    Content="Create Profile" 
+                    Style="{ThemeResource AccentButtonStyle}"
+                    Padding="24,8"
+                    Click="btnSave_Click"/>
+            
+            <Button x:Name="btnClear" 
+                    Content="Clear" 
+                    Padding="24,8"
+                    Click="btnClear_Click"/>
 
-            <AppBarSeparator />
-
-            <!--Clear fields-->
-            <AppBarButton Label="Clear"
-                          Icon="Clear"
-                          Name="btnClear"
-                          Click="btnClear_Click"/>
-
-            <!--Create profile-->
-            <AppBarButton Label="Create"
-                          Icon="Save"
-                          Name="btnSave"
-                          Click="btnSave_Click"/>
-
-        </CommandBar>
-
-        <StackPanel Grid.Row="2">
-
-            <TextBlock Text="Name"
-                       Margin="0,0,0,8"/>
-
-            <!--Profile name-->
-            <TextBox Name="txtName"/>
-
+            <Button x:Name="btnSwitchProfiles" 
+                    Content="Cancel" 
+                    Padding="24,8"
+                    Click="btnSwitchProfiles_Click"/>
         </StackPanel>
-
     </Grid>
 </Page>

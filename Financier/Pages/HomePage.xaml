@@ -4,108 +4,134 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Financier.Pages"
+    xmlns:core="using:Financier.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Tag="Dashboard">
 
-    <Grid RowSpacing="16"
-          ColumnSpacing="16">
-        
+    <Grid RowSpacing="24" Padding="24">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition />
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <!--Username label-->
-        <TextBlock Style="{ThemeResource BodyLargeTextBlockStyle}"
-                   Grid.Row="0"
-                   Grid.Column="0">
-            
-            <Run Text="Hello,"/>
-            <Run x:Name="rUsername"
-                 FontWeight="SemiBold"
-                 Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/><Run Text="!"/>
-        </TextBlock>
-
-        <!--Balance label-->
-        <TextBlock Grid.Row="0"
-                   Grid.Column="1"
-                   Style="{ThemeResource BodyLargeTextBlockStyle}"
-                   Name="tbBalance"
-                   HorizontalAlignment="Right"/>
-
-        <!--Transaction history label-->
-        <TextBlock Text="Transaction history"
-                   Grid.Row="1"
-                   Style="{ThemeResource BodyStrongTextBlockStyle}"/>
-
-        <!--Preview panel label-->
-        <TextBlock Text="Preview"
-                   Grid.Row="1"
-                   Grid.Column="1"
-                   Style="{ThemeResource BodyStrongTextBlockStyle}"/>
-
-        <!--History panel-->
-        <ListView Grid.Row="2"
-                  Grid.Column="0"
-                  Name="lvHistory"
-                  Background="{ThemeResource LayerOnMicaBaseAltFillColorDefault}"
-                  CornerRadius="{ThemeResource ControlCornerRadius}"
-                  SelectionChanged="lvHistory_SelectionChanged"/>
-
-        <!--Preview panel-->
-        <StackPanel Grid.Row="2"
-                    Grid.Column="1"
-                    Name="stpPreview">
-
-            <TextBlock Text="Date"
-                       Style="{ThemeResource BodyTextBlockStyle}"
-                       Margin="0,0,0,8"/>
-            
-            <DatePicker Name="dpDate"
-                        IsEnabled="False"
-                        Margin="0,0,0,8"/>
-
-            <TextBlock Text="Value"
-                       Style="{ThemeResource BodyTextBlockStyle}"
-                       Margin="0,0,0,8"/>
-
-            <TextBox Name="txtValue"
-                     IsReadOnly="True"
-                     Margin="0,0,0,8"/>
-
-            <TextBlock Text="Type"
-                       Style="{ThemeResource BodyTextBlockStyle}"
-                       Margin="0,0,0,8"/>
-
-            <TextBox Name="txtType"
-                     IsReadOnly="True"
-                     Margin="0,0,0,8"/>
-
-            <TextBlock Text="Category"
-                       Style="{ThemeResource BodyTextBlockStyle}"
-                       Margin="0,0,0,8"/>
-
-            <TextBox Name="txtCategory"
-                     IsReadOnly="True"
-                     Margin="0,0,0,8"/>
-
-            <TextBlock Text="Notes"
-                       Style="{ThemeResource BodyTextBlockStyle}"
-                       Margin="0,0,0,8"/>
-
-            <TextBox Name="txtDesc"
-                     IsReadOnly="True"
-                     AcceptsReturn="True"/>
-
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2">
+            <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Margin="0,0,0,4">
+                <Run Text="Welcome back,"/>
+                <Run x:Name="rUsername" FontWeight="Bold" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+            </TextBlock>
+            <TextBlock Text="Here's your financial summary" Style="{ThemeResource BodyTextBlockStyle}" Opacity="0.7"/>
         </StackPanel>
 
+        <!-- Balance Card -->
+        <Border Grid.Row="1" Grid.ColumnSpan="2" 
+                Background="{ThemeResource LayerFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                Padding="24"
+                CornerRadius="12">
+            <StackPanel>
+                <TextBlock Text="TOTAL BALANCE" Style="{ThemeResource CaptionTextBlockStyle}" FontWeight="SemiBold" Opacity="0.6" Margin="0,0,0,4"/>
+                <TextBlock x:Name="tbBalance" 
+                           Style="{ThemeResource DisplayTextBlockStyle}" 
+                           FontWeight="Bold"
+                           Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Main Content -->
+        <Grid Grid.Row="2" Grid.Column="0" RowSpacing="12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Text="Recent Transactions" Style="{ThemeResource SubtitleTextBlockStyle}" FontWeight="SemiBold"/>
+            
+            <ListView Grid.Row="1"
+                      x:Name="lvHistory"
+                      Background="{ThemeResource LayerOnMicaBaseAltFillColorDefault}"
+                      CornerRadius="8"
+                      BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                      BorderThickness="1"
+                      SelectionChanged="lvHistory_SelectionChanged">
+                
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="core:TransactionInfo">
+                        <Grid Padding="12" ColumnSpacing="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border x:Name="IconBorder" 
+                                    Width="40" Height="40" 
+                                    CornerRadius="20" 
+                                    VerticalAlignment="Center">
+                                <FontIcon x:Name="TypeIcon" 
+                                          FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                                          FontSize="18"/>
+                            </Border>
+
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock x:Name="CategoryText" FontWeight="SemiBold" FontSize="16"/>
+                                <TextBlock Text="{x:Bind Timestamp}" Style="{ThemeResource CaptionTextBlockStyle}" Opacity="0.6"/>
+                            </StackPanel>
+
+                            <TextBlock x:Name="ValueText" 
+                                       Grid.Column="2" 
+                                       VerticalAlignment="Center" 
+                                       FontWeight="Bold" 
+                                       FontSize="16"
+                                       TextAlignment="Right"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <!-- Detail Preview -->
+        <Border Grid.Row="2" Grid.Column="1"
+                Margin="12,0,0,0"
+                Padding="24"
+                Background="{ThemeResource LayerFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="12"
+                VerticalAlignment="Top">
+            
+            <StackPanel x:Name="stpPreview" Spacing="16">
+                <TextBlock Text="Transaction Details" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
+                
+                <StackPanel>
+                    <TextBlock Text="Date" Style="{ThemeResource CaptionTextBlockStyle}" Opacity="0.6"/>
+                    <TextBlock x:Name="txtDateDisplay" FontSize="16"/>
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock Text="Amount" Style="{ThemeResource CaptionTextBlockStyle}" Opacity="0.6"/>
+                    <TextBlock x:Name="txtValueDisplay" FontSize="24" FontWeight="Bold"/>
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock Text="Category" Style="{ThemeResource CaptionTextBlockStyle}" Opacity="0.6"/>
+                    <TextBlock x:Name="txtCategoryDisplay" FontSize="16"/>
+                </StackPanel>
+
+                <StackPanel x:Name="spNotes">
+                    <TextBlock Text="Notes" Style="{ThemeResource CaptionTextBlockStyle}" Opacity="0.6"/>
+                    <TextBlock x:Name="txtNotesDisplay" FontSize="14" FontStyle="Italic" TextWrapping="Wrap"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
     </Grid>
 </Page>
