@@ -1,5 +1,6 @@
 using Financier.Core;
 
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
 using Windows.Foundation;
@@ -68,7 +69,6 @@ public sealed partial class NewProfilePage : Page
         App.MainWindow.nviHome.IsSelected = true;
         return;
     }
-
     private void btnClear_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         txtName.Text = string.Empty;
@@ -77,5 +77,10 @@ public sealed partial class NewProfilePage : Page
         ib.Message = "Input fields cleared.";
         ib.IsOpen = true;
         return;
+    }
+
+    private void btnSwitchProfiles_Click(object sender, RoutedEventArgs e)
+    {
+        App.MainWindow?.WindowFrame.Navigate(typeof(ProfileSelectionPage));
     }
 }

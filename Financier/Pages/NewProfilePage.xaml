@@ -24,10 +24,17 @@
                  Title="Create profile"
                  Message="In order to continue, please set up a local user profile."/>
 
-        <!--COmmand bar-->
+        <!--Command bar-->
         <CommandBar Grid.Row="1"
                     OverflowButtonVisibility="Collapsed">
-            
+
+            <AppBarButton Label="Profile Selector"
+                          Icon="Switch"
+                          Name="btnSwitchProfiles"
+                          Click="btnSwitchProfiles_Click"/>
+
+            <AppBarSeparator />
+
             <!--Clear fields-->
             <AppBarButton Label="Clear"
                           Icon="Clear"

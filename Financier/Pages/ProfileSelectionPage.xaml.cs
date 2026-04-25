@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -41,7 +42,7 @@ public sealed partial class ProfileSelectionPage : Page
     /// Custom overriden method.
     /// </summary>
     /// <param name="e">Navigation arguments.</param>
-    protected override void OnNavigatedTo(NavigationEventArgs e)
+    protected override async void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
         if (e.Parameter is HashSet<UserProfile> profiles)
@@ -49,13 +50,15 @@ public sealed partial class ProfileSelectionPage : Page
             this._profiles = profiles;
         }
 
-        ReloadUI();
+        await ReloadUI();
     }
 
     private HashSet<UserProfile> _profiles = [];
-    private void ReloadUI()
+    private async Task ReloadUI()
     {
         lvProfiles.Items.Clear();
+        _profiles = UserProfile.GetAllProfiles();
+        
         if (_profiles.Count == 0)
         {
             // no profiles
@@ -94,9 +97,9 @@ public sealed partial class ProfileSelectionPage : Page
         lvProfiles.SelectedIndex = -1;
     }
 
-    private void btnRefresh_Click(object sender, RoutedEventArgs e)
+    private async void btnRefresh_Click(object sender, RoutedEventArgs e)
     {
-        ReloadUI();
+        await ReloadUI();
     }
 
     private void btnAccept_Click(object sender, RoutedEventArgs e)
@@ -127,5 +130,11 @@ public sealed partial class ProfileSelectionPage : Page
     {
         // dynamically enable/disable the accept button
         btnAccept.IsEnabled = lvProfiles.SelectedIndex >= 0;
+    }
+
+    private void btnNewProfile_Click(object sender, RoutedEventArgs e)
+    {
+        if (App.MainWindow is null) return;
+        App.MainWindow.WindowFrame.Navigate(typeof(NewProfilePage));
     }
 }

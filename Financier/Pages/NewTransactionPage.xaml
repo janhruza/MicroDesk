@@ -18,7 +18,6 @@
         <CommandBar Grid.Row="0"
                     OverflowButtonVisibility="Collapsed">
             
-            
             <AppBarButton Icon="Clear"
                           Label="Clear"
                           Name="btnClear"

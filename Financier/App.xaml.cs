@@ -85,34 +85,20 @@ public partial class App : Application
     {
         _window = new MainWindow();
 
-        if (Directory.Exists(UserProfile.ProfilesFolder))
+        HashSet<UserProfile> profiles = UserProfile.GetAllProfiles();
+        if (profiles.Count == 0)
         {
-            HashSet<UserProfile> profiles = [];
-            foreach (string filename in Directory.EnumerateFiles(UserProfile.ProfilesFolder))
-            {
-                // get profile data
-                string data = File.ReadAllText(filename);
-                if (UserProfile.Load(data, out UserProfile profile) == true)
-                {
-                    // add profile to the profile selector
-                    profiles.Add(profile);
-                }
-            }
+            // no accouts cretaed, create a new one
+            UserProfile.SetCurrent(null);
+            _window.WindowFrame.Navigate(typeof(NewProfilePage));
+        }
 
-            if (profiles.Count == 0)
-            {
-                // no accouts cretaed, create a new one
-                UserProfile.SetCurrent(null);
-                _window.WindowFrame.Navigate(typeof(NewProfilePage));
-            }
-
-            else
-            {
-                // profile selector
-                // pick from the loaded profiles
-                UserProfile.SetCurrent(null);
-                _window.WindowFrame.Navigate(typeof(ProfileSelectionPage), profiles);
-            }
+        else
+        {
+            // profile selector
+            // pick from the loaded profiles
+            UserProfile.SetCurrent(null);
+            _window.WindowFrame.Navigate(typeof(ProfileSelectionPage), profiles);
         }
 
         _window.Activate();

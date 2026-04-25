@@ -159,5 +159,44 @@ public struct UserProfile
         return true;
     }
 
+    /// <summary>
+    /// Gets all user profiles found in the profiles folder. Each profile is expected to be stored as a JSON file with a .json extension.
+    /// </summary>
+    /// <returns>
+    /// Collection of all user profiles found in the profiles folder. If the folder does not exist or an error occurs while reading files, an empty set is returned.
+    /// </returns>
+    public static HashSet<UserProfile> GetAllProfiles()
+    {
+        if (Directory.Exists(_dataFolder) == false)
+        {
+            Directory.CreateDirectory(_dataFolder);
+            return new HashSet<UserProfile>();
+        }
+
+        HashSet<UserProfile> profiles = new HashSet<UserProfile>();
+        if (Directory.Exists(_dataFolder) == false)
+        {
+            return profiles;
+        }
+        string[] files = Directory.GetFiles(_dataFolder, "*.json");
+        foreach (string file in files)
+        {
+            try
+            {
+                string data = File.ReadAllText(file, Encoding.UTF8);
+                if (Load(data, out UserProfile profile))
+                {
+                    _ = profiles.Add(profile);
+                }
+            }
+            catch (IOException)
+            {
+                // log error
+                continue;
+            }
+        }
+        return profiles;
+    }
+
     #endregion
 }

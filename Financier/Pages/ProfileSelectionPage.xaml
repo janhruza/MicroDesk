@@ -25,6 +25,13 @@
         <CommandBar Grid.Row="1"
                     OverflowButtonVisibility="Collapsed">
 
+            <AppBarButton Label="New Profile"
+                          Icon="Add"
+                          Name="btnNewProfile"
+                          Click="btnNewProfile_Click"/>
+
+            <AppBarSeparator />
+
             <AppBarButton Label="Refresh"
                           Icon="Refresh"
                           Name="btnRefresh"
