@@ -169,7 +169,7 @@ public struct UserProfile
     {
         if (Directory.Exists(_dataFolder) == false)
         {
-            Directory.CreateDirectory(_dataFolder);
+            _ = Directory.CreateDirectory(_dataFolder);
             return new HashSet<UserProfile>();
         }
 

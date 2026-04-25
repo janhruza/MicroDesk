@@ -7,7 +7,6 @@ using Microsoft.UI.Xaml.Media;
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
@@ -89,16 +88,16 @@ public partial class App : Application
         if (profiles.Count == 0)
         {
             // no accouts cretaed, create a new one
-            UserProfile.SetCurrent(null);
-            _window.WindowFrame.Navigate(typeof(NewProfilePage));
+            _ = UserProfile.SetCurrent(null);
+            _ = _window.WindowFrame.Navigate(typeof(NewProfilePage));
         }
 
         else
         {
             // profile selector
             // pick from the loaded profiles
-            UserProfile.SetCurrent(null);
-            _window.WindowFrame.Navigate(typeof(ProfileSelectionPage), profiles);
+            _ = UserProfile.SetCurrent(null);
+            _ = _window.WindowFrame.Navigate(typeof(ProfileSelectionPage), profiles);
         }
 
         _window.Activate();

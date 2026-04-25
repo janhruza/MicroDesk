@@ -3,22 +3,11 @@ using Financier.Core;
 using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Documents;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -56,13 +45,13 @@ public sealed partial class ProfileSelectionPage : Page
     private HashSet<UserProfile> _profiles = [];
     private async Task ReloadUI()
     {
-        lvProfiles.Items.Clear();
-        _profiles = UserProfile.GetAllProfiles();
-        
-        if (_profiles.Count == 0)
+        this.lvProfiles.Items.Clear();
+        this._profiles = UserProfile.GetAllProfiles();
+
+        if (this._profiles.Count == 0)
         {
             // no profiles
-            lvProfiles.Items.Add(new ListViewItem
+            this.lvProfiles.Items.Add(new ListViewItem
             {
                 Content = "No profiles found.",
                 Padding = new Thickness(8),
@@ -72,7 +61,7 @@ public sealed partial class ProfileSelectionPage : Page
             return;
         }
 
-        foreach (UserProfile profile in _profiles)
+        foreach (UserProfile profile in this._profiles)
         {
             ListViewItem lvi = new ListViewItem
             {
@@ -90,11 +79,11 @@ public sealed partial class ProfileSelectionPage : Page
                 }
             };
 
-            lvProfiles.Items.Add(lvi);
+            this.lvProfiles.Items.Add(lvi);
         }
 
         // unselect any profiles
-        lvProfiles.SelectedIndex = -1;
+        this.lvProfiles.SelectedIndex = -1;
     }
 
     private async void btnRefresh_Click(object sender, RoutedEventArgs e)
@@ -107,19 +96,19 @@ public sealed partial class ProfileSelectionPage : Page
         if (App.MainWindow is null)
         {
             // critical error
-            ib.Severity = InfoBarSeverity.Error;
-            ib.Title = "Error";
-            ib.Message = "Window not found.";
-            ib.IsOpen = true;
+            this.ib.Severity = InfoBarSeverity.Error;
+            this.ib.Title = "Error";
+            this.ib.Message = "Window not found.";
+            this.ib.IsOpen = true;
             return;
         }
 
         // load the selected profile
-        if (lvProfiles.SelectedItem is ListViewItem item)
+        if (this.lvProfiles.SelectedItem is ListViewItem item)
         {
             if (item.Tag is UserProfile profile)
             {
-                UserProfile.SetCurrent(profile);
+                _ = UserProfile.SetCurrent(profile);
                 App.MainWindow.nviHome.IsSelected = true;
                 return;
             }
@@ -129,12 +118,12 @@ public sealed partial class ProfileSelectionPage : Page
     private void lvProfiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         // dynamically enable/disable the accept button
-        btnAccept.IsEnabled = lvProfiles.SelectedIndex >= 0;
+        this.btnAccept.IsEnabled = this.lvProfiles.SelectedIndex >= 0;
     }
 
     private void btnNewProfile_Click(object sender, RoutedEventArgs e)
     {
         if (App.MainWindow is null) return;
-        App.MainWindow.WindowFrame.Navigate(typeof(NewProfilePage));
+        _ = App.MainWindow.WindowFrame.Navigate(typeof(NewProfilePage));
     }
 }

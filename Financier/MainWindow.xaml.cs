@@ -41,7 +41,7 @@ public sealed partial class MainWindow : Window
     /// <summary>
     /// Gets the associated frame control.
     /// </summary>
-    public Frame WindowFrame => frm;
+    public Frame WindowFrame => this.frm;
 
     /// <summary>
     /// Displays an in-app banner message.
@@ -51,10 +51,10 @@ public sealed partial class MainWindow : Window
     /// <param name="message">Message text.</param>
     public void DisplayMessage(InfoBarSeverity severity, string title, string message)
     {
-        ib.Severity = severity;
-        ib.Title = title;
-        ib.Message = message;
-        ib.IsOpen = true;
+        this.ib.Severity = severity;
+        this.ib.Title = title;
+        this.ib.Message = message;
+        this.ib.IsOpen = true;
         return;
     }
 
@@ -95,7 +95,7 @@ public sealed partial class MainWindow : Window
                         break;
 
                     case "logout":
-                        UserProfile.SetCurrent(null);
+                        _ = UserProfile.SetCurrent(null);
                         _ = this.frm.Navigate(typeof(ProfileSelectionPage));
                         pageTitle = string.Empty;
                         DisplayMessage(InfoBarSeverity.Success, "Logout", "Logout successful.");
@@ -126,12 +126,12 @@ public sealed partial class MainWindow : Window
 
             if (e.Content is NewProfilePage)
             {
-                tbTitle.Text = "New Profile";
+                this.tbTitle.Text = "New Profile";
             }
 
             else if (e.Content is ProfileSelectionPage)
             {
-                tbTitle.Text = "Select a profile";
+                this.tbTitle.Text = "Select a profile";
             }
         }
     }

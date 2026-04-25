@@ -170,9 +170,9 @@ public partial class NewTransactionPage : Page
 
         // get current date from dpDate
         DateTime dt = DateTime.Now;
-        if (dpDate.Date.HasValue)
+        if (this.dpDate.Date.HasValue)
         {
-            dt = dpDate.Date.Value.DateTime;
+            dt = this.dpDate.Date.Value.DateTime;
         }
 
         // create the transaction

@@ -3,8 +3,6 @@ using Financier.Core;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
-using Windows.Foundation;
-
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
@@ -24,44 +22,44 @@ public sealed partial class NewProfilePage : Page
 
     private void btnSave_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        string name = txtName.Text.Trim();
+        string name = this.txtName.Text.Trim();
         if (string.IsNullOrWhiteSpace(name))
         {
             // input error
-            ib.Severity = InfoBarSeverity.Error;
-            ib.Title = "Error";
-            ib.Message = "Invalid input.";
-            ib.IsOpen = true;
+            this.ib.Severity = InfoBarSeverity.Error;
+            this.ib.Title = "Error";
+            this.ib.Message = "Invalid input.";
+            this.ib.IsOpen = true;
             return;
         }
 
         UserProfile profile = new UserProfile
         {
             Name = name,
-            WinPos = default(Rect),
+            WinPos = default,
             Transactions = []
         };
 
         if (UserProfile.Save(profile) == false)
         {
             // saving error
-            ib.Severity = InfoBarSeverity.Error;
-            ib.Title = "Error";
-            ib.Message = "Unable to save the user profile.";
-            ib.IsOpen = true;
+            this.ib.Severity = InfoBarSeverity.Error;
+            this.ib.Title = "Error";
+            this.ib.Message = "Unable to save the user profile.";
+            this.ib.IsOpen = true;
             return;
         }
 
-        UserProfile.SetCurrent(profile);
+        _ = UserProfile.SetCurrent(profile);
 
         // navigate to the home page
         if (App.MainWindow is null)
         {
             // error, impossible if this page is visible to the user
-            ib.Severity = InfoBarSeverity.Error;
-            ib.Title = "Error";
-            ib.Message = "Unable to get the main window.";
-            ib.IsOpen = true;
+            this.ib.Severity = InfoBarSeverity.Error;
+            this.ib.Title = "Error";
+            this.ib.Message = "Unable to get the main window.";
+            this.ib.IsOpen = true;
             return;
         }
 
@@ -71,16 +69,16 @@ public sealed partial class NewProfilePage : Page
     }
     private void btnClear_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        txtName.Text = string.Empty;
-        ib.Severity = InfoBarSeverity.Success;
-        ib.Title = "Success";
-        ib.Message = "Input fields cleared.";
-        ib.IsOpen = true;
+        this.txtName.Text = string.Empty;
+        this.ib.Severity = InfoBarSeverity.Success;
+        this.ib.Title = "Success";
+        this.ib.Message = "Input fields cleared.";
+        this.ib.IsOpen = true;
         return;
     }
 
     private void btnSwitchProfiles_Click(object sender, RoutedEventArgs e)
     {
-        App.MainWindow?.WindowFrame.Navigate(typeof(ProfileSelectionPage));
+        _ = (App.MainWindow?.WindowFrame.Navigate(typeof(ProfileSelectionPage)));
     }
 }
