@@ -27,6 +27,7 @@ public sealed partial class NewProfilePage : Page
     {
         this.cbxCultures.Items.Clear();
 
+        int currentIdx = 0;
         foreach (var culture in CultureInfo.GetCultures(CultureTypes.SpecificCultures))
         {
             this.cbxCultures.Items.Add(new ComboBoxItem
@@ -34,9 +35,14 @@ public sealed partial class NewProfilePage : Page
                 Content = $"{culture.DisplayName} ({culture.Name})",
                 Tag = culture.Name
             });
+
+            if (culture.Name == CultureInfo.CurrentCulture.Name)
+            {
+                currentIdx = this.cbxCultures.Items.Count - 1;
+            }
         }
 
-        this.cbxCultures.SelectedIndex = 0;
+        this.cbxCultures.SelectedIndex = currentIdx;
     }
 
     private void btnSave_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)

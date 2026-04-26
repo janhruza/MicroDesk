@@ -84,7 +84,7 @@
 
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                 <TextBlock x:Name="CategoryText" FontWeight="SemiBold" FontSize="16"/>
-                                <TextBlock Text="{x:Bind Timestamp}" Style="{ThemeResource CaptionTextBlockStyle}" Opacity="0.6"/>
+                                <TextBlock Text="{x:Bind Timestamp.ToShortDateString()}" Style="{ThemeResource CaptionTextBlockStyle}" Opacity="0.6"/>
                             </StackPanel>
 
                             <TextBlock x:Name="ValueText" 

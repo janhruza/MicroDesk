@@ -122,7 +122,7 @@ public partial class NewTransactionPage : Page
         if (UserProfile.IsLoaded() == false)
         {
             // no profile loaded
-            await App.ShowDialog(XamlRoot, "Unable to create a new transaction. No user profile is loaded.", "Error");
+            App.MainWindow?.DisplayMessage(InfoBarSeverity.Error, "No Profile Loaded", "Please load a user profile before adding transactions.");
             return;
         }
 
@@ -131,7 +131,7 @@ public partial class NewTransactionPage : Page
         // check if the transaction is valid
         if (double.IsNaN(this.txtValue.Value))
         {
-            await App.ShowDialog(XamlRoot, "Unable to create a new transaction. Please make sure the transaction value is in the correct numeric format.", "Invalid value");
+            App.MainWindow?.DisplayMessage(InfoBarSeverity.Error, "Invalid Value", "Please enter a valid numeric value for the transaction.");
             return;
         }
 
@@ -195,7 +195,7 @@ public partial class NewTransactionPage : Page
         _ = UserProfile.SetCurrent(profile);
 
         // display a confirmation message
-        await App.ShowDialog(XamlRoot, "Transaction added successfully.", "Transaction added");
+        App.MainWindow?.DisplayMessage(InfoBarSeverity.Success, "Success", "Transaction added successfully.");
 
         // clear the UI
         LoadUI();

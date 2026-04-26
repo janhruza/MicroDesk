@@ -85,7 +85,7 @@ public sealed partial class MainWindow : Window
                     case "logout":
                         _ = UserProfile.SetCurrent(null);
                         _ = this.frm.Navigate(typeof(ProfileSelectionPage));
-                        DisplayMessage(InfoBarSeverity.Success, "Logout", "Logout successful.");
+                        DisplayMessage(InfoBarSeverity.Informational, "Logout", "Logout successful.");
                         break;
                 }
             }
