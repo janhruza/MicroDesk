@@ -62,9 +62,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controls\" />
-  </ItemGroup>
-  <ItemGroup>
     <Page Update="Pages\ProfileSelectionPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

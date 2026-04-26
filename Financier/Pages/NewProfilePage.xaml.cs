@@ -2,6 +2,7 @@ using Financier.Core;
 
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Navigation;
 
 using System.Globalization;
 
@@ -21,6 +22,31 @@ public sealed partial class NewProfilePage : Page
     {
         InitializeComponent();
         LoadCultures();
+    }
+
+    private bool _valid = false;
+
+    /// <summary>
+    /// Override the method called when the page is navigated to, to reset the _valid flag to false, indicating that the profile creation process has not been completed yet.
+    /// </summary>
+    /// <param name="e"></param>
+    protected override void OnNavigatedTo(NavigationEventArgs e)
+    {
+        _valid = false;
+    }
+
+    /// <summary>
+    /// Override the method called when the page is navigating from, to check if the _valid flag is false. If it is, cancel the navigation and display a warning message to the user, prompting them to complete the profile creation before leaving the page.
+    /// </summary>
+    /// <param name="e"></param>
+    protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+    {
+        base.OnNavigatingFrom(e);
+        if (_valid == false)
+        {
+            e.Cancel = true;
+            App.MainWindow?.DisplayMessage(InfoBarSeverity.Warning, "Warning", "Please complete the profile creation before leaving this page.");
+        }
     }
 
     private void LoadCultures()
@@ -86,6 +112,7 @@ public sealed partial class NewProfilePage : Page
             return;
         }
 
+        _valid = true;
         _ = UserProfile.SetCurrent(profile);
 
         // navigate to the home page

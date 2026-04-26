@@ -88,7 +88,7 @@ public partial class App : Application
         if (profiles.Count == 0)
         {
             // no accouts cretaed, create a new one
-            _ = UserProfile.SetCurrent(new UserProfile());
+            _ = UserProfile.SetCurrent(new UserProfile()); // cannot be null here
             _ = _window.WindowFrame.Navigate(typeof(NewProfilePage));
         }
 

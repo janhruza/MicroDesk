@@ -208,6 +208,8 @@ public class UserProfile
                 string data = File.ReadAllText(file, Encoding.UTF8);
                 if (Load(data, out UserProfile profile))
                 {
+                    // only add profiles with valid names to the collection
+                    if (string.IsNullOrWhiteSpace(profile.Name) == true) continue;
                     _ = profiles.Add(profile);
                 }
             }

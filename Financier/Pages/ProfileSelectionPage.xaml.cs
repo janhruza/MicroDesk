@@ -132,7 +132,7 @@ public sealed partial class ProfileSelectionPage : Page
     private void btnNewProfile_Click(object sender, RoutedEventArgs e)
     {
         if (App.MainWindow is null) return;
-        _ = UserProfile.SetCurrent(new UserProfile());
+        _ = UserProfile.SetCurrent(new UserProfile()); // cannot be null here
         _ = App.MainWindow.WindowFrame.Navigate(typeof(NewProfilePage));
     }
 }
