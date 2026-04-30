@@ -133,8 +133,8 @@ public sealed partial class NewProfilePage : Page
     private void btnClear_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         this.txtName.Text = string.Empty;
-        this.ib.Severity = InfoBarSeverity.Success;
-        this.ib.Title = "Success";
+        this.ib.Severity = InfoBarSeverity.Informational;
+        this.ib.Title = "Info";
         this.ib.Message = "Input fields cleared.";
         this.ib.IsOpen = true;
         return;
