@@ -21,32 +21,46 @@
         </Grid.RowDefinitions>
 
         <TitleBar Grid.Row="0"
-                  Name="titleBar"
+                  x:Name="titleBar"
                   Title="Journal"
                   IsPaneToggleButtonVisible="True"
                   PaneToggleRequested="titleBar_PaneToggleRequested"/>
 
         <NavigationView Grid.Row="1"
-                        IsPaneToggleButtonVisible="False"
-                        IsBackButtonVisible="Collapsed"
-                        IsPaneOpen="False"
                         x:Name="nav"
-                        SelectionChanged="nav_SelectionChanged">
-            
+                        SelectionChanged="nav_SelectionChanged"
+                        PaneDisplayMode="Auto"
+                        IsBackButtonVisible="Collapsed"
+                        IsPaneToggleButtonVisible="False"
+                        IsSettingsVisible="True">
+
             <NavigationView.MenuItems>
-                <NavigationViewItem Icon="Home"
-                                    Content="Home"
-                                    Name="navHome"
-                                    Tag="home"/>
-                
-                <NavigationViewItem Icon="Add"
-                                    Content="New Entry"
-                                    Name="navAdd"
-                                    Tag="new"/>
-                
+                <NavigationViewItem Content="Home"
+                                    x:Name="navHome"
+                                    Tag="home">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE80F;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+
+                <NavigationViewItem Content="New Entry"
+                                    Tag="new">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE710;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+
             </NavigationView.MenuItems>
 
-            <Frame Name="frm"/>
+            <Frame x:Name="frm">
+                <Frame.ContentTransitions>
+                    <TransitionCollection>
+                        <NavigationThemeTransition>
+                            <DrillInNavigationTransitionInfo/>
+                        </NavigationThemeTransition>
+                    </TransitionCollection>
+                </Frame.ContentTransitions>
+            </Frame>
 
         </NavigationView>
     </Grid>

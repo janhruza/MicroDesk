@@ -14,13 +14,12 @@
         <MenuFlyout>
             <MenuFlyoutItem Text="Refresh"
                             KeyboardAcceleratorTextOverride="F5"
-                            Name="mfUpdate"
                             Click="mfUpdate_Click"/>
         </MenuFlyout>
     </Page.ContextFlyout>
     
-    <Grid ColumnSpacing="16"
-          Padding="16">
+    <Grid ColumnSpacing="24"
+          Padding="24">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -28,41 +27,54 @@
         </Grid.RowDefinitions>
         
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="320"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Row="0"
-                   Text="Journals"
-                   Style="{ThemeResource BodyStrongTextBlockStyle}"
-                   Margin="0,0,0,16"/>
+                   Text="Recent Entries"
+                   Style="{ThemeResource TitleTextBlockStyle}"
+                   Margin="0,0,0,24"/>
 
         <ListView Grid.Column="0"
-                 Grid.Row="1"
-                 Name="lvHistory"
-                 SelectionChanged="lvHistory_SelectionChanged"
-                 CornerRadius="4"/>
+                  Grid.Row="1"
+                  x:Name="lvHistory"
+                  SelectionChanged="lvHistory_SelectionChanged">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Margin" Value="0,0,0,4"/>
+                    <Setter Property="CornerRadius" Value="8"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
 
-        <Grid RowSpacing="8"
-              Grid.Column="1"
-              Grid.Row="1">
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition />
-            </Grid.RowDefinitions>
-
-            <TextBox Grid.Row="0"
-                     IsReadOnly="True"
-                     Name="txtPreviewTitle"/>
-
-            <TextBox Grid.Row="1"
-                     IsReadOnly="True"
-                     Name="txtPreviewContent"
-                     AcceptsReturn="True"
-                     ScrollViewer.VerticalScrollBarVisibility="Auto"
-                     ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
-        </Grid>
+        <Border Grid.Column="1"
+                Grid.Row="1"
+                Background="{ThemeResource LayerFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="12"
+                Padding="24">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Spacing="12">
+                    <TextBox x:Name="txtPreviewTitle"
+                             FontWeight="Bold"
+                             BorderThickness="0"
+                             Background="Transparent"
+                             IsReadOnly="True"
+                             TextWrapping="Wrap"/>
+                    
+                    <MenuFlyoutSeparator />
+                    
+                    <TextBox x:Name="txtPreviewContent"
+                             BorderThickness="0"
+                             Background="Transparent"
+                             IsReadOnly="True"
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
 
     </Grid>
 </Page>

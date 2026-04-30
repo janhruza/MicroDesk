@@ -8,61 +8,54 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Margin="16"
-          RowSpacing="8">
-        
+    <Grid Padding="24">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition />
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
+        <RelativePanel Grid.Row="0" Margin="0,0,0,24">
             <TextBlock Text="New Entry"
-                       Style="{ThemeResource BodyStrongTextBlockStyle}"/>
+                       Style="{ThemeResource TitleTextBlockStyle}"
+                       RelativePanel.AlignLeftWithPanel="True"
+                       RelativePanel.AlignVerticalCenterWithPanel="True"/>
 
-            <CommandBar Grid.Column="1"
-                        OverflowButtonVisibility="Collapsed">
+            <Button x:Name="btnSave"
+                    Style="{ThemeResource AccentButtonStyle}"
+                    Content="Save Entry"
+                    Padding="16,8"
+                    Click="btnSave_Click"
+                    RelativePanel.AlignRightWithPanel="True"/>
+        </RelativePanel>
 
-                <AppBarButton Label="Save"
-                              Icon="Save"
-                              Name="btnSave"
-                              Click="btnSave_Click"/>
-            </CommandBar>
-
-        </Grid>
-
-        <StackPanel Grid.Row="1">
-
-            <TextBlock Text="Title"
-                       Margin="0,0,0,4"/>
+        <ScrollViewer Grid.Row="1"
+                      HorizontalAlignment="Stretch">
             
-            <TextBox Name="txtTitle"/>
+            <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="12"
+                    Padding="32">
+                <StackPanel Spacing="24">
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="Title" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
+                        <TextBox x:Name="txtTitle"
+                                 PlaceholderText="Enter a title..."
+                                 Padding="10,6"/>
+                    </StackPanel>
 
-        </StackPanel>
-
-        <Grid Grid.Row="2">
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            
-            <TextBlock Text="Content"
-                       Margin="0,0,0,4"
-                       Grid.Row="0"/>
-            
-            <TextBox Name="txtContent"
-                     Grid.Row="1"
-                     AcceptsReturn="True"/>
-
-        </Grid>
-        
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="Content" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
+                        <TextBox x:Name="txtContent"
+                                 AcceptsReturn="True"
+                                 MinHeight="300"
+                                 TextWrapping="Wrap"
+                                 PlaceholderText="Write your thoughts here..."
+                                 Padding="10,10"
+                                 VerticalContentAlignment="Top"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </ScrollViewer>
     </Grid>
 </Page>

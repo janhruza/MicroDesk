@@ -8,48 +8,78 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel Margin="16">
+    <Grid Padding="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <TextBlock Margin="0,0,0,16"
-                   Style="{ThemeResource BodyStrongTextBlockStyle}"
-                   Text="Settings"/>
+        <TextBlock Grid.Row="0"
+                   Text="Settings"
+                   Style="{ThemeResource TitleTextBlockStyle}"
+                   Margin="0,0,0,24"/>
 
-        <TextBlock Text="Theme"
-                   Margin="0,0,0,4"/>
+        <ScrollViewer Grid.Row="1" MaxWidth="800" HorizontalAlignment="Left">
+            <StackPanel Spacing="12">
+                <TextBlock Text="Personalization" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,12,0,4"/>
 
-        <ComboBox Name="cbxTheme"
-                  HorizontalAlignment="Stretch"
-                  SelectionChanged="cbxTheme_SelectionChanged">
+                <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        Padding="16">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Spacing="2">
+                            <TextBlock Text="App Theme" Style="{ThemeResource BodyTextBlockStyle}"/>
+                            <TextBlock Text="Choose which theme to display" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                        </StackPanel>
+                        <ComboBox Grid.Column="1" x:Name="cbxTheme" Width="150" SelectionChanged="cbxTheme_SelectionChanged">
+                            <ComboBoxItem Tag="themeLight" Content="Light"/>
+                            <ComboBoxItem Tag="themeDark" Content="Dark"/>
+                            <ComboBoxItem Tag="themeSystem" Content="System"/>
+                        </ComboBox>
+                    </Grid>
+                </Border>
 
-            <ComboBoxItem Tag="themeLight"
-                          Content="Light"/>
-            
-            <ComboBoxItem Tag="themeDark"
-                          Content="Dark"/>
-            
-            <ComboBoxItem Tag="themeSystem"
-                          Content="System"/>
-        </ComboBox>
+                <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        Padding="16">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Spacing="2">
+                            <TextBlock Text="Window Backdrop" Style="{ThemeResource BodyTextBlockStyle}"/>
+                            <TextBlock Text="Select background effect for the application" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                        </StackPanel>
+                        <ComboBox Grid.Column="1" x:Name="cbxBackdrop" Width="150" SelectionChanged="cbxBackdrop_SelectionChanged">
+                            <ComboBoxItem Tag="bpNone" Content="None"/>
+                            <ComboBoxItem Tag="bpAcrylic" Content="Acrylic"/>
+                            <ComboBoxItem Tag="bpMica" Content="Mica"/>
+                            <ComboBoxItem Tag="bpMicaAlt" Content="Mica (Alt)"/>
+                        </ComboBox>
+                    </Grid>
+                </Border>
 
-        <TextBlock Text="Backdrop Style"
-                   Margin="0,8,0,4"/>
-
-        <ComboBox Name="cbxBackdrop"
-                  HorizontalAlignment="Stretch"
-                  SelectionChanged="cbxBackdrop_SelectionChanged">
-            
-            <ComboBoxItem Tag="bpNone"
-                          Content="None"/>
-
-            <ComboBoxItem Tag="bpAcrylic"
-                          Content="Acrylic"/>
-
-            <ComboBoxItem Tag="bpMica"
-                          Content="Mica"/>
-
-            <ComboBoxItem Tag="bpMicaAlt"
-                          Content="Mica (Alt)"/>
-        </ComboBox>
-
-    </StackPanel>
+                <TextBlock Text="About" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,24,0,4"/>
+                <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        Padding="16">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="Journal" Style="{ThemeResource BodyTextBlockStyle}"/>
+                        <TextBlock Text="Version 1.0.0" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
 </Page>
