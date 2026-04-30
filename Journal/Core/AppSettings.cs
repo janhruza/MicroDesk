@@ -2,8 +2,15 @@
 using System.IO;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Journal.Core;
+
+[JsonSourceGenerationOptions(WriteIndented = true, IncludeFields = true)]
+[JsonSerializable(typeof(AppSettings))]
+internal partial class AppSettingsSerializer : JsonSerializerContext
+{
+}
 
 /// <summary>
 /// Representing the app settings.
@@ -75,7 +82,7 @@ public struct AppSettings
         }
 
         string data = File.ReadAllText(_settingsPath, Encoding.UTF8);
-        AppSettings? settings = JsonSerializer.Deserialize<AppSettings>(data, _options);
+        AppSettings? settings = JsonSerializer.Deserialize<AppSettings>(data, AppSettingsSerializer.Default.AppSettings);
         if (settings.HasValue)
         {
             _current = settings.Value;
@@ -92,7 +99,7 @@ public struct AppSettings
     /// settings are not persisted until this method is called.</remarks>
     public static void SaveSettings()
     {
-        string data = JsonSerializer.Serialize(_current, _options);
+        string data = JsonSerializer.Serialize(_current, AppSettingsSerializer.Default.AppSettings);
         File.WriteAllText(_settingsPath, data, Encoding.UTF8);
         return;
     }

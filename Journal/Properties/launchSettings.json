@@ -5,6 +5,11 @@
     },
     "Journal (Unpackaged)": {
       "commandName": "Project"
+    },
+    "Journal (Remote)": {
+      "commandName": "MsixPackage",
+      "remoteDebugEnabled": true,
+      "remoteDebugMachine": "DESKTOP-0VV0LD6"
     }
   }
 }

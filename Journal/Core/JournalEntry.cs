@@ -3,8 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Journal.Core;
+
+[JsonSourceGenerationOptions(WriteIndented = true)]
+[JsonSerializable(typeof(JournalEntry))]
+[JsonSerializable(typeof(List<JournalEntry>))] // Pokud používáš i kolekce, přidej je taky
+internal partial class JournalEntrySerializerContext : JsonSerializerContext
+{
+}
 
 /// <summary>
 /// Representing a single journal entry.
@@ -86,7 +94,7 @@ public struct JournalEntry
         }
 
         string data = File.ReadAllText(sJournalFile, Encoding.Unicode);
-        List<JournalEntry>? entries = JsonSerializer.Deserialize<List<JournalEntry>>(data) ?? new List<JournalEntry>();
+        List<JournalEntry>? entries = JsonSerializer.Deserialize(data, JournalEntrySerializerContext.Default.ListJournalEntry) ?? new List<JournalEntry>();
         CopyList(entries, Entries);
         return entries;
     }
@@ -98,7 +106,7 @@ public struct JournalEntry
     /// <returns>Operation result.</returns>
     public static bool SaveEntries(List<JournalEntry> entries)
     {
-        string json = JsonSerializer.Serialize<List<JournalEntry>>(entries);
+        string json = JsonSerializer.Serialize(entries, JournalEntrySerializerContext.Default.ListJournalEntry);
         if (string.IsNullOrWhiteSpace(json))
         {
             return false;
