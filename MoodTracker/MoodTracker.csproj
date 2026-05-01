@@ -12,8 +12,4 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\LibMicroDesk\LibMicroDesk.csproj" />
-  </ItemGroup>
-
 </Project>

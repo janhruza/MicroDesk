@@ -3,27 +3,15 @@
     <Platform Name="Any CPU" />
     <Platform Name="x64" />
   </Configurations>
-  <Project Path="FileVault/FileVault.csproj">
-    <Platform Solution="Debug|x64" Project="x64" />
-  </Project>
   <Project Path="Financier/Financier.csproj" Id="fa6dde29-fd4b-4275-8b9e-f1e436cc1951">
     <Platform Project="x64" />
     <Deploy />
-  </Project>
-  <Project Path="Headlines/Headlines.csproj">
-    <Platform Solution="Debug|x64" Project="x64" />
   </Project>
   <Project Path="Journal/Journal.csproj" Id="a784ce3d-9829-4d5a-b5e7-a352e57902fc">
     <Platform Project="x64" />
     <Deploy />
   </Project>
-  <Project Path="LibMicroDesk/LibMicroDesk.csproj">
-    <Platform Solution="*|x64" Project="x64" />
-  </Project>
-  <Project Path="MoodTracker/MoodTracker.csproj">
-    <Platform Solution="*|x64" Project="x64" />
-  </Project>
-  <Project Path="QuickNotes/QuickNotes.csproj">
+  <Project Path="MDCore/MDCore.csproj" Id="5ffe4d44-d20b-4a9e-b0e9-025aa2b7b86b">
     <Platform Solution="Debug|x64" Project="x64" />
   </Project>
 </Solution>
