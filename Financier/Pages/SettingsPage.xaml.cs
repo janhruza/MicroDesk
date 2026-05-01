@@ -56,6 +56,10 @@ public sealed partial class SettingsPage : Page
                         App.SetAppBackdropMode(new MicaBackdrop());
                         break;
 
+                    case "backdropMicaAlt":
+                        App.SetAppBackdropMode(new MicaBackdrop() { Kind = Microsoft.UI.Composition.SystemBackdrops.MicaKind.BaseAlt});
+                        break;
+
                     case "backdropAcrylic":
                         App.SetAppBackdropMode(new DesktopAcrylicBackdrop());
                         break;

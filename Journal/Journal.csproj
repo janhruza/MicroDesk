@@ -102,4 +102,7 @@
   <ItemGroup>
     <PRIResource Remove="AppPackages\**" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MDCore\MDCore.csproj" />
+  </ItemGroup>
 </Project>

@@ -1,8 +1,12 @@
 ﻿using Journal.Core;
 
+using MDCore;
+
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+
+using System;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -46,6 +50,7 @@ public partial class App : Application
     public App()
     {
         InitializeComponent();
+        this.UnhandledException += Application_UnhandledException;
     }
 
     /// <summary>
@@ -67,6 +72,8 @@ public partial class App : Application
     /// <param name="args">Details about the launch request and process.</param>
     protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
     {
+        Log.Info(Log.AppStarted);
+
         // create initial data
         JournalEntry.SetupJournals();
         _ = JournalEntry.LoadEntries();
@@ -81,6 +88,7 @@ public partial class App : Application
         {
             // set new settings
             AppSettings.SetCurrent(settings);
+            Log.Info("New settings have been initialized.");
         }
 
         else
@@ -100,5 +108,21 @@ public partial class App : Application
 
         // save app settings
         AppSettings.SaveSettings();
+
+        Log.Info("Main window closed.");
+    }
+
+    private void Application_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
+    {
+        if (e.Exception is AggregateException ex)
+        {
+            string errors = string.Join(Environment.NewLine, ex.InnerExceptions);
+            Log.Error(errors);
+        }
+
+        else
+        {
+            Log.Error(e.Exception.ToString() ?? Log.UnhandledException);
+        }
     }
 }

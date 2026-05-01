@@ -1,6 +1,8 @@
 ﻿using Financier.Core;
 using Financier.Pages;
 
+using MDCore;
+
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
@@ -33,6 +35,7 @@ public partial class App : Application
     public App()
     {
         InitializeComponent();
+        this.UnhandledException += Application_UnhandledException;
     }
 
     [DllImport("dwmapi")]
@@ -101,5 +104,19 @@ public partial class App : Application
         }
 
         _window.Activate();
+    }
+
+    private void Application_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
+    {
+        if (e.Exception is AggregateException ex)
+        {
+            string errors = string.Join(Environment.NewLine, ex.InnerExceptions);
+            Log.Error(errors);
+        }
+
+        else
+        {
+            Log.Error(e.Exception.ToString() ?? Log.UnhandledException);
+        }
     }
 }

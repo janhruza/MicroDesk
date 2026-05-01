@@ -62,4 +62,28 @@ public static class Log
     {
         _logger.Success(message);
     }
+
+    #region Log messages
+
+    /// <summary>
+    /// App started message.
+    /// </summary>
+    public const string AppStarted = "Application started.";
+
+    /// <summary>
+    /// App stopped message.
+    /// </summary>
+    public const string AppStopped = "Application stopped.";
+
+    /// <summary>
+    /// Generic app error message.
+    /// </summary>
+    public const string AppError = "An error occurred in the application.";
+
+    /// <summary>
+    /// Generic unhandled exception text.
+    /// </summary>
+    public const string UnhandledException = "An unhandled exception occurred.";
+
+    #endregion
 }
