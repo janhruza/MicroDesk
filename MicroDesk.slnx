@@ -7,6 +7,10 @@
     <Platform Project="x64" />
     <Deploy />
   </Project>
+  <Project Path="Focus/Focus.csproj" Id="79f1fc03-8bff-4933-87ab-75c05a46dfb7">
+    <Platform Project="x64" />
+    <Deploy />
+  </Project>
   <Project Path="Journal/Journal.csproj" Id="a784ce3d-9829-4d5a-b5e7-a352e57902fc">
     <Platform Project="x64" />
     <Deploy />
