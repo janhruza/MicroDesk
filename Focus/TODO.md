@@ -1,5 +1,9 @@
 ﻿# Focus TODO List
 
+> **Note** Development paused for now.
+
+---
+
 ## Main features
 
 - [ ] New Session page (PgNewSession)
