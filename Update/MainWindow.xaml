@@ -28,7 +28,14 @@
                   IsBackButtonVisible="False"
                   IsPaneToggleButtonVisible="False"
                   BackRequested="titleBar_BackRequested"
-                  PaneToggleRequested="titleBar_PaneToggleRequested"/>
+                  PaneToggleRequested="titleBar_PaneToggleRequested">
+
+            <!--App icon-->
+            <TitleBar.IconSource>
+                <ImageIconSource ImageSource="/Assets/AppIcon.png"/>
+            </TitleBar.IconSource>
+
+        </TitleBar>
 
         <NavigationView Grid.Row="1"
                         IsBackButtonVisible="Collapsed"

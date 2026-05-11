@@ -24,12 +24,21 @@ namespace Update;
 /// </summary>
 public sealed partial class MainWindow : Window
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MainWindow"/> class.
+    /// </summary>
     public MainWindow()
     {
         InitializeComponent();
         ExtendsContentIntoTitleBar = true;
     }
 
+    /// <summary>
+    /// Navigates to the specified page type, optionally passing a parameter to the target page.
+    /// </summary>
+    /// <param name="pageType">The type of the page to navigate to. Must not be null.</param>
+    /// <param name="parameter">An optional parameter to pass to the target page. Can be null if no parameter is required.</param>
+    /// <returns>true if navigation to the specified page was successful; otherwise, false.</returns>
     public bool NavigateTo(Type pageType, object? parameter = null)
     {
         return frm.Navigate(pageType, parameter);
