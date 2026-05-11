@@ -18,4 +18,8 @@
   <Project Path="MDCore/MDCore.csproj" Id="5ffe4d44-d20b-4a9e-b0e9-025aa2b7b86b">
     <Platform Solution="Debug|x64" Project="x64" />
   </Project>
+  <Project Path="Update/Update.csproj" Id="2fc64497-39ce-464c-99e7-9cda5ac5e6a2">
+    <Platform Project="x64" />
+    <Deploy />
+  </Project>
 </Solution>
