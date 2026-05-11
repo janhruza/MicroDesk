@@ -17,6 +17,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -37,7 +38,7 @@
 
         </TitleBar>
 
-        <NavigationView Grid.Row="1"
+        <NavigationView Grid.Row="2"
                         IsBackButtonVisible="Collapsed"
                         PaneTitle="Menu"
                         IsPaneToggleButtonVisible="True"
@@ -60,9 +61,24 @@
             </NavigationView.MenuItems>
 
             <ScrollViewer>
-                
-                <Frame Margin="16"
-                       Name="frm"/>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <InfoBar Grid.Row="1"
+                             Name="infoBar"
+                             Severity="Informational"
+                             Message="No message."
+                             Title="Info"
+                             IsOpen="False"/>
+                    
+                    <Frame Grid.Row="1"
+                           Margin="16"
+                           Name="frm"/>
+                </Grid>
                 
             </ScrollViewer>
 
