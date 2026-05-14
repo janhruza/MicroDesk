@@ -42,12 +42,15 @@
                         IsBackButtonVisible="Collapsed"
                         PaneTitle="Menu"
                         IsPaneToggleButtonVisible="True"
-                        Name="nvMenu">
+                        Name="nvMenu"
+                        IsSettingsVisible="True"
+                        SelectionChanged="nvMenu_SelectionChanged">
 
             <NavigationView.AutoSuggestBox>
 
                 <AutoSuggestBox QueryIcon="Find"
-                                AutomationProperties.Name="Search"/>
+                                AutomationProperties.Name="Search"
+                                PlaceholderText="Search RSS Feeds"/>
 
             </NavigationView.AutoSuggestBox>
 

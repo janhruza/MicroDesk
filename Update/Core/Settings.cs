@@ -5,7 +5,7 @@ namespace Update.Core;
 /// <summary>
 /// Representing the basic app settings class.
 /// </summary>
-public class Settings : IDumpable
+public class Settings : IDumpable<Settings>
 {
     /// <summary>
     /// Creates a new empty instance of the <see cref="Settings"/> class. This constructor is used to create a new settings object with default values.
@@ -25,9 +25,10 @@ public class Settings : IDumpable
     }
 
     /// <inheritdoc/>
-    public bool ReadFromFile(string fileName)
+    public bool ReadFromFile(string fileName, out Settings settings)
     {
         // TODO : Implement the method to read the settings from a file.
+        settings = new Settings();
         return false;
     }
 

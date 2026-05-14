@@ -13,6 +13,8 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 
+using Update.Pages;
+
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -77,5 +79,14 @@ public sealed partial class MainWindow : Window
     {
         // unused
         return;
+    }
+
+    private void nvMenu_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+    {
+        if (args.IsSettingsSelected)
+        {
+            NavigateTo(typeof(SettingsPage));
+            return;
+        }
     }
 }
