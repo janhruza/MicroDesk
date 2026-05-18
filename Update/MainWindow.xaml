@@ -27,7 +27,7 @@
                   Subtitle="RSS Feed"
                   IsBackButtonEnabled="False"
                   IsBackButtonVisible="False"
-                  IsPaneToggleButtonVisible="False"
+                  IsPaneToggleButtonVisible="True"
                   BackRequested="titleBar_BackRequested"
                   PaneToggleRequested="titleBar_PaneToggleRequested">
 
@@ -40,8 +40,7 @@
 
         <NavigationView Grid.Row="2"
                         IsBackButtonVisible="Collapsed"
-                        PaneTitle="Menu"
-                        IsPaneToggleButtonVisible="True"
+                        IsPaneToggleButtonVisible="False"
                         Name="nvMenu"
                         IsSettingsVisible="True"
                         SelectionChanged="nvMenu_SelectionChanged">

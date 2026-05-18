@@ -31,28 +31,5 @@ public sealed partial class SettingsPage : Page
     public SettingsPage()
     {
         InitializeComponent();
-
-        cbxStyle.SelectedIndex = 1;
-        _isInitialized = true;
-    }
-
-    private bool _isInitialized = false;
-    private void cbxStyle_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        if (_isInitialized == false) return;
-
-        switch (cbxStyle.SelectedIndex)
-        {
-            default: break;
-
-            case 0:
-                // Accent
-                App.Current.Resources.Clear();
-                break;
-
-            case 1:
-                // Custom
-                break;
-        }
     }
 }

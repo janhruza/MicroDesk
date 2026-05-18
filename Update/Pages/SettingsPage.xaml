@@ -17,20 +17,8 @@
                 Background="{ThemeResource LayerOnMicaBaseAltFillColorDefault}">
 
             <StackPanel>
-
-                <ComboBox Header="Style"
-                          HorizontalAlignment="Stretch"
-                          Margin="0,0,0,16"
-                          Name="cbxStyle"
-                          SelectionChanged="cbxStyle_SelectionChanged">
-
-                    <ComboBoxItem Tag="cbiThemeAccent"
-                                  Content="Accent"/>
-
-                    <ComboBoxItem Tag="cbiThemeCustom"
-                                  Content="Custom"/>
-
-                </ComboBox>
+                
+                
 
             </StackPanel>
             
