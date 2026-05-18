@@ -46,15 +46,15 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Pages\Elevated\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\MDCore\MDCore.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\Elevated\" />
   </ItemGroup>
 
   <!--

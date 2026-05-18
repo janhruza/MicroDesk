@@ -1,22 +1,10 @@
-using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 
 using Update.Pages;
-
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -81,11 +69,51 @@ public sealed partial class MainWindow : Window
         return;
     }
 
-    private void nvMenu_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+    private async Task<string> DlgNewFeed()
+    {
+        ContentDialog dlg = new ContentDialog
+        {
+            Title = "Add New Feed",
+            PrimaryButtonText = "Add",
+            CloseButtonText = "Cancel",
+            DefaultButton = ContentDialogButton.Primary,
+            XamlRoot = this.Content.XamlRoot,
+            Content = new TextBox
+            {
+                Header = "RSS Feed URL",
+                PlaceholderText = "Enter feed URL",
+                Margin = new Thickness(0, 10, 0, 0)
+            }
+        };
+
+        var result = await dlg.ShowAsync();
+
+        if (result == ContentDialogResult.Primary && dlg.Content is TextBox tb && !string.IsNullOrWhiteSpace(tb.Text))
+        {
+            return tb.Text.Trim();
+        }
+
+        return string.Empty;
+    }
+
+    private async void nvMenu_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
     {
         if (args.IsSettingsSelected)
         {
             NavigateTo(typeof(SettingsPage));
+            return;
+        }
+    }
+
+    private async void btnNewFeed_Click(object sender, RoutedEventArgs e)
+    {
+        string feed = await DlgNewFeed();
+        if (string.IsNullOrEmpty(feed) == false)
+        {
+            // TODO: handle the new feed URL
+            infoBar.Message = $"New feed added: {feed}";
+            infoBar.Severity = InfoBarSeverity.Success;
+            infoBar.IsOpen = true;
             return;
         }
     }

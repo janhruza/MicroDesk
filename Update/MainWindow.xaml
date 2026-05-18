@@ -45,6 +45,25 @@
                         IsSettingsVisible="True"
                         SelectionChanged="nvMenu_SelectionChanged">
 
+            <NavigationView.ContextFlyout>
+
+                <MenuFlyout>
+
+                    <MenuFlyoutItem Text="Add New Feed"
+                                    Icon="Add"
+                                    KeyboardAcceleratorTextOverride="Ctrl+N"
+                                    Click="btnNewFeed_Click"/>
+
+                    <MenuFlyoutSeparator />
+
+                    <MenuFlyoutItem Text="Refresh"
+                                    Icon="Refresh"
+                                    KeyboardAcceleratorTextOverride="F5"/>
+
+                </MenuFlyout>
+
+            </NavigationView.ContextFlyout>
+            
             <NavigationView.AutoSuggestBox>
 
                 <AutoSuggestBox QueryIcon="Find"
@@ -55,8 +74,14 @@
 
             <NavigationView.MenuItems>
 
-                <NavigationViewItem Content="New Feed"
-                                    Icon="Add"/>
+                <NavigationViewItem Icon="Add">
+
+                    <HyperlinkButton Content="New Feed"
+                                     Name="btnNewFeed"
+                                     HorizontalAlignment="Stretch"
+                                     Click="btnNewFeed_Click"/>
+
+                </NavigationViewItem>
 
                 <NavigationViewItemSeparator />
 
@@ -70,7 +95,7 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <InfoBar Grid.Row="1"
+                    <InfoBar Grid.Row="0"
                              Name="infoBar"
                              Severity="Informational"
                              Message="No message."
