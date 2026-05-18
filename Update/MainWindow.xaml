@@ -36,6 +36,15 @@
                 <ImageIconSource ImageSource="/Assets/AppIcon.png"/>
             </TitleBar.IconSource>
 
+            <TitleBar.RightHeader>
+
+                <PersonPicture Initials="JD"
+                               Width="32"
+                               Height="32"
+                               Name="personPicture"/>
+
+            </TitleBar.RightHeader>
+            
         </TitleBar>
 
         <NavigationView Grid.Row="2"
@@ -54,12 +63,6 @@
                                     KeyboardAcceleratorTextOverride="Ctrl+N"
                                     Click="btnNewFeed_Click"/>
 
-                    <MenuFlyoutSeparator />
-
-                    <MenuFlyoutItem Text="Refresh"
-                                    Icon="Refresh"
-                                    KeyboardAcceleratorTextOverride="F5"/>
-
                 </MenuFlyout>
 
             </NavigationView.ContextFlyout>
@@ -73,17 +76,6 @@
             </NavigationView.AutoSuggestBox>
 
             <NavigationView.MenuItems>
-
-                <NavigationViewItem Icon="Add">
-
-                    <HyperlinkButton Content="New Feed"
-                                     Name="btnNewFeed"
-                                     HorizontalAlignment="Stretch"
-                                     Click="btnNewFeed_Click"/>
-
-                </NavigationViewItem>
-
-                <NavigationViewItemSeparator />
 
             </NavigationView.MenuItems>
 
