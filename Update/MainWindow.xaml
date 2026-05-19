@@ -36,15 +36,26 @@
                 <ImageIconSource ImageSource="/Assets/AppIcon.png"/>
             </TitleBar.IconSource>
 
-            <TitleBar.RightHeader>
 
-                <PersonPicture Initials="JD"
-                               Width="32"
-                               Height="32"
-                               Name="personPicture"/>
+            <TitleBar.Content>
 
-            </TitleBar.RightHeader>
-            
+                <StackPanel Orientation="Horizontal"
+                            Spacing="8">
+
+                    <AutoSuggestBox QueryIcon="Find"
+                                    AutomationProperties.Name="Search"
+                                    PlaceholderText="Search RSS Feeds"/>
+
+                    <Button ToolTipService.ToolTip="Add New Feed"
+                            Click="btnNewFeed_Click">
+
+                        <SymbolIcon Symbol="Add"/>
+                    </Button>
+
+                </StackPanel>
+
+            </TitleBar.Content>
+
         </TitleBar>
 
         <NavigationView Grid.Row="2"
@@ -66,14 +77,6 @@
                 </MenuFlyout>
 
             </NavigationView.ContextFlyout>
-            
-            <NavigationView.AutoSuggestBox>
-
-                <AutoSuggestBox QueryIcon="Find"
-                                AutomationProperties.Name="Search"
-                                PlaceholderText="Search RSS Feeds"/>
-
-            </NavigationView.AutoSuggestBox>
 
             <NavigationView.MenuItems>
 
@@ -93,7 +96,7 @@
                              Message="No message."
                              Title="Info"
                              IsOpen="False"/>
-                    
+
                     <Frame Grid.Row="1"
                            Margin="16"
                            Name="frm"/>

@@ -2,6 +2,7 @@
 
 using System;
 
+using Update.Core;
 using Update.Core.Profiles;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -16,11 +17,12 @@ public partial class App : Application
 {
     private Window? _window;
 
-    internal static UserProfile CurrentProfile { get; }
+    internal static Settings CurrentSettings { get; }
 
     static App()
     {
-        CurrentProfile = new UserProfile();
+        CurrentSettings = new Settings();
+        CurrentSettings.ReadFromFile();
     }
 
     /// <summary>

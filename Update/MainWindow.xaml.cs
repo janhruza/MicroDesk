@@ -1,3 +1,5 @@
+using MDCore;
+
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
@@ -5,6 +7,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
+using Update.Core.Data;
 using Update.Pages;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -25,18 +28,40 @@ public sealed partial class MainWindow : Window
         InitializeComponent();
         ExtendsContentIntoTitleBar = true;
         this.AppWindow.TitleBar.PreferredHeightOption = Microsoft.UI.Windowing.TitleBarHeightOption.Tall;
+        this.Closed += MainWindow_Closed;
 
-        personPicture.Initials = GetInitials(App.CurrentProfile.Name);
+        NavigateTo(typeof(LandingPage), new object());
+
+        ReloadFeeds();
     }
 
-    private string GetInitials(string name)
+    private void ReloadFeeds()
     {
-        if (string.IsNullOrWhiteSpace(name))
-            return string.Empty;
-        var parts = name.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        if (parts.Length == 1)
-            return parts[0].Substring(0, Math.Min(2, parts[0].Length)).ToUpper();
-        return string.Concat(parts.Select(p => p[0])).ToUpper();
+        nvMenu.MenuItems.Clear();
+
+        foreach (string feed in App.CurrentSettings.Feeds)
+        {
+            if (RssFeed.LoadFromUrl(feed, out RssFeed rssFeed) == false)
+            {
+                Log.Error($"RSS reading error. Feed address: {feed}");
+                continue;
+            }
+
+            NavigationViewItem nvi = new NavigationViewItem
+            {
+                Content = rssFeed.Title,
+                Icon = new SymbolIcon(Symbol.Link),
+                Tag = rssFeed
+            };
+
+            nvMenu.MenuItems.Add(nvi);
+        }
+    }
+
+    private void MainWindow_Closed(object sender, WindowEventArgs args)
+    {
+        // save settings
+        App.CurrentSettings.WriteToFile();
     }
 
     /// <summary>
@@ -117,6 +142,15 @@ public sealed partial class MainWindow : Window
             NavigateTo(typeof(SettingsPage));
             return;
         }
+
+        // navigate to the RSS feed view
+        if (args.SelectedItem is NavigationViewItem nvi)
+        {
+            if (nvi.Tag is RssFeed feed)
+            {
+                NavigateTo(typeof(LandingPage), feed);
+            }
+        }
     }
 
     private async void btnNewFeed_Click(object sender, RoutedEventArgs e)
@@ -124,7 +158,7 @@ public sealed partial class MainWindow : Window
         string feed = await DlgNewFeed();
         if (string.IsNullOrEmpty(feed) == false)
         {
-            // TODO: handle the new feed URL
+            RSS.RegisterFeed(feed);
             infoBar.Message = $"New feed added: {feed}";
             infoBar.Severity = InfoBarSeverity.Success;
             infoBar.IsOpen = true;

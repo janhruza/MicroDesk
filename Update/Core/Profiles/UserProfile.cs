@@ -8,7 +8,7 @@ namespace Update.Core.Profiles;
 /// <summary>
 /// Representing the user profile, which contains all the information about the user, such as the username, password, email, etc.
 /// </summary>
-public class UserProfile : IDumpable<UserProfile>
+public class UserProfile : IDumpable
 {
     /// <summary>
     /// Representing the folder where all the user profiles are stored. The user profiles are stored in the "Profiles" folder in the base directory of the application.
@@ -45,10 +45,9 @@ public class UserProfile : IDumpable<UserProfile>
         return false;
     }
 
-    public bool ReadFromFile(string fileName, out UserProfile profile)
+    public bool ReadFromFile(string fileName)
     {
         // TODO: Implement the method to read the user profile from a file. The file should be stored in the "Profiles" folder with the name of the ID of the user profile.
-        profile = new UserProfile();
         return false;
     }
 }

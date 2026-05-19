@@ -12,8 +12,6 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 
-using Update.Core.Data;
-
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -21,16 +19,12 @@ using Windows.Foundation.Collections;
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace Update.Pages;
-
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.
 /// </summary>
-public sealed partial class SettingsPage : Page
+public sealed partial class FeedPage : Page
 {
-    /// <summary>
-    /// Creates a new instance of the <see cref="SettingsPage"/> class.
-    /// </summary>
-    public SettingsPage()
+    public FeedPage()
     {
         InitializeComponent();
     }

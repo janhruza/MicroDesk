@@ -16,6 +16,8 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Assets\AppIcon.ico" />
+    <None Remove="Pages\FeedPage.xaml" />
+    <None Remove="Pages\LandingPage.xaml" />
     <None Remove="Pages\SettingsPage.xaml" />
   </ItemGroup>
 
@@ -49,12 +51,19 @@
     <ProjectReference Include="..\MDCore\MDCore.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Pages\SettingsPage.xaml">
+    <Page Update="Pages\FeedPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Pages\Elevated\" />
+    <Page Update="Pages\LandingPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\SettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <!--
