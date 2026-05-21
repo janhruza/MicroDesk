@@ -34,10 +34,7 @@ public struct RssFeed
     {
         // read the RSS feed url and parse it
         // read the RSS channels
-        result = new RssFeed
-        {
-        };
-
+        result = new RssFeed();
         return false;
     }
 }
