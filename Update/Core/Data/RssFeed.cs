@@ -22,7 +22,7 @@ public struct RssFeed
     /// <summary>
     /// Representing the list of channels in the RSS feed.
     /// </summary>
-    public List<RssChannel> Channels { get; set; }
+    public HashSet<RssChannel> Channels { get; set; }
 
     /// <summary>
     /// Loads RSS feed data from the given <paramref name="feedUrl"/>.
