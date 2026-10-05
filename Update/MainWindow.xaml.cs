@@ -121,7 +121,8 @@ public sealed partial class MainWindow : Window
             {
                 Header = "RSS Feed URL",
                 PlaceholderText = "Enter feed URL",
-                Margin = new Thickness(0, 10, 0, 0)
+                Margin = new Thickness(0, 10, 0, 0),
+                Width = 350
             }
         };
 

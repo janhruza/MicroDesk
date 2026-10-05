@@ -44,7 +44,8 @@
 
                     <AutoSuggestBox QueryIcon="Find"
                                     AutomationProperties.Name="Search"
-                                    PlaceholderText="Search RSS Feeds"/>
+                                    PlaceholderText="Search RSS Feeds"
+                                    MinWidth="450"/>
 
                     <Button ToolTipService.ToolTip="Add New Feed"
                             Click="btnNewFeed_Click">
