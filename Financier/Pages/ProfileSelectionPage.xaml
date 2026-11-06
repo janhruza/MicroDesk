@@ -10,7 +10,7 @@
     mc:Ignorable="d"
     Tag="Select a profile">
 
-    <Grid Padding="32,24,32,32" RowSpacing="24" MaxWidth="1280" HorizontalAlignment="Stretch">
+    <Grid Padding="24,20,24,24" RowSpacing="20" MaxWidth="1280" HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -39,7 +39,7 @@
             <ListView Grid.Row="1"
                       Name="lvProfiles"
                       Style="{ThemeResource ListSurfaceStyle}"
-                      MinHeight="360"
+                      MinHeight="280"
                       SelectionChanged="lvProfiles_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="core:UserProfile">
@@ -67,18 +67,16 @@
         <StackPanel Grid.Row="3" Orientation="Horizontal" Spacing="12">
             <Button x:Name="btnAccept"
                     Content="Log In" 
-                    Style="{ThemeResource PrimaryActionButtonStyle}"
+                    Style="{ThemeResource AccentButtonStyle}"
                     IsEnabled="False"
                     Click="btnAccept_Click"/>
             
             <Button x:Name="btnNewProfile"
                     Content="New Profile" 
-                    Style="{ThemeResource SecondaryActionButtonStyle}"
                     Click="btnNewProfile_Click"/>
             
             <Button x:Name="btnRefresh"
                     Content="Refresh" 
-                    Style="{ThemeResource SecondaryActionButtonStyle}"
                     Click="btnRefresh_Click"/>
         </StackPanel>
     </Grid>

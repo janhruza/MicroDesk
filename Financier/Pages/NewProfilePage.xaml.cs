@@ -142,6 +142,8 @@ public sealed partial class NewProfilePage : Page
 
     private void btnSwitchProfiles_Click(object sender, RoutedEventArgs e)
     {
+        // Cancel is an intentional exit and should bypass the unsaved-form guard.
+        _valid = true;
         _ = (App.MainWindow?.WindowFrame.Navigate(typeof(ProfileSelectionPage)));
     }
 }

@@ -197,8 +197,12 @@ public partial class NewTransactionPage : Page
         // display a confirmation message
         App.MainWindow?.DisplayMessage(InfoBarSeverity.Success, "Success", "Transaction added successfully.");
 
-        // clear the UI
-        LoadUI();
+        // return to the dashboard so the new transaction is immediately visible
+        if (App.MainWindow is not null)
+        {
+            App.MainWindow.nviHome.IsSelected = true;
+        }
+
         return;
     }
 

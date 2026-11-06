@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     Tag="New Profile">
 
-    <Grid Padding="32,24,32,32" RowSpacing="28" MaxWidth="1280" HorizontalAlignment="Center">
+    <Grid Padding="24,20,24,24" RowSpacing="20" MaxWidth="1280" HorizontalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -28,64 +28,50 @@
 
         <Border Grid.Row="2"
                 Style="{ThemeResource CardStyle}"
-                Padding="48"
-                MinWidth="760"
+                Padding="28"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Stretch">
 
-            <Grid ColumnSpacing="28" RowSpacing="18">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
+            <StackPanel Spacing="20" HorizontalAlignment="Stretch">
                 <TextBox Name="txtName"
                          Header="Profile Name"
                          PlaceholderText="Enter a name for this profile..."
-                         MinHeight="56"
+                         MinHeight="48"
                          HorizontalContentAlignment="Stretch"
                          HorizontalAlignment="Stretch"/>
 
-                <ComboBox Grid.Column="1"
-                          Header="Culture"
+                <ComboBox Header="Culture"
                           Name="cbxCultures"
-                          MinHeight="56"
+                          MinHeight="48"
                           HorizontalContentAlignment="Stretch"
                           HorizontalAlignment="Stretch"/>
 
-                <TextBlock Grid.Row="1"
+                <TextBlock
                            Text="This name will be used to identify your data files."
                            Style="{ThemeResource CaptionTextBlockStyle}"
                            Opacity="0.6"
                            TextWrapping="Wrap"/>
 
-                <TextBlock Grid.Row="1"
-                           Grid.Column="1"
+                <TextBlock
                            Text="Culture formats dates, numbers, and currencies according to your locale."
                            Style="{ThemeResource CaptionTextBlockStyle}"
                            Opacity="0.6"
                            TextWrapping="Wrap"/>
-            </Grid>
+            </StackPanel>
         </Border>
 
         <StackPanel Grid.Row="3" Orientation="Horizontal" Spacing="12">
             <Button x:Name="btnSave"
                     Content="Create Profile" 
-                    Style="{ThemeResource PrimaryActionButtonStyle}"
+                    Style="{ThemeResource AccentButtonStyle}"
                     Click="btnSave_Click"/>
             
             <Button x:Name="btnClear"
                     Content="Clear" 
-                    Style="{ThemeResource SecondaryActionButtonStyle}"
                     Click="btnClear_Click"/>
 
             <Button x:Name="btnSwitchProfiles"
                     Content="Cancel" 
-                    Style="{ThemeResource SecondaryActionButtonStyle}"
                     Click="btnSwitchProfiles_Click"/>
         </StackPanel>
     </Grid>

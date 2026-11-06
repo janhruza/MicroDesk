@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     Tag="Settings">
 
-    <Grid Padding="36,32,36,36" RowSpacing="28" MaxWidth="1280" HorizontalAlignment="Center">
+    <Grid Padding="24,20,24,24" RowSpacing="20" MaxWidth="1280" HorizontalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -21,14 +21,14 @@
         </StackPanel>
 
         <ScrollViewer Grid.Row="1">
-            <StackPanel Spacing="32" MaxWidth="920" HorizontalAlignment="Stretch">
+            <StackPanel Spacing="24" MaxWidth="920" HorizontalAlignment="Stretch">
                 
                 <!-- Appearance Group -->
                 <StackPanel Spacing="12">
                     <TextBlock Text="Appearance" Style="{ThemeResource SectionTitleStyle}"/>
                     
-                    <Border Style="{ThemeResource CardStyle}" Padding="32">
-                        <StackPanel Spacing="20">
+                    <Border Style="{ThemeResource CardStyle}" Padding="24">
+                        <StackPanel Spacing="16">
                             <ComboBox Name="cbxThemeMode"
                                       Header="App Theme"
                                       HorizontalAlignment="Stretch"
@@ -54,8 +54,8 @@
                 <!-- About Group -->
                 <StackPanel Spacing="12">
                     <TextBlock Text="About" Style="{ThemeResource SectionTitleStyle}"/>
-                    <Border Style="{ThemeResource CardStyle}" Padding="32">
-                        <StackPanel Spacing="8">
+                    <Border Style="{ThemeResource CardStyle}" Padding="24">
+                        <StackPanel Spacing="6">
                             <TextBlock Text="Financier" FontSize="20" FontWeight="SemiBold"/>
                             <TextBlock Text="Version 1.0.0" Style="{ThemeResource CaptionTextBlockStyle}" Opacity="0.6"/>
                             <TextBlock Text="A simple personal finance manager built with WinUI 3." Style="{ThemeResource BodyTextBlockStyle}" Margin="0,8,0,0"/>

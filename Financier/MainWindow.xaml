@@ -52,9 +52,9 @@
                         IsBackButtonVisible="Collapsed"
                         IsPaneToggleButtonVisible="False"
                         PaneDisplayMode="LeftCompact"
-                        IsPaneOpen="True"
+                        IsPaneOpen="False"
                         IsSettingsVisible="True"
-                        OpenPaneLength="264"
+                        OpenPaneLength="240"
                         CompactPaneLength="56"
                         SelectionFollowsFocus="Disabled"
                         SelectionChanged="nav_SelectionChanged">
@@ -90,18 +90,23 @@
 
             </NavigationView.FooterMenuItems>
             
-            <!--A whole grid to display pages and their properties-->
-            <Border x:Name="contentSurface"
-                    Margin="0,0,24,24"
-                    Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}"
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                    BorderThickness="1"
-                    CornerRadius="20">
-                <Frame Name="frm"
-                       Padding="12"
-                       Navigating="frm_Navigating"
-                       Navigated="frm_Navigated"/>
-            </Border>
+            <!--Scrollable workspace for pages that exceed the available window height-->
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                          VerticalScrollBarVisibility="Auto"
+                          VerticalScrollMode="Auto"
+                          HorizontalScrollMode="Disabled">
+                <Border x:Name="contentSurface"
+                        Margin="0,0,16,16"
+                        Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="14">
+                    <Frame Name="frm"
+                           Padding="8"
+                           Navigating="frm_Navigating"
+                           Navigated="frm_Navigated"/>
+                </Border>
+            </ScrollViewer>
 
         </NavigationView>
 
