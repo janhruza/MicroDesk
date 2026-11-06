@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     Tag="New Transaction">
 
-    <Grid Padding="24" RowSpacing="24">
+    <Grid Padding="32,24,32,32" RowSpacing="28" MaxWidth="1280" HorizontalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -17,54 +17,81 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <TextBlock x:Name="tbTitle" Style="{ThemeResource TitleTextBlockStyle}" FontWeight="Bold"/>
+        <TextBlock x:Name="tbTitle" Style="{ThemeResource PageTitleStyle}"/>
 
         <!-- Form Card -->
-        <Border Grid.Row="1" 
-                Background="{ThemeResource LayerFillColorDefaultBrush}"
-                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                BorderThickness="1"
-                Padding="32"
-                CornerRadius="12"
+        <Border Grid.Row="1"
+                Style="{ThemeResource CardStyle}"
+                Padding="48"
+                MinWidth="760"
                 VerticalAlignment="Top"
-                MaxWidth="500"
                 HorizontalAlignment="Stretch">
-            
-            <StackPanel Spacing="20">
+
+            <Grid ColumnSpacing="28" RowSpacing="24">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
                 <CalendarDatePicker Name="dpDate"
                                     Header="Date"
+                                    MinHeight="56"
+                                    HorizontalContentAlignment="Stretch"
                                     HorizontalAlignment="Stretch"
                                     FirstDayOfWeek="Monday"/>
 
-                <ComboBox Name="cbxCategory"
+                <ComboBox Grid.Column="1"
+                          Name="cbxCategory"
                           Header="Category"
+                          MinHeight="56"
+                          HorizontalContentAlignment="Stretch"
                           HorizontalAlignment="Stretch"/>
 
-                <NumberBox Name="txtValue"
+                <NumberBox Grid.Row="1"
+                           Name="txtValue"
                            Header="Amount"
                            Value="0"
                            SpinButtonPlacementMode="Compact"
+                           SmallChange="1"
+                           MinHeight="56"
+                           HorizontalContentAlignment="Stretch"
                            HorizontalAlignment="Stretch"/>
 
-                <TextBox Name="txtNote"
+                <TextBlock Grid.Row="1"
+                           Grid.Column="1"
+                           Text="Use a positive amount. Financier applies your selected category and date to this entry."
+                           Style="{ThemeResource CaptionTextBlockStyle}"
+                           Opacity="0.6"
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Center"/>
+
+                <TextBox Grid.Row="2"
+                         Grid.ColumnSpan="2"
+                         Name="txtNote"
                          Header="Note (Optional)"
                          PlaceholderText="Add a description..."
                          AcceptsReturn="True"
-                         MinHeight="100"/>
-            </StackPanel>
+                         MinHeight="200"
+                         HorizontalContentAlignment="Stretch"
+                         HorizontalAlignment="Stretch"/>
+            </Grid>
         </Border>
 
         <!-- Actions -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="12">
-            <Button x:Name="btnSave" 
+            <Button x:Name="btnSave"
                     Content="Save Transaction" 
-                    Style="{ThemeResource AccentButtonStyle}"
-                    Padding="24,8"
+                    Style="{ThemeResource PrimaryActionButtonStyle}"
                     Click="btnSave_Click"/>
             
-            <Button x:Name="btnClear" 
+            <Button x:Name="btnClear"
                     Content="Clear" 
-                    Padding="24,8"
+                    Style="{ThemeResource SecondaryActionButtonStyle}"
                     Click="btnClear_Click"/>
         </StackPanel>
     </Grid>

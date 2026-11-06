@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     Tag="New Profile">
 
-    <Grid Padding="24" RowSpacing="24">
+    <Grid Padding="32,24,32,32" RowSpacing="28" MaxWidth="1280" HorizontalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -17,7 +17,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Create New Profile" Style="{ThemeResource TitleTextBlockStyle}" FontWeight="Bold"/>
+        <TextBlock Text="Create New Profile" Style="{ThemeResource PageTitleStyle}"/>
 
         <InfoBar Grid.Row="1"
                  Name="ib"
@@ -26,54 +26,66 @@
                  Title="Local Storage"
                  Message="Your data will be stored locally on this machine."/>
 
-        <Border Grid.Row="2" 
-                Background="{ThemeResource LayerFillColorDefaultBrush}"
-                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                BorderThickness="1"
-                Padding="32"
-                CornerRadius="12"
+        <Border Grid.Row="2"
+                Style="{ThemeResource CardStyle}"
+                Padding="48"
+                MinWidth="760"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Stretch">
-            
-            <StackPanel Spacing="20">
+
+            <Grid ColumnSpacing="28" RowSpacing="18">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
                 <TextBox Name="txtName"
                          Header="Profile Name"
                          PlaceholderText="Enter a name for this profile..."
+                         MinHeight="56"
+                         HorizontalContentAlignment="Stretch"
                          HorizontalAlignment="Stretch"/>
-                
-                <TextBlock Text="This name will be used to identify your data files." 
-                           Style="{ThemeResource CaptionTextBlockStyle}" 
-                           Opacity="0.6" 
-                           TextWrapping="Wrap"/>
 
-
-                <ComboBox Header="Culture"
+                <ComboBox Grid.Column="1"
+                          Header="Culture"
                           Name="cbxCultures"
+                          MinHeight="56"
+                          HorizontalContentAlignment="Stretch"
                           HorizontalAlignment="Stretch"/>
 
-                <TextBlock Opacity="0.6"
-                           Text="Culture info is used to format dates, numbers, and currencies according to your locale."
+                <TextBlock Grid.Row="1"
+                           Text="This name will be used to identify your data files."
                            Style="{ThemeResource CaptionTextBlockStyle}"
+                           Opacity="0.6"
                            TextWrapping="Wrap"/>
 
-            </StackPanel>
+                <TextBlock Grid.Row="1"
+                           Grid.Column="1"
+                           Text="Culture formats dates, numbers, and currencies according to your locale."
+                           Style="{ThemeResource CaptionTextBlockStyle}"
+                           Opacity="0.6"
+                           TextWrapping="Wrap"/>
+            </Grid>
         </Border>
 
         <StackPanel Grid.Row="3" Orientation="Horizontal" Spacing="12">
-            <Button x:Name="btnSave" 
+            <Button x:Name="btnSave"
                     Content="Create Profile" 
-                    Style="{ThemeResource AccentButtonStyle}"
-                    Padding="24,8"
+                    Style="{ThemeResource PrimaryActionButtonStyle}"
                     Click="btnSave_Click"/>
             
-            <Button x:Name="btnClear" 
+            <Button x:Name="btnClear"
                     Content="Clear" 
-                    Padding="24,8"
+                    Style="{ThemeResource SecondaryActionButtonStyle}"
                     Click="btnClear_Click"/>
 
-            <Button x:Name="btnSwitchProfiles" 
+            <Button x:Name="btnSwitchProfiles"
                     Content="Cancel" 
-                    Padding="24,8"
+                    Style="{ThemeResource SecondaryActionButtonStyle}"
                     Click="btnSwitchProfiles_Click"/>
         </StackPanel>
     </Grid>

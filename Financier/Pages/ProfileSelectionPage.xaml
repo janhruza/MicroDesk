@@ -10,7 +10,7 @@
     mc:Ignorable="d"
     Tag="Select a profile">
 
-    <Grid Padding="24" RowSpacing="24">
+    <Grid Padding="32,24,32,32" RowSpacing="24" MaxWidth="1280" HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -18,7 +18,10 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Manage Profiles" Style="{ThemeResource TitleTextBlockStyle}" FontWeight="Bold"/>
+        <StackPanel>
+            <TextBlock Text="Manage Profiles" Style="{ThemeResource PageTitleStyle}"/>
+            <TextBlock Text="Choose the workspace you want to continue with" Style="{ThemeResource BodyTextBlockStyle}" Opacity="0.7"/>
+        </StackPanel>
 
         <InfoBar Name="ib"
                  Grid.Row="1"
@@ -31,18 +34,16 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             
-            <TextBlock Text="Saved Profiles" Style="{ThemeResource BodyStrongTextBlockStyle}" Opacity="0.7"/>
+            <TextBlock Text="Saved Profiles" Style="{ThemeResource CardHeaderStyle}"/>
 
             <ListView Grid.Row="1"
                       Name="lvProfiles"
-                      Background="{ThemeResource LayerOnMicaBaseAltFillColorDefault}"
-                      CornerRadius="8"
-                      BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                      BorderThickness="1"
+                      Style="{ThemeResource ListSurfaceStyle}"
+                      MinHeight="360"
                       SelectionChanged="lvProfiles_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="core:UserProfile">
-                        <Grid Padding="16" ColumnSpacing="16">
+                        <Grid Padding="16,12" ColumnSpacing="16" MinHeight="68">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
@@ -64,21 +65,20 @@
         </Grid>
 
         <StackPanel Grid.Row="3" Orientation="Horizontal" Spacing="12">
-            <Button x:Name="btnAccept" 
+            <Button x:Name="btnAccept"
                     Content="Log In" 
-                    Style="{ThemeResource AccentButtonStyle}"
+                    Style="{ThemeResource PrimaryActionButtonStyle}"
                     IsEnabled="False"
-                    Padding="24,8"
                     Click="btnAccept_Click"/>
             
-            <Button x:Name="btnNewProfile" 
+            <Button x:Name="btnNewProfile"
                     Content="New Profile" 
-                    Padding="24,8"
+                    Style="{ThemeResource SecondaryActionButtonStyle}"
                     Click="btnNewProfile_Click"/>
             
-            <Button x:Name="btnRefresh" 
+            <Button x:Name="btnRefresh"
                     Content="Refresh" 
-                    Padding="24,8"
+                    Style="{ThemeResource SecondaryActionButtonStyle}"
                     Click="btnRefresh_Click"/>
         </StackPanel>
     </Grid>

@@ -9,27 +9,26 @@
     mc:Ignorable="d"
     Tag="Settings">
 
-    <Grid Padding="24" RowSpacing="24">
+    <Grid Padding="36,32,36,36" RowSpacing="28" MaxWidth="1280" HorizontalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Settings" Style="{ThemeResource TitleTextBlockStyle}" FontWeight="Bold"/>
+        <StackPanel>
+            <TextBlock Text="Settings" Style="{ThemeResource PageTitleStyle}"/>
+            <TextBlock Text="Tune the appearance of your workspace" Style="{ThemeResource BodyTextBlockStyle}" Opacity="0.7"/>
+        </StackPanel>
 
         <ScrollViewer Grid.Row="1">
-            <StackPanel Spacing="24" MaxWidth="600" HorizontalAlignment="Left">
+            <StackPanel Spacing="32" MaxWidth="920" HorizontalAlignment="Stretch">
                 
                 <!-- Appearance Group -->
                 <StackPanel Spacing="12">
-                    <TextBlock Text="Appearance" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
+                    <TextBlock Text="Appearance" Style="{ThemeResource SectionTitleStyle}"/>
                     
-                    <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
-                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                            BorderThickness="1"
-                            Padding="24"
-                            CornerRadius="12">
-                        <StackPanel Spacing="16">
+                    <Border Style="{ThemeResource CardStyle}" Padding="32">
+                        <StackPanel Spacing="20">
                             <ComboBox Name="cbxThemeMode"
                                       Header="App Theme"
                                       HorizontalAlignment="Stretch"
@@ -54,14 +53,10 @@
 
                 <!-- About Group -->
                 <StackPanel Spacing="12">
-                    <TextBlock Text="About" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
-                    <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
-                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                            BorderThickness="1"
-                            Padding="24"
-                            CornerRadius="12">
-                        <StackPanel Spacing="4">
-                            <TextBlock Text="Financier" FontWeight="Bold"/>
+                    <TextBlock Text="About" Style="{ThemeResource SectionTitleStyle}"/>
+                    <Border Style="{ThemeResource CardStyle}" Padding="32">
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="Financier" FontSize="20" FontWeight="SemiBold"/>
                             <TextBlock Text="Version 1.0.0" Style="{ThemeResource CaptionTextBlockStyle}" Opacity="0.6"/>
                             <TextBlock Text="A simple personal finance manager built with WinUI 3." Style="{ThemeResource BodyTextBlockStyle}" Margin="0,8,0,0"/>
                         </StackPanel>

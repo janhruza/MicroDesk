@@ -75,7 +75,7 @@ public partial class App : Application
     internal static void SetAppBackdropMode(SystemBackdrop? backdrop)
     {
         if (_window is null) return;
-        _window.SystemBackdrop = backdrop;
+        _window.ApplyBackdropSurface(backdrop);
         return;
     }
 

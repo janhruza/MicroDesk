@@ -1,9 +1,12 @@
 using Financier.Core;
 using Financier.Pages;
 
+using Microsoft.UI;
+using Microsoft.UI.Composition.SystemBackdrops;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -22,12 +25,36 @@ public sealed partial class MainWindow : Window
     {
         InitializeComponent();
         ExtendsContentIntoTitleBar = true;
+        ApplyBackdropSurface(new MicaBackdrop());
 
         // minimum window size
         OverlappedPresenter presenter = OverlappedPresenter.Create();
         presenter.PreferredMinimumWidth = 640;
         presenter.PreferredMinimumHeight = 480;
         AppWindow.SetPresenter(presenter);
+    }
+
+    internal void ApplyBackdropSurface(SystemBackdrop? backdrop)
+    {
+        SystemBackdrop = backdrop;
+
+        if (backdrop is MicaBackdrop)
+        {
+            rootGrid.Background = new SolidColorBrush(Colors.Transparent);
+            contentSurface.Background = (Brush)Application.Current.Resources["LayerOnMicaBaseAltFillColorDefaultBrush"];
+        }
+        else if (backdrop is DesktopAcrylicBackdrop)
+        {
+            Brush acrylicBrush = (Brush)Application.Current.Resources["AcrylicInAppFillColorDefaultBrush"];
+            rootGrid.Background = acrylicBrush;
+            contentSurface.Background = acrylicBrush;
+        }
+        else
+        {
+            Brush pageBackground = (Brush)Application.Current.Resources["ApplicationPageBackgroundThemeBrush"];
+            rootGrid.Background = pageBackground;
+            contentSurface.Background = pageBackground;
+        }
     }
 
     private void titleBar_PaneToggleRequested(TitleBar sender, object args)
